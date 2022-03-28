@@ -1,5 +1,6 @@
 package de.neuefische.smartcount;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

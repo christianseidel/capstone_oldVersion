@@ -15,7 +15,7 @@ public class Expense {
     @Id
     private String id;
     private String purpose;
-    private Double amount;               // I still need to clarify which data type to use
+    private Double amount;
     private Currency currency;
     private String user;
     private Date date;
