@@ -18,4 +18,10 @@ public class SmartCountController {
         smartCountService.createExpense(expense);
         return smartCountService.getExpenses();
     }
+
+    @GetMapping
+    public Collection<Expense> getAllExpenses() {
+        return smartCountService.getExpenses();
+    }
+
 }
