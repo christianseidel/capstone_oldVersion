@@ -1,5 +1,4 @@
-import {Expense, Currency} from "./model";
-import exp from "constants";
+import {Expense} from "./model";
 
 interface ExpenseItemProps {
     expense: Expense
@@ -8,7 +7,6 @@ interface ExpenseItemProps {
 
 function ExpenseItem(props: ExpenseItemProps) {
 
-    function deleteItem() {}  // next task in-line
 
     return (
         <div>
