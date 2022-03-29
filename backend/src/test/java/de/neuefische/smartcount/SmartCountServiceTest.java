@@ -57,4 +57,36 @@ class SmartCountServiceTest {
         assertThat(actual).isEqualTo(expenseList);
     }
 
+    @Test
+    void deleteOneExpense() {
+        // given
+        Expense expense03 = new Expense();
+        expense03.setAmount(9.70);
+        expense03.setCurrency(Currency.Euro);
+        expense03.setPurpose("Shoppen");
+        expense03.setUser("Kim");
+        Expense expense04 = new Expense();
+        expense04.setAmount(62.01);
+        expense04.setCurrency(Currency.Euro);
+        expense04.setPurpose("Tanken");
+        expense04.setUser("Sabine");
+        Expense expense05 = new Expense();
+        expense05.setAmount(11.20);
+        expense05.setDescription("Brot und Käse");
+        expense05.setCurrency(Currency.Euro);
+        expense05.setPurpose("Markt");
+        expense05.setUser("Lydia");
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo);
+        expenseService.createExpense(expense03);
+        expenseService.createExpense(expense04);
+        expenseService.createExpense(expense05);
+
+        //when
+        expenseService.deleteExpense(expense04.getId());
+
+        //then
+        verify(repo).deleteById(expense04.getId());
+    }
 }

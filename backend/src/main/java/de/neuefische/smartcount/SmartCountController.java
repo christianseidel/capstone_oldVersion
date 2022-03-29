@@ -24,4 +24,10 @@ public class SmartCountController {
         return smartCountService.getExpenses();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteExpense(@PathVariable String id) {
+        smartCountService.deleteExpense(id);
+    }
+
+
 }

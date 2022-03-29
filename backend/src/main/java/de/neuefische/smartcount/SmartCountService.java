@@ -21,4 +21,8 @@ public class SmartCountService {
                     .stream()
                     .toList();
         }
+
+        public void deleteExpense(String id) {
+            expensesRepository.deleteById(id);
+        }
 }
