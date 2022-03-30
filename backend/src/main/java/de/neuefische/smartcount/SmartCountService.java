@@ -12,8 +12,8 @@ public class SmartCountService {
 
     private final ExpensesRepository expensesRepository;
 
-        public void createExpense(Expense expense) {
-           expensesRepository.save(expense);
+        public Expense createExpense(Expense expense) {
+           return expensesRepository.save(expense);
         }
 
         public Collection<Expense> getExpenses() {
@@ -25,4 +25,9 @@ public class SmartCountService {
         public void deleteExpense(String id) {
             expensesRepository.deleteById(id);
         }
-}
+
+        public Expense editExpense(String id, Expense expense) {
+        return expensesRepository.save(expense);
+        }
+
+       }

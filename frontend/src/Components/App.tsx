@@ -3,10 +3,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AllExpenses from "./AllExpenses";
 import EditExpense from "./EditExpense";
 import {AllByRole} from "@testing-library/react";
+import CreateExpense from "./CreateExpense";
 
 function App() {
-
-    function nö() {}
 
     return (
         <div>
@@ -16,7 +15,8 @@ function App() {
                     <Routes>
                         <Route path={'/'} element={<AllExpenses />}/>
                         <Route path={'/expenses'} element={<AllExpenses />}/>
-                        <Route path={'/edit'} element={<EditExpense onItemCreation={nö}/>}/>
+                        <Route path={'/edit'} element={<CreateExpense />}/>
+                        <Route path={'/edit/:expenseId'} element={<EditExpense />}/>
                     </Routes>
 
             </BrowserRouter>

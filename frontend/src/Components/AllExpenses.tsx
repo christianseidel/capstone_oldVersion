@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {Expense} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
-import EditExpense from "./EditExpense";
 
 function AllExpenses() {
 
     const nav = useNavigate();
     const [list, setList] = useState([] as Array<Expense>);
+    const [editMode, setEditMode] = useState(false);
 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ function AllExpenses() {
     }
 
 
-    return (
+       return (
         <div>
             <div>
                 <h1>SmartCount &ndash; Your Multi-User Cashbook</h1>
@@ -35,7 +35,7 @@ function AllExpenses() {
                                                onExpenseChange={setList} />)}
             </div>
             <div>
-                <button onClick={() => nav(`/edit`)}>Add New Expense</button>
+                <button onClick={() => nav ('/edit')}>Add New Expense</button>
             </div>
         </div>
     );

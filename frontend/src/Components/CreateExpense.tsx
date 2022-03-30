@@ -1,12 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {Expense} from "./model";
+import {useNavigate} from "react-router-dom";
 
-interface ExpenseItemProps{
-    expense : Expense
-}
-// => props: ExpenseItemProps
-function EditExpense() {
+function CreateExpense() {
 
     const nav = useNavigate();
 
@@ -14,11 +9,6 @@ function EditExpense() {
     const [description, setDescription] = useState(localStorage.getItem('description') ?? '');
     const [amount, setAmount] = useState(localStorage.getItem('amount') ?? '');
     const [currency, setCurrency] = useState(localStorage.getItem('currency') ?? '');
-
-    const id = useParams()
-
-    console.log(id);
-    console.log(purpose);
 
     useEffect(() => {
         localStorage.setItem('purpose', purpose);
@@ -35,15 +25,14 @@ function EditExpense() {
         localStorage.setItem('currency', '');
     }
 
-    const putExpense = (event: FormEvent<HTMLFormElement>) => {
+    const postExpense = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id}`, {
-            method: 'PUT',
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: id,
                 purpose: purpose,
                 description: description,
                 amount: amount,
@@ -54,9 +43,10 @@ function EditExpense() {
         nav('/expenses');
     }
 
+
     return (
         <div>
-            <form onSubmit={ev => putExpense(ev)}>
+            <form onSubmit={ev => postExpense(ev)}>
                 <input type="text" placeholder={'Purpose'} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
                 <input type="text" placeholder={'Description'} value={description}
@@ -65,13 +55,13 @@ function EditExpense() {
                        onChange={ev => setAmount(ev.target.value)}/>
                 <input type="text" placeholder={'Euro'} value={currency} required
                        onChange={ev => setCurrency(ev.target.value)}/>
-                <button type="submit"> &#10004; ändern </button>
+                <button type="submit"> &#10004; erstellen</button>
             </form>
         </div>
     )
 }
 
-export default EditExpense;
+export default CreateExpense;
 
 /*               Ein Auswahlmenü für "Currency" habe ich erstmal nicht hingekriegt:
                 <select value={currency}
