@@ -15,6 +15,7 @@ public class Expense {
     @Id
     private String id;
     private String purpose;
+    private String description;
     private Double amount;
     private Currency currency;
     private String user;

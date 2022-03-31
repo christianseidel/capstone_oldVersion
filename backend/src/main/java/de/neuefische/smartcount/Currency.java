@@ -1,8 +1,9 @@
 package de.neuefische.smartcount;
 
 public enum Currency {
-    Euro,
-    USDollar,
-    SwissFranc,
-    BritishPound
+    EUR,
+    USD,
+    CHF,
+    GBP,
+    JPY
 }

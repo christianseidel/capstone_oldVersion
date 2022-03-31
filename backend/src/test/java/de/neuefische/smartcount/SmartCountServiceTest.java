@@ -1,10 +1,15 @@
 package de.neuefische.smartcount;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 
+import javax.swing.text.html.Option;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -16,17 +21,17 @@ class SmartCountServiceTest {
         //given
         Expense expense01 = new Expense();
         expense01.setAmount(34.34);
-        expense01.setCurrency(Currency.Euro);
+        expense01.setCurrency(Currency.EUR);
         expense01.setPurpose("Einkaufen");
         expense01.setUser("Stefan");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         SmartCountService expenseService = new SmartCountService(repo);
 
-        //when
+        // when
         expenseService.createExpense(expense01);
 
-        //then
+        // then
         verify(repo).save(expense01);
     }
 
@@ -36,12 +41,12 @@ class SmartCountServiceTest {
         // given
         Expense expense03 = new Expense();
         expense03.setAmount(9.70);
-        expense03.setCurrency(Currency.Euro);
+        expense03.setCurrency(Currency.EUR);
         expense03.setPurpose("Shoppen");
         expense03.setUser("Kim");
         Expense expense04 = new Expense();
         expense04.setAmount(62.01);
-        expense04.setCurrency(Currency.Euro);
+        expense04.setCurrency(Currency.EUR);
         expense04.setPurpose("Tanken");
         expense04.setUser("Sabine");
 
@@ -53,8 +58,107 @@ class SmartCountServiceTest {
         SmartCountService expenseService = new SmartCountService(repo);
         Collection<Expense> actual = expenseService.getExpenses();
 
-        //then
+        // then
         assertThat(actual).isEqualTo(expenseList);
     }
 
+    @Test
+    void deleteOneExpense() {
+        // given
+        Expense expense03 = new Expense();
+        expense03.setAmount(9.70);
+        expense03.setCurrency(Currency.EUR);
+        expense03.setPurpose("Shoppen");
+        expense03.setUser("Kim");
+        Expense expense04 = new Expense();
+        expense04.setAmount(62.01);
+        expense04.setCurrency(Currency.EUR);
+        expense04.setPurpose("Tanken");
+        expense04.setUser("Sabine");
+        Expense expense05 = new Expense();
+        expense05.setAmount(11.20);
+        expense05.setDescription("Brot und Käse");
+        expense05.setCurrency(Currency.EUR);
+        expense05.setPurpose("Markt");
+        expense05.setUser("Lydia");
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo);
+        expenseService.createExpense(expense03);
+        expenseService.createExpense(expense04);
+        expenseService.createExpense(expense05);
+
+        // when
+        expenseService.deleteExpense(expense04.getId());
+
+        // then
+        verify(repo).deleteById(expense04.getId());
+    }
+
+    @Test
+    void retrieveOneExpense() {
+        // given
+        Expense expense06 = new Expense();
+        expense06.setAmount(100.01);
+        expense06.setCurrency(Currency.JPY);
+        expense06.setPurpose("Shusi Essen");
+        expense06.setDescription("am Strand");
+        expense06.setUser("Franz");
+        expense06.setId("2222");
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        Mockito.when(repo.findById("2222")).thenReturn(Optional.of(expense06));
+
+        // when
+        SmartCountService expenseService = new SmartCountService(repo);
+        Optional<Expense> actual = expenseService.getSingleExpense("2222");
+
+        // then
+        Assertions.assertThat(actual).contains(expense06);
+    }
+
+    @Test
+    void changeExpense() {
+        // given
+        Expense expense07changed = new Expense();
+        expense07changed.setId("2333");
+        expense07changed.setPurpose("Currywurst");
+        expense07changed.setAmount(10.99);
+        expense07changed.setCurrency(Currency.USD);
+        expense07changed.setDescription("am Kotti");
+        expense07changed.setUser("Sven");
+
+        Expense expense07saved = new Expense();
+        expense07saved.setId("2333");
+        expense07saved.setPurpose("Currywurst");
+        expense07saved.setAmount(10.99);
+        expense07saved.setCurrency(Currency.USD);
+        expense07saved.setDescription("am Kotti");
+        expense07saved.setUser("Sven");
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        Mockito.when(repo.findById("2333")).thenReturn(Optional.of(new Expense()));
+        Mockito.when(repo.save(expense07changed)).thenReturn(expense07saved);
+
+        // when
+        SmartCountService expenseService = new SmartCountService(repo);
+        Expense actual = expenseService.editExpense("2333", expense07changed);
+
+        // then
+        Assertions.assertThat(actual).isSameAs(expense07saved);
+    }
+
+    @Test
+    void changeExpenseWithWroingId() {
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        Mockito.when(repo.findById("2333")).thenReturn(Optional.empty());
+
+        // when
+        SmartCountService expenseService = new SmartCountService(repo);
+
+        // then
+        Assertions.assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(()->expenseService.editExpense("2333", null));
+    }
 }

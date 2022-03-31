@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/expenses")
@@ -14,8 +15,32 @@ public class SmartCountController {
     private final SmartCountService smartCountService;
 
     @PostMapping
-    public Collection<Expense> createExpense(@RequestBody Expense expense) {
-        smartCountService.createExpense(expense);
+    public Expense createExpense(@RequestBody Expense expense) {
+        return smartCountService.createExpense(expense);
+    }
+
+    @GetMapping
+    public Collection<Expense> getAllExpenses() {
         return smartCountService.getExpenses();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteExpense(@PathVariable String id) {
+        smartCountService.deleteExpense(id);
+    }
+
+    @PutMapping("/{id}")
+    public Expense editExpense(@PathVariable String id, @RequestBody Expense expense) {
+        /* try { // noch im Bau... */
+            return smartCountService.editExpense(id, expense);
+        /* } catch (RuntimeException exception) {
+            return Response  // gerade im Bau ....
+        }  */
+
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Expense> getSingleExpense(@PathVariable String id) {
+        return smartCountService.getSingleExpense(id);
     }
 }
