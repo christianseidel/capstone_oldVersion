@@ -17,7 +17,7 @@ public class SmartCountController {
     @PostMapping
     public Expense createExpense(@RequestBody Expense expense) {
         return smartCountService.createExpense(expense);
-        }
+    }
 
     @GetMapping
     public Collection<Expense> getAllExpenses() {
@@ -31,7 +31,12 @@ public class SmartCountController {
 
     @PutMapping("/{id}")
     public Expense editExpense(@PathVariable String id, @RequestBody Expense expense) {
-        return smartCountService.editExpense(id, expense);
+        /* try { // noch im Bau... */
+            return smartCountService.editExpense(id, expense);
+        /* } catch (RuntimeException exception) {
+            return Response  // gerade im Bau ....
+        }  */
+
     }
 
     @GetMapping("/{id}")

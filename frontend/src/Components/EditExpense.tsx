@@ -19,18 +19,18 @@ function EditExpense() {
         localStorage.setItem('description', '');
         localStorage.setItem('amount', '');
     }
-/*
+
     useEffect(() => {
         localStorage.setItem('purpose', purpose);
         localStorage.setItem('description', description);
         localStorage.setItem('amount', `${amount}`);
         localStorage.setItem('currency', currency);
     }, [purpose, description, amount, currency]);
-*/
 
-    const fetchItem = () => {
+
+    useEffect(() => {
         setError('');
-        clearForm();
+
         fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
             method: 'GET'
         })
@@ -46,13 +46,10 @@ function EditExpense() {
                 setDescription(data.description ?? '');
                 setAmount(data.amount);
                 setCurrency(data.currency);
+                clearForm();
             })
             .catch(e => setError(e.message));
-    }
-
-    useEffect(() => {
-        fetchItem();
-    }, []);
+    }, [id.expenseId]);
 
 
     const putExpense = (event: FormEvent<HTMLFormElement>) => {
