@@ -27,7 +27,12 @@ public class SmartCountService {
         }
 
         public Expense editExpense(String id, Expense expense) {
-        return expensesRepository.save(expense);
+            var item = expensesRepository.findById(id);
+            if (item.isEmpty()) {
+                throw new RuntimeException("Diese Id ist nicht bekannt!");
+            } else {
+                return expensesRepository.save(expense);
+            }
         }
 
         public Optional<Expense> getSingleExpense(String id) {

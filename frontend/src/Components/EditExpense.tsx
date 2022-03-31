@@ -12,19 +12,13 @@ function EditExpense() {
     const [currency, setCurrency] = useState(localStorage.getItem('currency') ?? '');
     const [error, setError] = useState('')
 
-    const idObject = useParams();
-    const id = Object.values(idObject).toString()
-
+    const id = useParams();
 
     function clearForm() {
         localStorage.setItem('purpose', '');
         localStorage.setItem('description', '');
         localStorage.setItem('amount', '');
     }
-
-    useEffect(() => {
-        fetchItem(id);
-    }, []);
 
     useEffect(() => {
         localStorage.setItem('purpose', purpose);
@@ -34,20 +28,20 @@ function EditExpense() {
     }, [purpose, description, amount, currency]);
 
 
-    const fetchItem = (id : string) => {
+    const fetchItem = () => {
         setError('');
         clearForm();
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id}`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
             method: 'GET'
         })
             .then(response => {
                 if (response.ok) {
                     return response.json()
                 } else {
-                    throw Error("Ein Eintrag mit der ID " + id + " wurde nicht gefunden.")
+                    throw Error("Ein Eintrag mit der ID " + id.expenseId + " wurde nicht gefunden.")
                 }
             })
-            .then((data : Expense) => {
+            .then((data: Expense) => {
                 setPurpose(data.purpose);
                 setDescription(data.description ?? '');
                 setAmount(data.amount);
@@ -56,23 +50,28 @@ function EditExpense() {
             .catch(e => setError(e.message));
     }
 
+    useEffect(() => {
+        fetchItem();
+    }, []);
+
+
     const putExpense = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id}`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: id,
+                id: id.expenseId,
                 purpose: purpose,
                 description: description,
                 amount: amount,
                 currency: currency
             })
         })
-            .then(clearForm);
-        nav('/expenses');
+            .then(clearForm)
+            .then(() => nav('/expenses'));
     }
 
     function cancelEdit() {
@@ -101,7 +100,7 @@ function EditExpense() {
                     <option value={"CHF"}>Schweizer Franken</option>
                     <option value={"JPY"}>Yen</option>
                 </select>
-                <button type="submit"> &#10004; ändern </button>
+                <button type="submit"> &#10004; ändern</button>
             </form>
 
             <button type="submit" onClick={event => cancelEdit()}> abbrechen</button>

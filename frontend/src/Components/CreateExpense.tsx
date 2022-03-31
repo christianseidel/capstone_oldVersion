@@ -39,8 +39,8 @@ function CreateExpense() {
                 currency: currency
             })
         })
-            .then(() => clearForm());
-        nav('/expenses');
+            .then(() => clearForm())
+            .then(() => nav('/expenses'));
     }
 
     function cancelEdit() {

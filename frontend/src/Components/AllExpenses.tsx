@@ -7,7 +7,6 @@ function AllExpenses() {
 
     const nav = useNavigate();
     const [list, setList] = useState([] as Array<Expense>);
-    const [editMode, setEditMode] = useState(false);
 
 
     useEffect(() => {

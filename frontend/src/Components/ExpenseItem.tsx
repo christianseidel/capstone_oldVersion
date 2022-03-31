@@ -1,5 +1,4 @@
 import {Expense} from "./model";
-import {FormEvent, MouseEvent} from "react";
 import {useNavigate} from "react-router-dom";
 
 interface ExpenseItemProps {

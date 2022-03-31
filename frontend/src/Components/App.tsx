@@ -2,7 +2,6 @@ import React, {Suspense} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AllExpenses from "./AllExpenses";
 import EditExpense from "./EditExpense";
-import {AllByRole} from "@testing-library/react";
 import CreateExpense from "./CreateExpense";
 
 function App() {
