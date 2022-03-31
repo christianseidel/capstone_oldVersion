@@ -52,7 +52,7 @@ function EditExpense() {
 
     useEffect(() => {
         fetchItem();
-    }, [fetchItem()]);
+    }, [fetchItem]);
 
 
     const putExpense = (event: FormEvent<HTMLFormElement>) => {
