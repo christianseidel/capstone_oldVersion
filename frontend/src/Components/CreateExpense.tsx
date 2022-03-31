@@ -1,6 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
+
 function CreateExpense() {
 
     const nav = useNavigate();
@@ -8,7 +9,7 @@ function CreateExpense() {
     const [purpose, setPurpose] = useState(localStorage.getItem('purpose') ?? '');
     const [description, setDescription] = useState(localStorage.getItem('description') ?? '');
     const [amount, setAmount] = useState(localStorage.getItem('amount') ?? '');
-    const [currency, setCurrency] = useState(localStorage.getItem('currency') ?? '');
+    const [currency, setCurrency] = useState(localStorage.getItem('currency') ?? 'EUR');
 
     useEffect(() => {
         localStorage.setItem('purpose', purpose);
@@ -22,7 +23,6 @@ function CreateExpense() {
         localStorage.setItem('purpose', '');
         localStorage.setItem('description', '');
         localStorage.setItem('amount', '');
-        localStorage.setItem('currency', '');
     }
 
     const postExpense = (event: FormEvent<HTMLFormElement>) => {
@@ -43,9 +43,14 @@ function CreateExpense() {
         nav('/expenses');
     }
 
+    function cancelEdit() {
+        clearForm();
+        nav('/expenses');
+    }
 
     return (
         <div>
+            <h2>Ausgabe hinzufügen</h2>
             <form onSubmit={ev => postExpense(ev)}>
                 <input type="text" placeholder={'Purpose'} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
@@ -53,21 +58,22 @@ function CreateExpense() {
                        onChange={ev => setDescription(ev.target.value)}/>
                 <input type="text" placeholder={'Amount'} value={amount} required
                        onChange={ev => setAmount(ev.target.value)}/>
-                <input type="text" placeholder={'Euro'} value={currency} required
-                       onChange={ev => setCurrency(ev.target.value)}/>
+
+                <select value={currency}
+                        onChange={ev => setCurrency(ev.target.value)}>
+                    <option value={"EUR"}>Euro</option>
+                    <option value={"USD"}>US-Dollar</option>
+                    <option value={"GBP"}>Britisches Pfund</option>
+                    <option value={"CHF"}>Schweizer Franken</option>
+                    <option value={"JPY"}>Yen</option>
+                </select>
                 <button type="submit"> &#10004; erstellen</button>
             </form>
+
+            <button type="submit" onClick={event => cancelEdit()}> abbrechen</button>
         </div>
     )
 }
 
 export default CreateExpense;
-
-/*               Ein Auswahlmenü für "Currency" habe ich erstmal nicht hingekriegt:
-                <select value={currency}
-                       onChange={ev => setCurrency(ev.target.value)}>
-                    <option value={"Euro"}>Euro</option>
-                    <option value={"USDollar"}> US-Dollar</option>
-                </select>
-                */
 

@@ -2,37 +2,58 @@ import {FormEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {Expense} from "./model";
 
-interface ExpenseItemProps{
-    expense : Expense
-}
-// => props: ExpenseItemProps
 function EditExpense() {
 
     const nav = useNavigate();
 
     const [purpose, setPurpose] = useState(localStorage.getItem('purpose') ?? '');
     const [description, setDescription] = useState(localStorage.getItem('description') ?? '');
-    const [amount, setAmount] = useState(localStorage.getItem('amount') ?? '');
+    const [amount, setAmount] = useState(localStorage.getItem('amount') ?? 0);
     const [currency, setCurrency] = useState(localStorage.getItem('currency') ?? '');
+    const [error, setError] = useState('')
 
-    const id = useParams()
-
-    console.log(id);
-    console.log(purpose);
-
-    useEffect(() => {
-        localStorage.setItem('purpose', purpose);
-        localStorage.setItem('description', description);
-        localStorage.setItem('amount', amount);
-        localStorage.setItem('currency', currency);
-    }, [purpose, description, amount, currency]);
+    const idObject = useParams();
+    const id = Object.values(idObject).toString()
 
 
     function clearForm() {
         localStorage.setItem('purpose', '');
         localStorage.setItem('description', '');
         localStorage.setItem('amount', '');
-        localStorage.setItem('currency', '');
+    }
+
+    useEffect(() => {
+        fetchItem(id);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('purpose', purpose);
+        localStorage.setItem('description', description);
+        localStorage.setItem('amount', `${amount}`);
+        localStorage.setItem('currency', currency);
+    }, [purpose, description, amount, currency]);
+
+
+    const fetchItem = (id : string) => {
+        setError('');
+        clearForm();
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id}`, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw Error("Ein Eintrag mit der ID " + id + " wurde nicht gefunden.")
+                }
+            })
+            .then((data : Expense) => {
+                setPurpose(data.purpose);
+                setDescription(data.description ?? '');
+                setAmount(data.amount);
+                setCurrency(data.currency);
+            })
+            .catch(e => setError(e.message));
     }
 
     const putExpense = (event: FormEvent<HTMLFormElement>) => {
@@ -50,12 +71,20 @@ function EditExpense() {
                 currency: currency
             })
         })
-            .then(() => clearForm());
+            .then(clearForm);
+        nav('/expenses');
+    }
+
+    function cancelEdit() {
+        clearForm();
         nav('/expenses');
     }
 
     return (
         <div>
+            <h2>Ausgabe bearbeiten</h2>
+            {error && <h4>{error}</h4>}
+
             <form onSubmit={ev => putExpense(ev)}>
                 <input type="text" placeholder={'Purpose'} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
@@ -63,21 +92,22 @@ function EditExpense() {
                        onChange={ev => setDescription(ev.target.value)}/>
                 <input type="text" placeholder={'Amount'} value={amount} required
                        onChange={ev => setAmount(ev.target.value)}/>
-                <input type="text" placeholder={'Euro'} value={currency} required
-                       onChange={ev => setCurrency(ev.target.value)}/>
+
+                <select value={currency}
+                        onChange={ev => setCurrency(ev.target.value)}>
+                    <option value={"EUR"}>Euro</option>
+                    <option value={"USD"}>US-Dollar</option>
+                    <option value={"GBP"}>Britisches Pfund</option>
+                    <option value={"CHF"}>Schweizer Franken</option>
+                    <option value={"JPY"}>Yen</option>
+                </select>
                 <button type="submit"> &#10004; ändern </button>
             </form>
+
+            <button type="submit" onClick={event => cancelEdit()}> abbrechen</button>
         </div>
     )
 }
 
 export default EditExpense;
-
-/*               Ein Auswahlmenü für "Currency" habe ich erstmal nicht hingekriegt:
-                <select value={currency}
-                       onChange={ev => setCurrency(ev.target.value)}>
-                    <option value={"Euro"}>Euro</option>
-                    <option value={"USDollar"}> US-Dollar</option>
-                </select>
-                */
 

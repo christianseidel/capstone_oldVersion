@@ -9,8 +9,9 @@ export interface Expense {
 }
 
 export enum Currency {
-    Euro = 'Euro',
-    USDollar = 'US-Dollar',
-    SwissFranc = "Swiss Franc",
-    BritishPound = 'British Pound'
+    EUR,
+    USD,
+    CHF,
+    GBP,
+    JPY
 }

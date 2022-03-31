@@ -35,7 +35,7 @@ function AllExpenses() {
                                                onExpenseChange={setList} />)}
             </div>
             <div>
-                <button onClick={() => nav ('/edit')}>Add New Expense</button>
+                <button onClick={() => nav ('/edit')}>Neue Ausgabe hinzufügen</button>
             </div>
         </div>
     );

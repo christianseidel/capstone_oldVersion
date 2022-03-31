@@ -16,7 +16,7 @@ class SmartCountServiceTest {
         //given
         Expense expense01 = new Expense();
         expense01.setAmount(34.34);
-        expense01.setCurrency(Currency.Euro);
+        expense01.setCurrency(Currency.EUR);
         expense01.setPurpose("Einkaufen");
         expense01.setUser("Stefan");
 
@@ -36,12 +36,12 @@ class SmartCountServiceTest {
         // given
         Expense expense03 = new Expense();
         expense03.setAmount(9.70);
-        expense03.setCurrency(Currency.Euro);
+        expense03.setCurrency(Currency.EUR);
         expense03.setPurpose("Shoppen");
         expense03.setUser("Kim");
         Expense expense04 = new Expense();
         expense04.setAmount(62.01);
-        expense04.setCurrency(Currency.Euro);
+        expense04.setCurrency(Currency.EUR);
         expense04.setPurpose("Tanken");
         expense04.setUser("Sabine");
 
@@ -62,18 +62,18 @@ class SmartCountServiceTest {
         // given
         Expense expense03 = new Expense();
         expense03.setAmount(9.70);
-        expense03.setCurrency(Currency.Euro);
+        expense03.setCurrency(Currency.EUR);
         expense03.setPurpose("Shoppen");
         expense03.setUser("Kim");
         Expense expense04 = new Expense();
         expense04.setAmount(62.01);
-        expense04.setCurrency(Currency.Euro);
+        expense04.setCurrency(Currency.EUR);
         expense04.setPurpose("Tanken");
         expense04.setUser("Sabine");
         Expense expense05 = new Expense();
         expense05.setAmount(11.20);
         expense05.setDescription("Brot und Käse");
-        expense05.setCurrency(Currency.Euro);
+        expense05.setCurrency(Currency.EUR);
         expense05.setPurpose("Markt");
         expense05.setUser("Lydia");
 

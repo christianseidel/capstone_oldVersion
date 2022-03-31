@@ -1,10 +1,10 @@
 package de.neuefische.smartcount;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/expenses")
@@ -34,4 +34,8 @@ public class SmartCountController {
         return smartCountService.editExpense(id, expense);
     }
 
+    @GetMapping("/{id}")
+    public Optional<Expense> getSingleExpense(@PathVariable String id) {
+        return smartCountService.getSingleExpense(id);
+    }
 }

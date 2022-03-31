@@ -1,10 +1,10 @@
 package de.neuefische.smartcount;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -30,4 +30,7 @@ public class SmartCountService {
         return expensesRepository.save(expense);
         }
 
+        public Optional<Expense> getSingleExpense(String id) {
+            return expensesRepository.findById(id);
+        }
        }
