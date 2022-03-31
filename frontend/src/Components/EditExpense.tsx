@@ -14,19 +14,19 @@ function EditExpense() {
 
     const id = useParams();
 
-    function clearForm() {
+    const clearForm = () => {
         localStorage.setItem('purpose', '');
         localStorage.setItem('description', '');
         localStorage.setItem('amount', '');
     }
-
+/*
     useEffect(() => {
         localStorage.setItem('purpose', purpose);
         localStorage.setItem('description', description);
         localStorage.setItem('amount', `${amount}`);
         localStorage.setItem('currency', currency);
     }, [purpose, description, amount, currency]);
-
+*/
 
     const fetchItem = () => {
         setError('');
@@ -52,7 +52,7 @@ function EditExpense() {
 
     useEffect(() => {
         fetchItem();
-    }, [fetchItem]);
+    }, []);
 
 
     const putExpense = (event: FormEvent<HTMLFormElement>) => {
