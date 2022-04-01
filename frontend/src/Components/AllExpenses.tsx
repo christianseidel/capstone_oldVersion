@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Expense, ExpenseDTO} from "./model";
+import {ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
 

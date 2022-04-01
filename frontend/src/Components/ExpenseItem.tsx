@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 interface ExpenseItemProps {
     expense: Expense
+    // eslint-disable-next-line @typescript-eslint/no-empty-pattern
     onExpenseChange: ({} : ExpenseDTO) => void;
     onItemDeletion: () => void;
 }
