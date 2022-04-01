@@ -1,7 +1,9 @@
 package de.neuefische.smartcount;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -31,12 +33,11 @@ public class SmartCountController {
 
     @PutMapping("/{id}")
     public Expense editExpense(@PathVariable String id, @RequestBody Expense expense) {
-        /* try { // noch im Bau... */
+        try {
             return smartCountService.editExpense(id, expense);
-        /* } catch (RuntimeException exception) {
-            return Response  // gerade im Bau ....
-        }  */
-
+        } catch (RuntimeException exception) {
+            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "was?");
+        }
     }
 
     @GetMapping("/{id}")
