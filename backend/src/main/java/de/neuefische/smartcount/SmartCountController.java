@@ -22,8 +22,8 @@ public class SmartCountController {
     }
 
     @GetMapping
-    public Collection<Expense> getAllExpenses() {
-        return smartCountService.getExpenses();
+    public ExpenseDTO getAllExpensesPlusSum() {
+        return smartCountService.getExpensesPlusSum();
     }
 
     @DeleteMapping("/{id}")

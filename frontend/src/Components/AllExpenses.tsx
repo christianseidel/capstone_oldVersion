@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Expense} from "./model";
+import {Expense, ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
 
 function AllExpenses() {
 
     const nav = useNavigate();
-    const [list, setList] = useState([] as Array<Expense>);
-
+    const [response, setResponse] = useState({} as ExpenseDTO);
 
     useEffect(() => {
         fetchAllExpenses()
@@ -16,8 +15,8 @@ function AllExpenses() {
     const fetchAllExpenses = () => {
         fetch(`${process.env.REACT_APP_BASE_URL}/expenses`)
             .then(response => response.json())
-            .then((responseBody: Array<Expense>) => {
-                setList(responseBody)
+            .then((responseBody: ExpenseDTO) => {
+                setResponse(responseBody)
             })
     }
 
@@ -29,10 +28,12 @@ function AllExpenses() {
             </div>
 
             <div>
-                {list.map(item => <ExpenseItem key={item.id} expense={item}
+                {response.expenses ? response.expenses.map(item => <ExpenseItem key={item.id} expense={item}
                                                onItemDeletion={fetchAllExpenses}
-                                               onExpenseChange={setList} />)}
+                                               onExpenseChange={setResponse} />)
+                    : <span>"loading ..."</span>}
             </div>
+            <div>{response.sum}</div>
             <div>
                 <button onClick={() => nav ('/edit')}>Neue Ausgabe hinzufügen</button>
             </div>

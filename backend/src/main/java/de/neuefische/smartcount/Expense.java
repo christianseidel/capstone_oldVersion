@@ -16,7 +16,7 @@ public class Expense {
     private String id;
     private String purpose;
     private String description;
-    private Double amount;
+    private double amount;
     private Currency currency;
     private String user;
     private Date date;

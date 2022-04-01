@@ -8,6 +8,11 @@ export interface Expense {
     date?: string
 }
 
+export interface ExpenseDTO {
+    expenses: Array<Expense>;
+    sum: number;
+}
+
 export enum Currency {
     EUR,
     USD,

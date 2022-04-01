@@ -1,9 +1,9 @@
-import {Expense} from "./model";
+import {Expense, ExpenseDTO} from "./model";
 import {useNavigate} from "react-router-dom";
 
 interface ExpenseItemProps {
     expense: Expense
-    onExpenseChange: (list: Array<Expense>) => void;
+    onExpenseChange: ({} : ExpenseDTO) => void;
     onItemDeletion: () => void;
 }
 
