@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 
 interface ExpenseItemProps {
     expense: Expense
-    // eslint-disable-next-line @typescript-eslint/no-empty-pattern
     onExpenseChange: ({} : ExpenseDTO) => void;
     onItemDeletion: () => void;
 }
@@ -31,7 +30,8 @@ function ExpenseItem(props: ExpenseItemProps) {
                 <span> {props.expense.description} </span>
             </div>
             <div>
-                <span> {props.expense.amount} &nbsp;{props.expense.currency}</span>
+                <span> {(props.expense.amount).toFixed(2)} &nbsp;{props.expense.currency}</span>
+                <div> {(props.expense.amount).toLocaleString('de-De', {style: 'currency', currency: props.expense.currency, minimumFractionDigits: 2})} </div>
             </div>
             <br/>
 

@@ -7,6 +7,7 @@ function AllExpenses() {
 
     const nav = useNavigate();
     const [response, setResponse] = useState({} as ExpenseDTO);
+    const loading : String = 'loading ...'
 
     useEffect(() => {
         fetchAllExpenses()
@@ -20,8 +21,12 @@ function AllExpenses() {
             })
     }
 
+    function locale(x:number) {
+    return x;
+    }
+    console.log(locale(12312312.178))
 
-       return (
+    return (
         <div>
             <div>
                 <h1>SmartCount &ndash; Your Multi-User Cashbook</h1>
@@ -29,13 +34,17 @@ function AllExpenses() {
 
             <div>
                 {response.expenses ? response.expenses.map(item => <ExpenseItem key={item.id} expense={item}
-                                               onItemDeletion={fetchAllExpenses}
-                                               onExpenseChange={setResponse} />)
-                    : <span>"loading ..."</span>}
+                                                                                onItemDeletion={fetchAllExpenses}
+                                                                                onExpenseChange={setResponse}/>)
+                    : <span>{loading}</span>}
             </div>
+            <div><b>Summe: {response.sum ? (response.sum).toFixed(2) : <span>{loading}</span>} Euro</b></div>
+            <br/>
             <div>{response.sum}</div>
+            <div>{(Math.round(response.sum * 100) / 100)}</div>
+
             <div>
-                <button onClick={() => nav ('/edit')}>Neue Ausgabe hinzufügen</button>
+                <button onClick={() => nav('/edit')}>Neue Ausgabe hinzufügen</button>
             </div>
         </div>
     );

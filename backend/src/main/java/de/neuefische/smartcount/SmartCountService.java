@@ -1,7 +1,6 @@
 package de.neuefische.smartcount;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -29,7 +28,7 @@ public class SmartCountService {
                 .mapToDouble(a -> a.getAmount()).sum();
     }
 
-    public ExpenseDTO getExpensesPlusSum() {
+    public ExpenseDTO getExpensesDTO() {
         return new ExpenseDTO(getExpenses(), getSum());
     }
 

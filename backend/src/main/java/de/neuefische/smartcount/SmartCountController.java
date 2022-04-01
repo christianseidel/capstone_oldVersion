@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @RestController
@@ -22,8 +21,8 @@ public class SmartCountController {
     }
 
     @GetMapping
-    public ExpenseDTO getAllExpensesPlusSum() {
-        return smartCountService.getExpensesPlusSum();
+    public ExpenseDTO getExpensesDTO() {
+        return smartCountService.getExpensesDTO();
     }
 
     @DeleteMapping("/{id}")
