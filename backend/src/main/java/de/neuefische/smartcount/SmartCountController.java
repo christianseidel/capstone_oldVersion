@@ -35,7 +35,7 @@ public class SmartCountController {
         try {
             return smartCountService.editExpense(id, expense);
         } catch (RuntimeException exception) {
-            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "was?");
+            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "was?");   // Please disregard for the moment, will be implemented later...
         }
     }
 

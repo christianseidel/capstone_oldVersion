@@ -53,8 +53,8 @@ body {
 }
 
 #edit-button_FrontPage:hover {
-    background-colorcolor: red !important;
-    color: #008800 !important;
+    background-colorcolor: red !important;   /* not working yet */
+    color: #008800 !important;               /* not working yet - still need to replace image files */
 }
 
 #delete-button_FrontPage {

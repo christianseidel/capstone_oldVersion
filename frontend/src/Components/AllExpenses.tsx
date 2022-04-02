@@ -35,7 +35,7 @@ function AllExpenses() {
                     : <span>{loading}</span>}
             </div>
             <div className={"sum"}><span>Gesamtausgaben:</span><span>{response.sum ? (response.sum).toLocaleString('de-De', {
-                style: 'currency', currency: 'EUR', minimumFractionDigits: 2
+                style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
             })
                 : <span>{loading}</span>}</span></div>
 
