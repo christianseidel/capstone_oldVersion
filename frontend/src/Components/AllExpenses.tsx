@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
+import './expenses.css'
 
 function AllExpenses() {
 
@@ -21,11 +22,6 @@ function AllExpenses() {
             })
     }
 
-    function locale(x:number) {
-    return x;
-    }
-    console.log(locale(12312312.178))
-
     return (
         <div>
             <div>
@@ -38,13 +34,13 @@ function AllExpenses() {
                                                                                 onExpenseChange={setResponse}/>)
                     : <span>{loading}</span>}
             </div>
-            <div><b>Summe: {response.sum ? (response.sum).toFixed(2) : <span>{loading}</span>} Euro</b></div>
-            <br/>
-            <div>{response.sum}</div>
-            <div>{(Math.round(response.sum * 100) / 100)}</div>
+            <div className={"sum"}><span>Gesamtausgaben:</span><span>{response.sum ? (response.sum).toLocaleString('de-De', {
+                style: 'currency', currency: 'EUR', minimumFractionDigits: 2
+            })
+                : <span>{loading}</span>}</span></div>
 
             <div>
-                <button onClick={() => nav('/edit')}>Neue Ausgabe hinzufügen</button>
+                <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>Neue Ausgabe hinzufügen</button>
             </div>
         </div>
     );

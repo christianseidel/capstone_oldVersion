@@ -1,9 +1,11 @@
 import {Expense, ExpenseDTO} from "./model";
 import {useNavigate} from "react-router-dom";
+import './expenses.css'
+import icon_edit from "../Media/Images/pencil.png"
 
 interface ExpenseItemProps {
     expense: Expense
-    onExpenseChange: ({} : ExpenseDTO) => void;
+    onExpenseChange: ({}: ExpenseDTO) => void;
     onItemDeletion: () => void;
 }
 
@@ -18,23 +20,30 @@ function ExpenseItem(props: ExpenseItemProps) {
             .then(() => props.onItemDeletion());
     }
 
-
     return (
         <div>
-            <div>
-                <span> {props.expense.purpose} </span> &nbsp; &nbsp;
-                <span><button id={'delete-button'} type="submit" onClick={() => nav (`/edit/${props.expense.id}`)}>&#9998;</button></span> &nbsp;
-                <span><button id={'delete-button'} type="submit" onClick={deleteItem}>&#10006;</button></span>
+            <div className={"item"}>
+                <div className={"item_firstLine"}>
+                    <span> {props.expense.purpose} </span> &nbsp; &nbsp;
+                    <span> {(props.expense.amount).toLocaleString('de-De', {
+                        style: 'currency',
+                        currency: props.expense.currency,
+                        minimumFractionDigits: 2
+                    })} </span>
+                </div>
+                <div className={"item_secondLine"}>
+                    <span> {props.expense.description} </span>
+                    <div className={"item_secondLine_buttons"}>
+                        <span>
+                            <button id={'edit-button_FrontPage'} type="submit" onClick={() => nav(`/edit/${props.expense.id}`)}>
+                            <img height={'16px'} width={'16px'} src={icon_edit} alt={'edit item'}/> </button>
+                        </span>
+                        <span>
+                            <button id={'delete-button_FrontPage'} type="submit" onClick={deleteItem}>&#10006;</button>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div>
-                <span> {props.expense.description} </span>
-            </div>
-            <div>
-                <span> {(props.expense.amount).toFixed(2)} &nbsp;{props.expense.currency}</span>
-                <div> {(props.expense.amount).toLocaleString('de-De', {style: 'currency', currency: props.expense.currency, minimumFractionDigits: 2})} </div>
-            </div>
-            <br/>
-
         </div>
     );
 }

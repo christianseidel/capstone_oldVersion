@@ -1,6 +1,6 @@
 import {FormEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-
+import './expenses.css'
 
 function CreateExpense() {
 
@@ -52,11 +52,11 @@ function CreateExpense() {
         <div>
             <h2>Ausgabe hinzufügen</h2>
             <form onSubmit={ev => postExpense(ev)}>
-                <input type="text" placeholder={'Purpose'} value={purpose} required
+                <input type="text" placeholder={'Bezeichnung'} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
-                <input type="text" placeholder={'Description'} value={description}
+                <input type="text" placeholder={'Beschreibung'} value={description}
                        onChange={ev => setDescription(ev.target.value)}/>
-                <input type="text" placeholder={'Amount'} value={amount} required
+                <input type="text" placeholder={'Betrag'} value={amount} required
                        onChange={ev => setAmount(ev.target.value)}/>
 
                 <select value={currency}
@@ -67,10 +67,10 @@ function CreateExpense() {
                     <option value={"CHF"}>Schweizer Franken</option>
                     <option value={"JPY"}>Yen</option>
                 </select>
-                <button type="submit"> &#10004; erstellen</button>
+                <button id={"edit-button"} type="submit"> &#10004; anlegen</button>
             </form>
 
-            <button type="submit" onClick={event => cancelEdit()}> abbrechen</button>
+            <button id={"cancel-button"} type="submit" onClick={event => cancelEdit()}> abbrechen</button>
         </div>
     )
 }
