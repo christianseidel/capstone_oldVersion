@@ -22,7 +22,7 @@ public class SmartCountController {
 
     @GetMapping
     public ExpenseDTO getExpensesDTO() {
-        return smartCountService.getExpensesDTO();
+        return new ExpenseDTO(smartCountService.getExpenses(), smartCountService.getSum());
     }
 
     @DeleteMapping("/{id}")

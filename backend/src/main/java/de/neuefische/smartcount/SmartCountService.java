@@ -17,19 +17,13 @@ public class SmartCountService {
     }
 
     public Collection<Expense> getExpenses() {
-        return expensesRepository.findAll()
-                .stream()
-                .toList();
+        return expensesRepository.findAll();
     }
 
-    private double getSum() {
+    public double getSum() {
         return expensesRepository.findAll()
                 .stream()
                 .mapToDouble(a -> a.getAmount()).sum();
-    }
-
-    public ExpenseDTO getExpensesDTO() {
-        return new ExpenseDTO(getExpenses(), getSum());
     }
 
     public void deleteExpense(String id) {

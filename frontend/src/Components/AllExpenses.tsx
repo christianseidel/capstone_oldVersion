@@ -7,7 +7,7 @@ import './expenses.css'
 function AllExpenses() {
 
     const nav = useNavigate();
-    const [response, setResponse] = useState({} as ExpenseDTO);
+    const [expenseDTO, setExpenseDTO] = useState({} as ExpenseDTO);
     const loading : String = 'loading ...'
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function AllExpenses() {
         fetch(`${process.env.REACT_APP_BASE_URL}/expenses`)
             .then(response => response.json())
             .then((responseBody: ExpenseDTO) => {
-                setResponse(responseBody)
+                setExpenseDTO(responseBody)
             })
     }
 
@@ -29,12 +29,12 @@ function AllExpenses() {
             </div>
 
             <div>
-                {response.expenses ? response.expenses.map(item => <ExpenseItem key={item.id} expense={item}
+                {expenseDTO.expenses ? expenseDTO.expenses.map(item => <ExpenseItem key={item.id} expense={item}
                                                                                 onItemDeletion={fetchAllExpenses}
-                                                                                onExpenseChange={setResponse}/>)
+                                                                                onExpenseChange={setExpenseDTO}/>)
                     : <span>{loading}</span>}
             </div>
-            <div className={"sum"}><span>Gesamtausgaben:</span><span>{response.sum ? (response.sum).toLocaleString('de-De', {
+            <div className={"sum"}><span>Gesamtausgaben:</span><span>{expenseDTO.sum ? (expenseDTO.sum).toLocaleString('de-De', {
                 style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
             })
                 : <span>{loading}</span>}</span></div>
