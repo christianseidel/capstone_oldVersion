@@ -31,6 +31,7 @@ public class SmartCountService {
     }
 
     public Expense editExpense(String id, Expense expense) {
+
         // Vorschlag von André:
         // => return expensesRepository.findById(id)
         // =>        .map(expense -> expensesRepository.save(expense));
