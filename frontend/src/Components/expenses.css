@@ -1,0 +1,81 @@
+body {
+    background-color: #88f2ff;
+    margin: 12pt;
+    padding: 15pt;
+    border: 8px solid #1e6ebf;
+    border-radius: 11px;
+}
+
+
+/*---  Main Page  ---*/
+
+.item {
+    max-width: 260pt;
+    margin: 6pt;
+    padding: 3pt;
+    border: 1px solid #1e6ebf;
+    border-radius: 6px;
+}
+
+.sum {
+    max-width: 260pt;
+    font-weight: bold;
+    margin: 6pt;
+    padding: 3pt;
+    border: 1px solid #1e6ebf;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.item_firstLine {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item_secondLine {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item_secondLine_buttons {
+    margin-top: 4pt;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*---  Buttons  FrontPage ---*/
+
+#edit-button_FrontPage {
+}
+
+#edit-button_FrontPage:hover {
+    background-colorcolor: red !important;   /* not working yet */
+    color: #008800 !important;               /* not working yet - still need to replace image files */
+}
+
+#delete-button_FrontPage {
+    margin-left: 8pt;
+}
+
+
+#create-button_FrontPage {
+    margin-top: 16pt;
+    margin-left: 6pt;
+}
+
+
+/*---  Buttons  Create/EditPage ---*/
+
+#cancel-button {
+    margin-top: 16pt;
+
+}
+
+#edit-button {
+    margin-left: 20pt;
+
+}

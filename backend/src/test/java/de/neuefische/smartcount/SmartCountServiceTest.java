@@ -161,4 +161,6 @@ class SmartCountServiceTest {
         Assertions.assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(()->expenseService.editExpense("2333", null));
     }
+
+
 }

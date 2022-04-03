@@ -1,6 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {Expense} from "./model";
+import './expenses.css'
 
 function EditExpense() {
 
@@ -82,25 +83,25 @@ function EditExpense() {
             {error && <h4>{error}</h4>}
 
             <form onSubmit={ev => putExpense(ev)}>
-                <input type="text" placeholder={'Purpose'} value={purpose} required
+                <input type="text" placeholder={'Bezeichnung'} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
-                <input type="text" placeholder={'Description'} value={description}
+                <input type="text" placeholder={'Beschreibung'} value={description}
                        onChange={ev => setDescription(ev.target.value)}/>
-                <input type="text" placeholder={'Amount'} value={amount} required
+                <input type="text" placeholder={'Betrag'} value={amount} required
                        onChange={ev => setAmount(ev.target.value)}/>
 
                 <select value={currency}
-                        onChange={ev => setCurrency(ev.target.value)}>
+                        onChange={ev => setCurrency(ev.target.value)} required>
                     <option value={"EUR"}>Euro</option>
                     <option value={"USD"}>US-Dollar</option>
                     <option value={"GBP"}>Britisches Pfund</option>
                     <option value={"CHF"}>Schweizer Franken</option>
                     <option value={"JPY"}>Yen</option>
                 </select>
-                <button type="submit"> &#10004; ändern</button>
+                <button id={"edit-button"} type="submit"> &#10004; ändern</button>
             </form>
 
-            <button type="submit" onClick={event => cancelEdit()}> abbrechen</button>
+            <button id={"cancel-button"} type="submit" onClick={event => cancelEdit()}> abbrechen</button>
         </div>
     )
 }
