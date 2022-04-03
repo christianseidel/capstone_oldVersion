@@ -36,7 +36,8 @@ public class SmartCountService {
         expensesRepository.deleteById(id);
     }
 
-    public Expense editExpense(String id, Expense expense) {
+     return expensesRepository.findById(id)
+             .map(expense -> expenseReoository.save(expense);
         var item = expensesRepository.findById(id);
         if (item.isEmpty()) {
             throw new RuntimeException("Diese Id ist nicht bekannt!");
