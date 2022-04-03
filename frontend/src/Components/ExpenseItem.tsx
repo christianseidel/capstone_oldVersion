@@ -5,7 +5,7 @@ import icon_edit from "../Media/Images/pencil.png"
 
 interface ExpenseItemProps {
     expense: Expense
-    onExpenseChange: ({}: ExpenseDTO) => void;
+    onExpenseChange: (expenseDTO: ExpenseDTO) => void;
     onItemDeletion: () => void;
 }
 
