@@ -20,11 +20,6 @@ public class SmartCountController {
         return smartCountService.createExpense(expense);
     }
 
-    @GetMapping
-    public ExpenseDTO getExpensesDTO() {
-        return new ExpenseDTO(smartCountService.getExpenses(), smartCountService.getSum());
-    }
-
     @DeleteMapping("/{id}")
     public void deleteExpense(@PathVariable String id) {
         smartCountService.deleteExpense(id);
@@ -37,6 +32,11 @@ public class SmartCountController {
         } catch (RuntimeException exception) {
             throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "was?");   // Please disregard for the moment, will be implemented later...
         }
+    }
+
+    @GetMapping
+    public ExpenseDTO getExpensesDTO() {
+        return new ExpenseDTO(smartCountService.getExpenses(), smartCountService.getSum());
     }
 
     @GetMapping("/{id}")
