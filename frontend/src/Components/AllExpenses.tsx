@@ -8,7 +8,7 @@ function AllExpenses() {
 
     const nav = useNavigate();
     const [expenseDTO, setExpenseDTO] = useState({} as ExpenseDTO);
-    const loading : String = 'loading ...'
+    let loading : String = 'loading ...'
 
     useEffect(() => {
         fetchAllExpenses()
@@ -34,10 +34,13 @@ function AllExpenses() {
                                                                                 onExpenseChange={setExpenseDTO}/>)
                     : <span>{loading}</span>}
             </div>
-            <div className={"sum"}><span>Gesamtausgaben:</span><span>{expenseDTO.sum ? (expenseDTO.sum).toLocaleString('de-De', {
+
+            <div className={"sum"}>
+                {(expenseDTO.sum !== 0) && <span>Gesamtausgaben:</span>}
+                <span>{expenseDTO.sum ? (expenseDTO.sum).toLocaleString('de-De', {
                 style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
             })
-                : <span>{loading}</span>}</span></div>
+                : ((expenseDTO.sum === 0) ? <span>Es wurden noch keine Ausgaben erfasst.</span> : <span>{loading}</span>)}</span></div>
 
             <div>
                 <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>Neue Ausgabe hinzufügen</button>

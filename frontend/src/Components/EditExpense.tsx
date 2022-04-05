@@ -99,9 +99,10 @@ function EditExpense() {
                     <option value={"JPY"}>Yen</option>
                 </select>
                 <button id={"edit-button"} type="submit"> &#10004; ändern</button>
+                <div>
+                    <button id={"cancel-button"} type="submit" onClick={event => cancelEdit()}> abbrechen</button>
+                </div>
             </form>
-
-            <button id={"cancel-button"} type="submit" onClick={event => cancelEdit()}> abbrechen</button>
         </div>
     )
 }

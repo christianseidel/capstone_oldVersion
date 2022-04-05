@@ -69,7 +69,6 @@ function CreateExpense() {
                 </select>
                 <button id={"edit-button"} type="submit"> &#10004; anlegen</button>
             </form>
-
             <button id={"cancel-button"} type="submit" onClick={event => cancelEdit()}> abbrechen</button>
         </div>
     )

@@ -2,6 +2,8 @@ import {Expense, ExpenseDTO} from "./model";
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
 import icon_edit from "../Media/Images/pencil.png"
+import React from "react";
+
 
 interface ExpenseItemProps {
     expense: Expense
@@ -21,8 +23,7 @@ function ExpenseItem(props: ExpenseItemProps) {
     }
 
     return (
-        <div>
-            <div className={"item"}>
+          <div className={"item"}>
                 <div className={"item_firstLine"}>
                     <span> {props.expense.purpose} </span> &nbsp; &nbsp;
                     <span> {(props.expense.amount).toLocaleString('de-De', {
@@ -44,7 +45,6 @@ function ExpenseItem(props: ExpenseItemProps) {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

@@ -2,10 +2,9 @@ package de.neuefische.smartcount;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/expenses")
@@ -22,16 +21,16 @@ public class SmartCountController {
 
     @DeleteMapping("/{id}")
     public void deleteExpense(@PathVariable String id) {
-        smartCountService.deleteExpense(id);
+        try {
+            smartCountService.deleteExpense(id);
+        } catch (RuntimeException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "nichts gefunden");
+        }
     }
 
     @PutMapping("/{id}")
-    public Expense editExpense(@PathVariable String id, @RequestBody Expense expense) {
-        try {
-            return smartCountService.editExpense(id, expense);
-        } catch (RuntimeException exception) {
-            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "was?");   // Please disregard for the moment, will be implemented later...
-        }
+    public ResponseEntity<Expense> editExpense(@PathVariable String id, @RequestBody Expense expense) {
+         return ResponseEntity.of(smartCountService.editExpense(id, expense));
     }
 
     @GetMapping
@@ -40,7 +39,7 @@ public class SmartCountController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Expense> getSingleExpense(@PathVariable String id) {
-        return smartCountService.getSingleExpense(id);
+    public ResponseEntity<Expense> getSingleExpense(@PathVariable String id) {
+        return ResponseEntity.of(smartCountService.getSingleExpense(id));
     }
 }
