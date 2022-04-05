@@ -65,34 +65,34 @@ class SmartCountServiceTest {
     @Test
     void deleteOneExpense() {
         // given
-        Expense expense03 = new Expense();
-        expense03.setAmount(9.70);
-        expense03.setCurrency(Currency.EUR);
-        expense03.setPurpose("Shoppen");
-        expense03.setUser("Kim");
         Expense expense04 = new Expense();
         expense04.setAmount(62.01);
         expense04.setCurrency(Currency.EUR);
         expense04.setPurpose("Tanken");
         expense04.setUser("Sabine");
-        Expense expense05 = new Expense();
-        expense05.setAmount(11.20);
-        expense05.setDescription("Brot und Käse");
-        expense05.setCurrency(Currency.EUR);
-        expense05.setPurpose("Markt");
-        expense05.setUser("Lydia");
+        expense04.setId(("0004"));
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         SmartCountService expenseService = new SmartCountService(repo);
-        expenseService.createExpense(expense03);
-        expenseService.createExpense(expense04);
-        expenseService.createExpense(expense05);
+        Mockito.when(repo.findById("0004")).thenReturn(Optional.of(expense04));
 
         // when
-        expenseService.deleteExpense(expense04.getId());
+        expenseService.deleteExpense("0004");
 
         // then
-        verify(repo).deleteById(expense04.getId());
+        verify(repo).deleteById("0004");
+    }
+
+    @Test
+    void deleteWhenExpenseDoesntExist() {
+        //given
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo);
+        Mockito.when(repo.findById("0004")).thenReturn(Optional.empty());
+
+        // then
+        Assertions.assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(()->expenseService.deleteExpense("0004"));
     }
 
     @Test
@@ -142,10 +142,10 @@ class SmartCountServiceTest {
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Expense actual = expenseService.editExpense("2333", expense07changed);
+        Optional<Expense> actual = expenseService.editExpense("2333", expense07changed);
 
         // then
-        Assertions.assertThat(actual).isSameAs(expense07saved);
+        Assertions.assertThat(actual).contains(expense07saved);
     }
 
     @Test
@@ -156,10 +156,11 @@ class SmartCountServiceTest {
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
+        Optional<Expense> actual = expenseService.editExpense("2333", null);
 
         // then
-        Assertions.assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(()->expenseService.editExpense("2333", null));
+        Assertions.assertThat(actual).isEmpty();
+
     }
 
 
