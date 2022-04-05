@@ -36,7 +36,7 @@ function AllExpenses() {
             </div>
 
             <div className={"sum"}>
-                {(expenseDTO.sum != 0) && <span>Gesamtausgaben:</span>}
+                {(expenseDTO.sum !== 0) && <span>Gesamtausgaben:</span>}
                 <span>{expenseDTO.sum ? (expenseDTO.sum).toLocaleString('de-De', {
                 style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
             })
