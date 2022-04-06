@@ -50,6 +50,13 @@ body {
 /*---  Buttons  FrontPage ---*/
 
 #edit-button_FrontPage {
+
+}
+
+#edit-button_FrontPage-image {
+    transform: rotate(0deg) translateY(1px);
+    height: 12px;
+    width:12px;
 }
 
 #edit-button_FrontPage:hover {
@@ -58,7 +65,8 @@ body {
 }
 
 #delete-button_FrontPage {
-    margin-left: 8pt;
+    margin-left: 6pt;
+
 }
 
 

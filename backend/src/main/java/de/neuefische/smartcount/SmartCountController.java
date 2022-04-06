@@ -24,7 +24,7 @@ public class SmartCountController {
         try {
             smartCountService.deleteExpense(id);
         } catch (RuntimeException exception) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "nichts gefunden");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -34,8 +34,8 @@ public class SmartCountController {
     }
 
     @GetMapping
-    public ExpenseDTO getExpensesDTO() {
-        return new ExpenseDTO(smartCountService.getExpenses(), smartCountService.getSum());
+    public ExpensesDTO getExpensesDTO() {
+        return new ExpensesDTO(smartCountService.getExpenses(), smartCountService.getSum());
     }
 
     @GetMapping("/{id}")

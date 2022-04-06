@@ -7,7 +7,7 @@ import './expenses.css'
 function AllExpenses() {
 
     const nav = useNavigate();
-    const [expenseDTO, setExpenseDTO] = useState({} as ExpenseDTO);
+    const [expensesDTO, setExpensesDTO] = useState({} as ExpenseDTO);
     let loading : String = 'loading ...'
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function AllExpenses() {
         fetch(`${process.env.REACT_APP_BASE_URL}/expenses`)
             .then(response => response.json())
             .then((responseBody: ExpenseDTO) => {
-                setExpenseDTO(responseBody)
+                setExpensesDTO(responseBody)
             })
     }
 
@@ -29,18 +29,18 @@ function AllExpenses() {
             </div>
 
             <div>
-                {expenseDTO.expenses ? expenseDTO.expenses.map(item => <ExpenseItem key={item.id} expense={item}
+                {expensesDTO.expenses ? expensesDTO.expenses.map(item => <ExpenseItem key={item.id} expense={item}
                                                                                 onItemDeletion={fetchAllExpenses}
-                                                                                onExpenseChange={setExpenseDTO}/>)
+                                                                                onExpenseChange={setExpensesDTO}/>)
                     : <span>{loading}</span>}
             </div>
 
             <div className={"sum"}>
-                {(expenseDTO.sum !== 0) && <span>Gesamtausgaben:</span>}
-                <span>{expenseDTO.sum ? (expenseDTO.sum).toLocaleString('de-De', {
+                {(expensesDTO.sum !== 0) && <span>Gesamtausgaben:</span>}
+                <span>{expensesDTO.sum ? (expensesDTO.sum).toLocaleString('de-De', {
                 style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
             })
-                : ((expenseDTO.sum === 0) ? <span>Es wurden noch keine Ausgaben erfasst.</span> : <span>{loading}</span>)}</span></div>
+                : ((expensesDTO.sum === 0) ? <span>Es wurden noch keine Ausgaben erfasst.</span> : <span>{loading}</span>)}</span></div>
 
             <div>
                 <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>Neue Ausgabe hinzufügen</button>

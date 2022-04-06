@@ -1,7 +1,7 @@
 import {Expense, ExpenseDTO} from "./model";
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
-import icon_edit from "../Media/Images/pencil.png"
+import icon_edit from "../Media/Images/pen.png"
 import React from "react";
 
 
@@ -37,7 +37,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                     <div className={"item_secondLine_buttons"}>
                         <span>
                             <button id={'edit-button_FrontPage'} type="submit" onClick={() => nav(`/edit/${props.expense.id}`)}>
-                            <img height={'16px'} width={'16px'} src={icon_edit} alt={'edit item'}/> </button>
+                            <img id={'edit-button_FrontPage-image'} src={icon_edit} alt={'edit item'} /> </button>
                         </span>
                         <span>
                             <button id={'delete-button_FrontPage'} type="submit" onClick={deleteItem}>&#10006;</button>
