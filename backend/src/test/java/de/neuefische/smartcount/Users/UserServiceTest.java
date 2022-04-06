@@ -16,10 +16,7 @@ class UserServiceTest {
     @Test
     void createUser() {
         // given
-        UserCreationData newUser = new UserCreationData();
-        newUser.setUsername("Franz");
-        newUser.setPassword("franz234");
-        newUser.setPasswordAgain("franz234");
+        UserCreationData newUser = new UserCreationData(null, "Franz", "franz234", "franz234");
         User user = new User(null, "Franz", "franz234");
         User savedUser = new User("3333", "Franz", "franz234");
 
