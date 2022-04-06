@@ -2,7 +2,7 @@ import {Expense, ExpenseDTO} from "./model";
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
 import icon_edit from "../Media/Images/pen.png"
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 
 interface ExpenseItemProps {

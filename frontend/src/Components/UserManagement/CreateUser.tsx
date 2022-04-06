@@ -22,9 +22,7 @@ function CreateUser() {
     }, [username]);
 
     useEffect(() => {
-        setError('');
-
-    })
+        setError('');}, [])
 
     const createUser = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
