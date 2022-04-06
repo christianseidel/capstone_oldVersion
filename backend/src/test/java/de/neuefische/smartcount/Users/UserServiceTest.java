@@ -1,12 +1,14 @@
 package de.neuefische.smartcount.Users;
 
 import de.neuefische.smartcount.Users.Exceptions.PasswordsDoNotMatchException;
+import de.neuefische.smartcount.Users.Exceptions.UserAlreadyExistsException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class UserServiceTest {
@@ -60,9 +62,16 @@ class UserServiceTest {
         newUser.setPasswordAgain("myPasswordNo1");
         User existingUser = new User("222333", "Bernd", "myPasswordNo1");
 
-       when
+        UserRepository repo = Mockito.mock(UserRepository.class);
+        when(repo.findByUsername("Bernd")).thenReturn(Optional.of(existingUser));
 
+        // when
+        UserService userService = new UserService(repo);
 
+        // then
+        assertThatExceptionOfType(UserAlreadyExistsException.class)
+                .isThrownBy(() -> userService.createUser(newUser))
+                .withMessage("user already exists");
     }
 
 }
