@@ -78,7 +78,7 @@ function EditExpense() {
     }
 
     return (
-        <div>
+        <div className={'edit'}>
             <h2>Ausgabe bearbeiten</h2>
             {error && <h4>{error}</h4>}
 
