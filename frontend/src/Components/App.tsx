@@ -10,18 +10,18 @@ function App() {
     return (
         <div>
             <Suspense fallback={"Loading..."}>
-            <BrowserRouter>
+                <BrowserRouter>
 
                     <Routes>
-                        <Route path={'/'} element={<AllExpenses />}/>
-                        <Route path={'/expenses'} element={<AllExpenses />}/>
-                        <Route path={'/edit'} element={<CreateExpense />}/>
-                        <Route path={'/edit/:expenseId'} element={<EditExpense />}/>
-                        <Route path={'/users'} element={<CreateUser />} />
+                        <Route path={'/'} element={<AllExpenses/>}/>
+                        <Route path={'/expenses'} element={<AllExpenses/>}/>
+                        <Route path={'/edit'} element={<CreateExpense/>}/>
+                        <Route path={'/edit/:expenseId'} element={<EditExpense/>}/>
+                        <Route path={'/users'} element={<CreateUser/>}/>
 
                     </Routes>
 
-            </BrowserRouter>
+                </BrowserRouter>
             </Suspense>
         </div>
     );

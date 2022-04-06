@@ -73,7 +73,9 @@ function CreateUser() {
                                 ? setShowPasswordToggle('password')
                                 : setShowPasswordToggle("text"))}>
                         <img id={'setShowPassword-button'} src={icon_eyes} alt={'edit item'} /> &nbsp;
-                        Passwörter anzeigen
+                        Passwörter
+                        {showPasswordToggle==='text' && <> verbergen</>}
+                        {showPasswordToggle==='password' && <> anzeigen</>}
                     </button>
                 </div>
 
