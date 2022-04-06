@@ -31,7 +31,6 @@ function EditExpense() {
 
     useEffect(() => {
         setError('');
-
         fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
             method: 'GET'
         })
@@ -78,7 +77,7 @@ function EditExpense() {
     }
 
     return (
-        <div>
+        <div className={'edit'}>
             <h2>Ausgabe bearbeiten</h2>
             {error && <h4>{error}</h4>}
 

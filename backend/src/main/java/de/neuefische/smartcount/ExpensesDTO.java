@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @Data
 @AllArgsConstructor
-public class ExpenseDTO {
+public class ExpensesDTO {
 
     private Collection<Expense> expenses;
     private double sum;
