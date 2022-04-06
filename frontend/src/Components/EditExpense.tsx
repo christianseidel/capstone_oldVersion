@@ -31,7 +31,6 @@ function EditExpense() {
 
     useEffect(() => {
         setError('');
-
         fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
             method: 'GET'
         })

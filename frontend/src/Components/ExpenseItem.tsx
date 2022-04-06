@@ -23,13 +23,7 @@ function ExpenseItem(props: ExpenseItemProps) {
     }
 
     const [mouseOverButton, setMouseOverButton] = useState('item');
-/*
-        const isMouseOverButton = (MouseOver : String) => {
-        if (MouseOver==="Edit") {MouseOverButton = "item-MouseOverEdit"} else
-        if (MouseOver==="Delete") {MouseOverButton = "item-MouseOverDelete"} else {
-        MouseOverButton = "item";}
-    };
-*/
+
     return (
           <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>

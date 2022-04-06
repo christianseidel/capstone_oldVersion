@@ -4,13 +4,11 @@ import de.neuefische.smartcount.Users.Exceptions.PasswordsDoNotMatchException;
 import de.neuefische.smartcount.Users.Exceptions.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 @RequiredArgsConstructor
 public class UserController {
 
@@ -21,7 +19,7 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody UserCreationData userCreationData) {
         try {
             userService.createUser(userCreationData);
-            return ResponseEntity.status(201).body("user was created");
+            return ResponseEntity.status(201).body("user successfully created");
         } catch (UserAlreadyExistsException e) {
             return ResponseEntity.status(409).body(e.getMessage());
         } catch (PasswordsDoNotMatchException e) {

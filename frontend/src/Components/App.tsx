@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AllExpenses from "./AllExpenses";
 import EditExpense from "./EditExpense";
 import CreateExpense from "./CreateExpense";
+import CreateUser from "./UserManagement/CreateUser";
 
 function App() {
 
@@ -16,6 +17,8 @@ function App() {
                         <Route path={'/expenses'} element={<AllExpenses />}/>
                         <Route path={'/edit'} element={<CreateExpense />}/>
                         <Route path={'/edit/:expenseId'} element={<EditExpense />}/>
+                        <Route path={'/users'} element={<CreateUser />} />
+
                     </Routes>
 
             </BrowserRouter>

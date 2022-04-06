@@ -92,10 +92,13 @@ body {
 
 }
 
-
 #create-button_FrontPage {
     margin-top: 16pt;
     margin-left: 6pt;
+}
+
+#createUser-button_FrontPage {
+    margin-left: 180pt;
 }
 
 
@@ -111,9 +114,22 @@ body {
 
 }
 
+
 /*---  EditPage ---*/
 
 .edit {
 
+}
 
+
+/*-- CreateUserPage ---*/
+
+#showPassword-button {
+    margin-left: 20pt;
+}
+
+#setShowPassword-button {
+    transform: translateY(1px);
+    height: 12px;
+    width: 12px;
 }
