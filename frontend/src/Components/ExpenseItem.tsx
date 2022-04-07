@@ -1,7 +1,9 @@
 import {Expense, ExpenseDTO} from "./model";
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
-import icon_edit from "../Media/Images/pencil.png"
+import icon_edit from "../Media/Images/pen.png"
+import React, {useState} from "react";
+
 
 interface ExpenseItemProps {
     expense: Expense
@@ -20,9 +22,10 @@ function ExpenseItem(props: ExpenseItemProps) {
             .then(() => props.onItemDeletion());
     }
 
+    const [mouseOverButton, setMouseOverButton] = useState('item');
+
     return (
-        <div>
-            <div className={"item"}>
+          <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
                     <span> {props.expense.purpose} </span> &nbsp; &nbsp;
                     <span> {(props.expense.amount).toLocaleString('de-De', {
@@ -35,16 +38,26 @@ function ExpenseItem(props: ExpenseItemProps) {
                     <span> {props.expense.description} </span>
                     <div className={"item_secondLine_buttons"}>
                         <span>
-                            <button id={'edit-button_FrontPage'} type="submit" onClick={() => nav(`/edit/${props.expense.id}`)}>
-                            <img height={'16px'} width={'16px'} src={icon_edit} alt={'edit item'}/> </button>
+                            <button id={'edit-button_FrontPage'} type="submit"
+                                    onClick={() => nav(`/edit/${props.expense.id}`)}
+                                    onMouseOver={()=>setMouseOverButton('item-MouseOverEdit')}
+                                    onMouseOut={()=>setMouseOverButton('item')}
+                                    >
+                                <img id={'edit-button_FrontPage-image'} src={icon_edit} alt={'edit item'} />
+                            </button>
                         </span>
                         <span>
-                            <button id={'delete-button_FrontPage'} type="submit" onClick={deleteItem}>&#10006;</button>
+                            <button id={'delete-button_FrontPage'} type="submit"
+                                    onClick={deleteItem}
+                                    onMouseOver={()=>setMouseOverButton('item-MouseOverDelete')}
+                                    onMouseOut={()=>setMouseOverButton('item')}
+                                    >
+                                &#10006;
+                            </button>
                         </span>
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

@@ -1,22 +1,11 @@
-# spring-boot-react-bundle
+## My Capstone Project: SmartCount
 
-This is a demo project that shows how it is possible to deploy a react frontend and a Spring Boot backend into a heroku dyno. The following paragraphs describe the actions you need to perform.
+From January to April 2022 I am attending a Full Stack Java Development Bootcamp with "neue fische" in Hamburg. This is my Capstone Project.
 
-## Creating an heroku app
-When creating the heroku app I recommend to use the heroku cli. Use the following commands to create the app and add the required buildpack.
-* `heroku create <your-app-name>`
-* `heroku buildpacks:set heroku/java --app=<your-app-name>`
+## SmartCount App
+SmartCount is a group app. It offers an easy way to keep track of everybody's expenses and allows to quickly see each person's share of costs and due at any point in time. SmartCount is meant for people who go on vacation together, live in a shared apartment, or simply plan for the next big event to take place. As a member of the group you will only have access to your own expense items.
 
-## Project structure
+## Tech Stack
+The Project is based on Java 17 and TypeScript, and includes elements of HTML and CSS. When building the app the following technologies have been integrated or used: Spring Web, REST, JSON, React Router, Spring Security, JWT, JUnit/Mockito, Maven, MongoDB, Heroku. Since I have worked as professional translator for many years, I could not do without React I18N-Next.
 
-The project consists of to sub projects. The react project is located in the frontend directory and the Spring Boot project in the backend directory. To let heroku know that the main project is the Spring Boot project, there is a parent pom.xml in the root directory. That way, when heroku builds checks out the code and starts the build the parent pom and the backend module are built.<br />
-To let heroku know that the jar file is now in the target directory of the backend, the `Procfile` is needed.
-
-## Bundling the frontend into the backend jar
-
-The frontend project is built using the `com.github.eirslett:frontend-maven-plugin`. The `maven-resources-plugin` is used to copy the content of the resulting `build` directory to the backend's `target/classes/static` directory.<br />
-
-## Deployment to heroku
-
-Just connect your heroku app and yout GitHub repository on the heroku app's "Deploy"-tab.
-# capstone
+**Please beware:** As I wrote these lines, I was still in the process of coding the app. It will only be finalized at the end of April 2022.
