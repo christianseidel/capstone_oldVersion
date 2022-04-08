@@ -1,10 +1,17 @@
 package de.neuefische.smartcount.Users;
 
+import de.neuefische.smartcount.Users.Authentification.JwtUtils;
+import de.neuefische.smartcount.Users.Authentification.Token;
 import de.neuefische.smartcount.Users.Exceptions.PasswordsDoNotMatchException;
 import de.neuefische.smartcount.Users.Exceptions.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/users")
@@ -14,6 +21,8 @@ public class UserController {
 
 
     private final UserService userService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody UserCreationData userCreationData) {
@@ -24,6 +33,16 @@ public class UserController {
             return ResponseEntity.status(409).body(e.getMessage());
         } catch (PasswordsDoNotMatchException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Token> loginUser(@RequestBody UserLoginData userLoginData) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginData.getUsername(), userLoginData.getPassword()));
+            return ResponseEntity.ok(new Token(jwtUtils.createToken(new HashMap<>(), userLoginData.getUsername())));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(401).build();
         }
     }
 
