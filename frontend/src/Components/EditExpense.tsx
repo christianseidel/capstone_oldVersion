@@ -55,7 +55,7 @@ function EditExpense() {
                 clearForm();
             })
             .catch(e => setError(e.message));
-    }, [id.expenseId]);
+    }, [token, id.expenseId]);
 
 
     const putExpense = (event: FormEvent<HTMLFormElement>) => {

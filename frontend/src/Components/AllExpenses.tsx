@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
@@ -20,10 +20,6 @@ function AllExpenses() {
     }, [nav])
 
     useEffect(() => {
-        fetchAllExpenses()
-    }, []);
-
-    const fetchAllExpenses = useCallback(() => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -31,8 +27,17 @@ function AllExpenses() {
         })
             .then(response => response.json())
             .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody));
-            }, [token])
+            }, [token]);
 
+    const fetchAllExpenses= () => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody));
+    };
 
     return (
         <div>
