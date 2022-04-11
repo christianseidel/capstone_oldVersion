@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import './expenses.css'
 import icon_edit from "../Media/Images/pen.png"
 import React, {useState} from "react";
+import {useAuth} from "./UserManagement/AuthProvider";
 
 
 interface ExpenseItemProps {
@@ -14,10 +15,14 @@ interface ExpenseItemProps {
 function ExpenseItem(props: ExpenseItemProps) {
 
     const nav = useNavigate();
+    const {token} = useAuth();
 
     function deleteItem() {
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${props.expense.id}`, {
-            method: 'DELETE'
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/${props.expense.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
             .then(() => props.onItemDeletion());
     }

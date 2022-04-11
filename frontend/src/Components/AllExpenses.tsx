@@ -8,10 +8,9 @@ import {useAuth} from "./UserManagement/AuthProvider";
 function AllExpenses() {
 
     const nav = useNavigate();
+    const {token, logout} = useAuth();
     const [expensesDTO, setExpensesDTO] = useState({} as ExpenseDTO);
     let loading : String = 'loading ...'
-
-    const {token, logout} = useAuth();
 
 
     useEffect(() => {
@@ -25,7 +24,7 @@ function AllExpenses() {
     }, []);
 
     const fetchAllExpenses = useCallback(() => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

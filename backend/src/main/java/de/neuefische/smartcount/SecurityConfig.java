@@ -41,15 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.POST, "/users/login").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/users/register").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/register").permitAll()
                 // .antMatchers(HttpMethod.GET, "/**").permitAll()
-                // .antMatchers(HttpMethod.GET, "/").permitAll()
-                // .mvcMatchers(HttpMethod.POST, "/expenses").permitAll()  // opened just for development purposes
-                // .mvcMatchers(HttpMethod.DELETE, "/expenses/**").permitAll()  // opened just for development purposes
-                // .anyRequest().permitAll()
-                // .anyRequest().authenticated()
-                .antMatchers("/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/expenses/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/expenses/**").authenticated()
+//                .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

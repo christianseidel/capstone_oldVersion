@@ -2,10 +2,12 @@ import {FormEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {Expense} from "./model";
 import './expenses.css'
+import {useAuth} from "./UserManagement/AuthProvider";
 
 function EditExpense() {
 
     const nav = useNavigate();
+    const {token} = useAuth();
 
     const [purpose, setPurpose] = useState(localStorage.getItem('purpose') ?? '');
     const [description, setDescription] = useState(localStorage.getItem('description') ?? '');
@@ -31,8 +33,12 @@ function EditExpense() {
 
     useEffect(() => {
         setError('');
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
-            method: 'GET'
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/${id.expenseId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
         })
             .then(response => {
                 if (response.ok) {
@@ -54,10 +60,11 @@ function EditExpense() {
 
     const putExpense = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${id.expenseId}`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/${id.expenseId}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 id: id.expenseId,
