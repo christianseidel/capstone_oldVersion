@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
+import {useAuth} from "./UserManagement/AuthProvider";
 
 function AllExpenses() {
 
@@ -10,17 +11,29 @@ function AllExpenses() {
     const [expensesDTO, setExpensesDTO] = useState({} as ExpenseDTO);
     let loading : String = 'loading ...'
 
+    const {token, logout} = useAuth();
+
+
+    useEffect(() => {
+        if (!localStorage.getItem('jwt')) {
+            nav('/users/login')
+        }
+    }, [nav])
+
     useEffect(() => {
         fetchAllExpenses()
     }, []);
 
-    const fetchAllExpenses = () => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/expenses`)
+    const fetchAllExpenses = useCallback(() => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
-            .then((responseBody: ExpenseDTO) => {
-                setExpensesDTO(responseBody)
-            })
-    }
+            .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody));
+            }, [token])
+
 
     return (
         <div>
@@ -43,10 +56,11 @@ function AllExpenses() {
                 : ((expensesDTO.sum === 0) ? <span>Es wurden noch keine Ausgaben erfasst.</span> : <span>{loading}</span>)}</span></div>
 
             <div>
-                <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>Neue Ausgabe hinzufügen</button>
+                <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; Ausgabe hinzufügen</button>
             </div>
+       <p></p>
             <div>
-                <button id={"createUser-button_FrontPage"} onClick={() => nav('/users')}>Nutzer registrieren</button>
+                <button id={"createUser-button_FrontPage"} onClick={() => logout()}>ausloggen</button>
             </div>
 
         </div>

@@ -9,13 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/users")
-@CrossOrigin
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -24,7 +27,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<String> createUser(@RequestBody UserCreationData userCreationData) {
         try {
             userService.createUser(userCreationData);
