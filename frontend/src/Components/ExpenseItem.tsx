@@ -30,7 +30,8 @@ function ExpenseItem(props: ExpenseItemProps) {
     const [mouseOverButton, setMouseOverButton] = useState('item');
 
     return (
-          <div className={mouseOverButton}>
+          <div className={mouseOverButton==='item' ? 'item-wrapper_regular' : 'item-wrapper_small'}>
+              <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
                     <span> {props.expense.purpose} </span> &nbsp; &nbsp;
                     <span> {(props.expense.amount).toLocaleString('de-De', {
@@ -63,6 +64,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                     </div>
                 </div>
             </div>
+          </div>
     );
 }
 

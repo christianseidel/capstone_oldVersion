@@ -6,11 +6,6 @@ body {
     border-radius: 11px;
 }
 
-h1 {
-    padding-bottom: 12px;
-    margin-bottom: 0px;
-}
-
 h3 {
     margin-top: 46px;
     margin-bottom: 3px;
@@ -28,43 +23,39 @@ h3 {
 .item {
     max-width: 350px;
     margin-left: 8px;
-    margin-top: 10px;
-    margin-bottom: 0px;
     padding: 4px;
     border: 1px solid #1e6ebf;
     border-radius: 9px;
 }
-.item:last-child {
-    margin-bottom: 27.5px;
+.item-wrapper_regular {
+    max-width: 368px;
+    padding-top: 10px;
+    padding-bottom: 6px;
+}
+.item-wrapper_small {
+    max-width: 386px;
+    padding-bottom: 2px;
 }
 
 .item-MouseOverEdit {
     font-size: larger;
-    max-width: 350px;
-    margin-left: 8px;
-    margin-top: 3px;
-    margin-bottom: 0px;
+    max-width: 368px;
+    margin-left: 0px;
     padding: 4px;
     border: 5px solid #808d7b;
     border-radius: 9px;
     background-color: #d3e7dc;
 }
-.item-MouseOverEdit + .item {
-    margin-top: 2.5px;}
 
 .item-MouseOverDelete {
     font-size: larger;
-    max-width: 350px;
-    margin-left: 8px;
-    margin-top: 3px;
-    margin-bottom: 0px;
+    max-width: 368px;
+    margin-left: 0px;
     padding: 4px;
     border: 5px solid #ab8799;
     border-radius: 9px;
     background-color: #eedbe4;
 }
-.item-MouseOverDelete + .item {
-    margin-top: 2.5px;}
 
 .sum {
     max-width: 350px;
@@ -112,16 +103,11 @@ h3 {
 #edit-button_FrontPage-image {
     transform: rotate(0deg) translateY(1px);
     height: 12px;
-    width:12px;
-}
-
-#edit-button_FrontPage:hover {
-
+    width: 12px;
 }
 
 #delete-button_FrontPage {
-    margin-left: 6pt;
-
+    margin-left: 6px;
 }
 
 #create-button_FrontPage {
