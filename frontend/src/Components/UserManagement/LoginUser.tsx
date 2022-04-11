@@ -61,7 +61,7 @@ function LoginUser() {
 
             <h3>Noch nicht registriert?</h3>
             <div>
-                Bitte registriere dich erst für die Nutzung von SmartCount: <button id={"register-button"} onClick={() => nav('/users/register')}>&#10140; registrieren</button>
+                Bitte registriere dich zunächst für die Nutzung von SmartCount: <button id={"register-button"} onClick={() => nav('/users/register')}>&#10140; registrieren</button>
             </div>
 
 
