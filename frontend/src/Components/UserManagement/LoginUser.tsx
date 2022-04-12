@@ -45,8 +45,8 @@ function LoginUser() {
                        onChange={ev => setLoginPassword(ev.target.value)}/>
 
                 <button id={"edit-button"} type="submit"> &#10004; einloggen</button>
-
             </form>
+
             <div>
                 <button id={"showPassword-button"} type="submit"
                         onClick={() => ((showPasswordToggle==='text')
@@ -63,7 +63,6 @@ function LoginUser() {
             <div>
                 Bitte registriere dich zunächst für die Nutzung von SmartCount: <button id={"register-button"} onClick={() => nav('/users/register')}>&#10140; registrieren</button>
             </div>
-
 
         </div>
     )

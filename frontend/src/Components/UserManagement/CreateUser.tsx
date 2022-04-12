@@ -51,7 +51,7 @@ function CreateUser() {
         nav('/users/login');
     }
 
-    // I still need to implement error message -- none is shown as of now /////////////////////////////////////
+    // I still need to implement error message -- none is shown as of now /////
     return (
         <div>
             <h2>Nutzer registrieren</h2>

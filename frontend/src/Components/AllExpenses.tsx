@@ -62,7 +62,7 @@ function AllExpenses() {
             <div>
                 <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; Ausgabe hinzufügen</button>
             </div>
-       <p></p>
+            <p></p>
             <div>
                 <button id={"createUser-button_FrontPage"} onClick={() => logout()}>ausloggen</button>
             </div>
