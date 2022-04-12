@@ -1,12 +1,10 @@
 import {FormEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
-import {useAuth} from "./UserManagement/AuthProvider";
 
 function CreateExpense() {
 
     const nav = useNavigate();
-    const {token} = useAuth();
 
     const [purpose, setPurpose] = useState(localStorage.getItem('purpose') ?? '');
     const [description, setDescription] = useState(localStorage.getItem('description') ?? '');
@@ -29,12 +27,11 @@ function CreateExpense() {
 
     const postExpense = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-                },
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 purpose: purpose,
                 description: description,

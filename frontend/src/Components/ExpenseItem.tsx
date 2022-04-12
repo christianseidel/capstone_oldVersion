@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import './expenses.css'
 import icon_edit from "../Media/Images/pen.png"
 import React, {useState} from "react";
-import {useAuth} from "./UserManagement/AuthProvider";
 
 
 interface ExpenseItemProps {
@@ -15,14 +14,10 @@ interface ExpenseItemProps {
 function ExpenseItem(props: ExpenseItemProps) {
 
     const nav = useNavigate();
-    const {token} = useAuth();
 
     function deleteItem() {
-        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/${props.expense.id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
+        fetch(`${process.env.REACT_APP_BASE_URL}/expenses/${props.expense.id}`, {
+            method: 'DELETE'
         })
             .then(() => props.onItemDeletion());
     }
@@ -30,8 +25,7 @@ function ExpenseItem(props: ExpenseItemProps) {
     const [mouseOverButton, setMouseOverButton] = useState('item');
 
     return (
-          <div className={mouseOverButton==='item' ? 'item-wrapper_regular' : 'item-wrapper_small'}>
-              <div className={mouseOverButton}>
+          <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
                     <span> {props.expense.purpose} </span> &nbsp; &nbsp;
                     <span> {(props.expense.amount).toLocaleString('de-De', {
@@ -64,7 +58,6 @@ function ExpenseItem(props: ExpenseItemProps) {
                     </div>
                 </div>
             </div>
-          </div>
     );
 }
 

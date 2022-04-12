@@ -13,9 +13,7 @@ import static org.mockito.Mockito.when;
 
 class UserServiceTest {
 
-    // I still need to adapt these tests to Security Features...
-
-  /*  @Test
+    @Test
     void createUser() {
         // given
         UserCreationData newUser = new UserCreationData(null, "Franz", "franz234", "franz234");
@@ -72,5 +70,5 @@ class UserServiceTest {
                 .isThrownBy(() -> userService.createUser(newUser))
                 .withMessage("user already exists");
     }
-*/
+
 }
