@@ -3,6 +3,7 @@ package de.neuefische.smartcount.Users;
 import de.neuefische.smartcount.Users.Exceptions.PasswordsDoNotMatchException;
 import de.neuefische.smartcount.Users.Exceptions.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -13,10 +14,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User createUser(UserCreationData userCreationData) {
         if (userCreationDataIsValid(userCreationData)) {
-            User user = new User(null, userCreationData.getUsername(), userCreationData.getPassword());
+            User user = new User(null, userCreationData.getUsername(), passwordEncoder.encode(userCreationData.getPassword()));
             User saved = userRepository.save(user);
             return saved;
         }
