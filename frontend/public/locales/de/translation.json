@@ -7,6 +7,7 @@
 
   "landing-page_title": "dein Kassenbuch für die Gruppe",
   "landing-page_sum": "Gesamtausgaben",
+  "landing-page_zeroExpense": "Es wurden noch keine Ausgaben erfasst",
 
   "create-item-page_title": "Ausgabe hinzufügen",
   "edit-item-page_title": "Ausgabe bearbeiten",
@@ -28,10 +29,11 @@
   "button_cancel": "abbrechen",
   "button_goToAddExpense": "Ausgabe hinzufügen",
 
-
   "currency-form_EUR": "Euro",
   "currency-form_USD": "US-Dollar",
   "currency-form_GBP": "Britisches Pfund",
   "currency-form_CHF": "Schweizer Franken",
-  "currency-form_JPY": "Yen"
+  "currency-form_JPY": "Yen",
+
+  "message_loading": "es wird geladen..."
 }

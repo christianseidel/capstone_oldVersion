@@ -7,6 +7,7 @@
 
   "landing-page_title": "Your Multi-User Cashbook",
   "landing-page_sum": "Total Expenses",
+  "landing-page_zeroExpense": "No Expense has yet been entered",
 
   "create-item-page_title": "Add New Expense",
   "edit-item-page_title": "Edit Expense",
@@ -17,7 +18,6 @@
   "input-form_designation": "Name",
   "input-form_description": "Description",
   "input-form_amount": "Amount",
-
 
   "button_logIn": "log in",
   "button_logOut": "log out",
@@ -33,5 +33,7 @@
   "currency-form_USD": "US Dollar",
   "currency-form_GBP": "British Pound",
   "currency-form_CHF": "Swiss Franc",
-  "currency-form_JPY": "Japanese Yen"
+  "currency-form_JPY": "Japanese Yen",
+
+  "message_loading":"loading..."
 }

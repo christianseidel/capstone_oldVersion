@@ -3,11 +3,11 @@ import {ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
-import i18n, {t} from "i18next";
 import {useAuth} from "./UserManagement/AuthProvider";
 import {useTranslation} from "react-i18next";
 import deFlag from "../Media/Images/de.png";
 import enFlag from "../Media/Images/en.png";
+import i18n from "i18next";
 
 function AllExpenses() {
 
@@ -16,7 +16,7 @@ function AllExpenses() {
 
     const {token, logout} = useAuth();
     const [expensesDTO, setExpensesDTO] = useState({} as ExpenseDTO);
-    let loading : String = 'loading ...'
+    let loading : String = `${t('message_loading')}`;
 
 
     useEffect(() => {
@@ -68,7 +68,7 @@ function AllExpenses() {
                 {expensesDTO.expenses ? expensesDTO.expenses.map(item => <ExpenseItem key={item.id} expense={item}
                                                                                 onItemDeletion={fetchAllExpenses}
                                                                                 onExpenseChange={setExpensesDTO}/>)
-                    : <span>{loading}</span>}
+                    : <span>{t('message_loading')}</span>}
             </div>
 
             <div className={"sum"}>
@@ -76,7 +76,7 @@ function AllExpenses() {
                 <span>{expensesDTO.sum ? (expensesDTO.sum).toLocaleString('de-De', {
                 style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
             })
-                : ((expensesDTO.sum === 0) ? <span>Es wurden noch keine Ausgaben erfasst.</span> : <span>{loading}</span>)}</span></div>
+                : ((expensesDTO.sum === 0) ? <span>{t('landing-page_zeroExpense')}.</span> : <span>{loading}</span>)}</span></div>
 
             <div>
                 <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; {t('button_goToAddExpense')}</button>

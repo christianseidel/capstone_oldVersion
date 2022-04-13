@@ -2,10 +2,10 @@ import {useNavigate} from "react-router-dom";
 import React, {FormEvent, useEffect, useState} from "react";
 import {useAuth} from "./AuthProvider";
 import icon_eyes from "../../Media/Images/eyes.png";
-import i18n, {t} from "i18next";
 import {useTranslation} from "react-i18next";
 import deFlag from "../../Media/Images/de.png";
 import enFlag from "../../Media/Images/en.png";
+import i18n from "i18next";
 
 function CreateUser() {
 
