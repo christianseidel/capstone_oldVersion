@@ -1,0 +1,37 @@
+{
+  "login-page_title": "Bitte logge dich ein",
+  "login-page_subtitle": "Noch nicht registriert",
+  "login-page_pleaseRegister": "Bitte registriere dich zunächst für die Nutzung von SmartCount",
+
+  "register-page_title":  "Nutzer registrieren",
+
+  "landing-page_title": "dein Kassenbuch für die Gruppe",
+  "landing-page_sum": "Gesamtausgaben",
+
+  "create-item-page_title": "Ausgabe hinzufügen",
+  "edit-item-page_title": "Ausgabe bearbeiten",
+
+  "input-form_name": "Name",
+  "input-form_password": "Passwort",
+  "input-form_passwordAgain": "Passwort wiederholen",
+  "input-form_designation": "Bezeichnung",
+  "input-form_description": "Beschreibung",
+  "input-form_amount": "Betrag",
+
+  "button_logIn": "einloggen",
+  "button_logOut": "ausloggen",
+  "button_showPassword": "Passwort anzeigen",
+  "button_hidePassword": "Passwort verbergen",
+  "button_goToRegister": "registrieren",
+  "button_create": "anlegen",
+  "button_change": "ändern",
+  "button_cancel": "abbrechen",
+  "button_goToAddExpense": "Ausgabe hinzufügen",
+
+
+  "currency-form_EUR": "Euro",
+  "currency-form_USD": "US-Dollar",
+  "currency-form_GBP": "Britisches Pfund",
+  "currency-form_CHF": "Schweizer Franken",
+  "currency-form_JPY": "Yen"
+}

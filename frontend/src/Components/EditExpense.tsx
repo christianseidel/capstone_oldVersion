@@ -1,13 +1,18 @@
-import {FormEvent, useEffect, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {Expense} from "./model";
 import './expenses.css'
 import {useAuth} from "./UserManagement/AuthProvider";
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
+import deFlag from "../Media/Images/de.png";
+import enFlag from "../Media/Images/en.png";
 
 function EditExpense() {
 
     const nav = useNavigate();
     const {token} = useAuth();
+    const {t} = useTranslation();
 
     const [purpose, setPurpose] = useState(localStorage.getItem('purpose') ?? '');
     const [description, setDescription] = useState(localStorage.getItem('description') ?? '');
@@ -83,30 +88,45 @@ function EditExpense() {
         nav('/expenses');
     }
 
+    function setLanguage() {
+        if (localStorage.getItem('i18nextLng') === 'en') {
+            i18n.changeLanguage('de');
+        } else {
+            i18n.changeLanguage('en');
+        }
+    }
+
     return (
-        <div className={'edit'}>
-            <h2>Ausgabe bearbeiten</h2>
+        <div>
+            <div className={'heading'}>
+                <h2>{t('edit-item-page_title')}</h2>
+                <span><img
+                    src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
+                    alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
+                    </span>
+            </div>
+
             {error && <h4>{error}</h4>}
 
             <form onSubmit={ev => putExpense(ev)}>
-                <input type="text" placeholder={'Bezeichnung'} value={purpose} required
+                <input type="text" placeholder={t('input-form_designation')} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
-                <input type="text" placeholder={'Beschreibung'} value={description}
+                <input type="text" placeholder={t('input-form_description')} value={description}
                        onChange={ev => setDescription(ev.target.value)}/>
-                <input type="text" placeholder={'Betrag'} value={amount} required
+                <input type="text" placeholder={t('input-form_amount')} value={amount} required
                        onChange={ev => setAmount(ev.target.value)}/>
 
                 <select value={currency}
                         onChange={ev => setCurrency(ev.target.value)} required>
-                    <option value={"EUR"}>Euro</option>
-                    <option value={"USD"}>US-Dollar</option>
-                    <option value={"GBP"}>Britisches Pfund</option>
-                    <option value={"CHF"}>Schweizer Franken</option>
-                    <option value={"JPY"}>Yen</option>
+                    <option value={"EUR"}>{t('currency-form_EUR')}</option>
+                    <option value={"USD"}>{t('currency-form_USD')}</option>
+                    <option value={"GBP"}>{t('currency-form_GBP')}</option>
+                    <option value={"CHF"}>{t('currency-form_CHF')}</option>
+                    <option value={"JPY"}>{t('currency-form_JPY')}</option>
                 </select>
-                <button id={"edit-button"} type="submit"> &#10004; ändern</button>
+                <button id={"edit-button"} type="submit"> &#10004; {t('button_change')}</button>
                 <div>
-                    <button id={"cancel-button"} type="submit" onClick={cancelEdit}> &#10008; abbrechen </button>
+                    <button id={"cancel-button"} type="submit" onClick={cancelEdit}> &#10008; {t('button_cancel')} </button>
                 </div>
             </form>
         </div>

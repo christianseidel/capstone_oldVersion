@@ -2,10 +2,15 @@ import React, {FormEvent, useEffect, useState} from "react";
 import {useAuth} from "./AuthProvider";
 import {useNavigate} from "react-router-dom";
 import icon_eyes from "../../Media/Images/eyes.png";
+import enFlag from "../../Media/Images/en.png";
+import deFlag from "../../Media/Images/de.png";
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 function LoginUser() {
 
     const nav = useNavigate();
+    const {t} = useTranslation();
 
     const [loginUsername, setLoginUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -32,19 +37,33 @@ function LoginUser() {
             .then(() => nav('/expenses'));
     };
 
+    function setLanguage() {
+        if (localStorage.getItem('i18nextLng') === 'en') {
+            i18n.changeLanguage('de');
+        } else {
+            i18n.changeLanguage('en');
+        }
+    }
 
    return (
         <div>
-            <h2>Bitte logge dich ein</h2>
+            <div className={'heading'}>
+                <h2>{t('login-page_title')}</h2>
+                <span><img
+                    src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
+                    alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
+                </span>
+            </div>
+
             {errorMessage && <h4>{errorMessage}</h4>}
 
             <form onSubmit={ev => doLogin(ev)}>
-                <input type="text" placeholder={'Name'} value={loginUsername} required
+                <input type="text" placeholder={t('input-form_name')} value={loginUsername} autoFocus required
                        onChange={ev => setLoginUsername(ev.target.value)}/>
-                <input type={showPasswordToggle} placeholder={'Passwort'} value={loginPassword} required
+                <input type={showPasswordToggle} placeholder={t('input-form_password')} value={loginPassword} required
                        onChange={ev => setLoginPassword(ev.target.value)}/>
 
-                <button id={"edit-button"} type="submit"> &#10004; einloggen</button>
+                <button id={"edit-button"} type="submit"> &#10004; {t('button_logIn')}</button>
             </form>
 
             <div>
@@ -53,15 +72,14 @@ function LoginUser() {
                             ? setShowPasswordToggle('password')
                             : setShowPasswordToggle("text"))}>
                     <img id={'showPassword-button-icon'} src={icon_eyes} alt={'edit item'} /> &nbsp;
-                    Passwort
-                    {showPasswordToggle==='text' && <> verbergen</>}
-                    {showPasswordToggle==='password' && <> anzeigen</>}
+                    {showPasswordToggle==='text' && <> {t('button_hidePassword')}</>}
+                    {showPasswordToggle==='password' && <> {t('button_showPassword')}</>}
                 </button>
             </div>
 
-            <h3>Noch nicht registriert?</h3>
+            <h3>{t('login-page_subtitle')}?</h3>
             <div>
-                Bitte registriere dich zunächst für die Nutzung von SmartCount: <button id={"register-button"} onClick={() => nav('/users/register')}>&#10140; registrieren</button>
+                {t('login-page_pleaseRegister')}: <button id={"register-button"} onClick={() => nav('/users/register')}>&#10140; {t('button_goToRegister')}</button>
             </div>
 
         </div>
