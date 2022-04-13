@@ -82,7 +82,7 @@ function CreateUser() {
             </div>
 
             <div>
-                <button id={"cancel-button"} type="submit" onClick={event => cancelCreation()}>
+                <button id={"cancel-button"} type="submit" onClick={cancelCreation}>
                     &#10008; abbrechen
                 </button>
             </div>
