@@ -38,6 +38,13 @@ public class SmartCountController {
         return new ExpensesDTO(smartCountService.getExpenses(), smartCountService.getSum());
     }
 
+    @GetMapping("/user")
+    public ExpensesDTO getExpensesDTOByUser() {
+        double x = 3.33;
+        return new ExpensesDTO(smartCountService.getExpensesByUser(), x);
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Expense> getSingleExpense(@PathVariable String id) {
         return ResponseEntity.of(smartCountService.getSingleExpense(id));

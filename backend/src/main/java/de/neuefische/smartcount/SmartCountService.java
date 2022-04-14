@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @RequiredArgsConstructor
 @Service
 public class SmartCountService {
@@ -20,6 +22,13 @@ public class SmartCountService {
 
     public Collection<Expense> getExpenses() {
         return expensesRepository.findAll();
+    }
+
+    public Collection<Expense> getExpensesByUser() {
+        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return expensesRepository.findAll().stream()
+                .filter(element -> "user".equals(user))
+                .toList();
     }
 
     public double getSum() {
