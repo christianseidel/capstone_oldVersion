@@ -53,6 +53,16 @@ function AllExpenses() {
         }
     }
 
+    const fetchMyItemsOnly = () => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/user`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody));
+        };
+
     return (
         <div>
             <div className={'heading'}>
@@ -80,6 +90,10 @@ function AllExpenses() {
 
             <div>
                 <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; {t('button_goToAddExpense')}</button>
+            </div>
+            <p></p>
+            <div>
+                <button id={"showMyItemsOnly-button_FrontPage"} onClick={fetchMyItemsOnly}> {t('button_showMyItemsOnly')}</button>
             </div>
             <p></p>
             <div>

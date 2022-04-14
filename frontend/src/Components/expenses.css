@@ -93,12 +93,22 @@ h3 {
 .item_secondLine {
     display: flex;
     justify-content: space-between;
-}
 
+}
+.item_secondLine_text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .item_secondLine_buttons {
     margin-top: 4pt;
     display: flex;
     justify-content: space-between;
+}
+
+#user_color {
+    color: blueviolet;
 }
 
 
@@ -127,6 +137,9 @@ h3 {
     margin-left: 180pt;
 }
 
+#showMyItemsOnly-button_FrontPage {
+    margin-left: 6pt;
+}
 
 /*---  Buttons  Create/EditPage ---*/
 
