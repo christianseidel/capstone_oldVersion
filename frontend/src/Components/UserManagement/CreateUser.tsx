@@ -2,10 +2,15 @@ import {useNavigate} from "react-router-dom";
 import React, {FormEvent, useEffect, useState} from "react";
 import {useAuth} from "./AuthProvider";
 import icon_eyes from "../../Media/Images/eyes.png";
+import {useTranslation} from "react-i18next";
+import deFlag from "../../Media/Images/de.png";
+import enFlag from "../../Media/Images/en.png";
+import i18n from "i18next";
 
 function CreateUser() {
 
     const nav = useNavigate();
+    const {t} = useTranslation();
 
     const [username, setUsername] = useState(localStorage.getItem('username') ?? '');
     const [passwordAgain, setPasswordAgain] = useState('');
@@ -50,22 +55,37 @@ function CreateUser() {
         clearForm();
         nav('/users/login');
     }
+    function setLanguage() {
+        if (localStorage.getItem('i18nextLng') === 'en') {
+            i18n.changeLanguage('de');
+        } else {
+            i18n.changeLanguage('en');
+        }
+    }
 
     // I still need to implement error message -- none is shown as of now /////
     return (
         <div>
-            <h2>Nutzer registrieren</h2>
+            <div className={'heading'}>
+            <h2>{t('register-page_title')}</h2>
+            <span><img
+                src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
+                alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
+            </span>
+
+            </div>
+
             {errorMessage && <div className="error">{errorMessage}</div>}
 
             <form onSubmit={ev => doRegister(ev)}>
-                <input type="text" placeholder={'Name'} value={username} required
+                <input type="text" placeholder={t('input-form_name')} value={username} autoFocus required
                        onChange={ev => setUsername(ev.target.value)}/>
-                <input type={showPasswordToggle} placeholder={'Passwort'} value={password} required
+                <input type={showPasswordToggle} placeholder={t('input-form_password')} value={password} required
                        onChange={ev => setPassword(ev.target.value)}/>
-                <input type={showPasswordToggle} placeholder={'Passwort wiederholen'} value={passwordAgain} required
+                <input type={showPasswordToggle} placeholder={t('input-form_passwordAgain')} value={passwordAgain} required
                        onChange={ev => setPasswordAgain(ev.target.value)}/>
 
-                <button id={"edit-button"} type="submit"> &#10004; anlegen</button>
+                <button id={"edit-button"} type="submit"> &#10004; {t('button_create')}</button>
 
             </form>
 
@@ -75,15 +95,14 @@ function CreateUser() {
                             ? setShowPasswordToggle('password')
                             : setShowPasswordToggle("text"))}>
                     <img id={'showPassword-button-icon'} src={icon_eyes} alt={'edit item'} /> &nbsp;
-                    Passwort
-                    {showPasswordToggle==='text' && <> verbergen</>}
-                    {showPasswordToggle==='password' && <> anzeigen</>}
+                    {showPasswordToggle==='text' && <> {t('button_hidePassword')}</>}
+                    {showPasswordToggle==='password' && <> {t('button_showPassword')}</>}
                 </button>
             </div>
 
             <div>
                 <button id={"cancel-button"} type="submit" onClick={cancelCreation}>
-                    &#10008; abbrechen
+                    &#10008; {t('button_cancel')}
                 </button>
             </div>
 
