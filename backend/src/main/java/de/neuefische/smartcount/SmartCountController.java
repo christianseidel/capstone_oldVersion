@@ -40,8 +40,7 @@ public class SmartCountController {
 
     @GetMapping("/user")
     public ExpensesDTO getExpensesDTOByUser() {
-        double x = 3.33;
-        return new ExpensesDTO(smartCountService.getExpensesByUser(), x);
+        return new ExpensesDTO(smartCountService.getExpensesByUser(), smartCountService.getSumByUser());
     }
 
 

@@ -24,15 +24,20 @@ public class SmartCountService {
         return expensesRepository.findAll();
     }
 
-    public Collection<Expense> getExpensesByUser() {
-        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        return expensesRepository.findAll().stream()
-                .filter(element -> "user".equals(user))
-                .toList();
-    }
-
     public double getSum() {
         return expensesRepository.findAll()
+                .stream()
+                .mapToDouble(a -> a.getAmount()).sum();
+    }
+
+    public Collection<Expense> getExpensesByUser() {
+        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return expensesRepository.findAllByUser(user);
+    }
+
+    public double getSumByUser() {
+        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return expensesRepository.findAllByUser(user)
                 .stream()
                 .mapToDouble(a -> a.getAmount()).sum();
     }
