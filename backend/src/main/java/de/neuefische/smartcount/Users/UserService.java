@@ -2,6 +2,8 @@ package de.neuefische.smartcount.Users;
 
 import de.neuefische.smartcount.Users.Exceptions.PasswordsDoNotMatchException;
 import de.neuefische.smartcount.Users.Exceptions.UserAlreadyExistsException;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

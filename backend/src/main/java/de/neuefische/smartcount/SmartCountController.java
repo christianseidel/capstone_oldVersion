@@ -3,6 +3,7 @@ package de.neuefische.smartcount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -16,6 +17,7 @@ public class SmartCountController {
 
     @PostMapping
     public Expense createExpense(@RequestBody Expense expense) {
+        expense.setUser(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         return smartCountService.createExpense(expense);
     }
 
@@ -40,9 +42,9 @@ public class SmartCountController {
 
     @GetMapping("/user")
     public ExpensesDTO getExpensesDTOByUser() {
-        return new ExpensesDTO(smartCountService.getExpensesByUser(), smartCountService.getSumByUser());
+        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return new ExpensesDTO(smartCountService.getExpensesByUser(user), smartCountService.getSumByUser(user));
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Expense> getSingleExpense(@PathVariable String id) {

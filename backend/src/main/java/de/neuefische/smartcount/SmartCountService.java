@@ -1,13 +1,10 @@
 package de.neuefische.smartcount;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @Service
@@ -16,7 +13,6 @@ public class SmartCountService {
     private final ExpensesRepository expensesRepository;
 
     public Expense createExpense(Expense expense) {
-        expense.setUser(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
         return expensesRepository.save(expense);
     }
 
@@ -30,13 +26,11 @@ public class SmartCountService {
                 .mapToDouble(a -> a.getAmount()).sum();
     }
 
-    public Collection<Expense> getExpensesByUser() {
-        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+    public Collection<Expense> getExpensesByUser(String user) {
         return expensesRepository.findAllByUser(user);
     }
 
-    public double getSumByUser() {
-        String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+    public double getSumByUser(String user) {
         return expensesRepository.findAllByUser(user)
                 .stream()
                 .mapToDouble(a -> a.getAmount()).sum();
