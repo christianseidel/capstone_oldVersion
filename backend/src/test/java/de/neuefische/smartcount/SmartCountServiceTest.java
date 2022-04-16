@@ -1,5 +1,6 @@
 package de.neuefische.smartcount;
 
+import de.neuefische.smartcount.Exceptions.InvalidUserException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -48,10 +49,11 @@ class SmartCountServiceTest {
         List<Expense> expenseList = List.of(expense03, expense04);
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         Mockito.when(repo.findAll()).thenReturn(expenseList);
+        Mockito.when(repo.existsAllByUser("Kim")).thenReturn(true);
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Collection<Expense> actual = expenseService.getExpenses();
+        Collection<Expense> actual = expenseService.getAllExpenses("Kim");
 
         // then
         assertThat(actual).isEqualTo(expenseList);
@@ -157,10 +159,10 @@ class SmartCountServiceTest {
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         SmartCountService expenseService = new SmartCountService(repo);
-        Mockito.when(repo.findById("0004")).thenReturn(Optional.of(expense04));
+        Mockito.when(repo.findByIdAndUser("0004", "Sabine")).thenReturn(Optional.of(expense04));
 
         // when
-        expenseService.deleteExpense("0004");
+        expenseService.deleteExpense("0004", "Sabine");
 
         // then
         verify(repo).deleteById("0004");
@@ -171,12 +173,36 @@ class SmartCountServiceTest {
         //given
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         SmartCountService expenseService = new SmartCountService(repo);
-        Mockito.when(repo.findById("0004")).thenReturn(Optional.empty());
+        Mockito.when(repo.findByIdAndUser("0004", "Steffi")).thenReturn(Optional.empty());
 
         // then
         Assertions.assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(()->expenseService.deleteExpense("0004"));
+            .isThrownBy(()->expenseService.deleteExpense("0004", "Steffi"));
     }
+
+    @Test
+    void deleteOneExpenseWithWrongUser() {
+        // given
+        Expense myExpense = new Expense();
+        myExpense.setAmount(100.01);
+        myExpense.setCurrency(Currency.JPY);
+        myExpense.setPurpose("Sushi Essen");
+        myExpense.setDescription("am See");
+        myExpense.setUser("Marion");
+        myExpense.setId("2444");
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        Mockito.when(repo.findByIdAndUser("2444", "Marion")).thenReturn(Optional.of(myExpense));
+
+        // when
+        SmartCountService expenseService = new SmartCountService(repo);
+
+        // then
+        Assertions.assertThatExceptionOfType(InvalidUserException.class)
+                .isThrownBy(() -> expenseService.getSingleExpense("2444", "Franz"))
+                .withMessage("You don't have access to this item");
+    }
+
 
     @Test
     void retrieveOneExpense() {
@@ -184,21 +210,45 @@ class SmartCountServiceTest {
         Expense expense06 = new Expense();
         expense06.setAmount(100.01);
         expense06.setCurrency(Currency.JPY);
-        expense06.setPurpose("Shusi Essen");
+        expense06.setPurpose("Sushi Essen");
         expense06.setDescription("am Strand");
         expense06.setUser("Franz");
         expense06.setId("2222");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        Mockito.when(repo.findById("2222")).thenReturn(Optional.of(expense06));
+        Mockito.when(repo.findByIdAndUser("2222", "Franz")).thenReturn(Optional.of(expense06));
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Optional<Expense> actual = expenseService.getSingleExpense("2222");
+        Optional<Expense> actual = expenseService.getSingleExpense("2222", "Franz");
 
         // then
         Assertions.assertThat(actual).contains(expense06);
     }
+
+    @Test
+    void retrieveOneExpenseWithWrongUser() {
+        // given
+        Expense expense06 = new Expense();
+        expense06.setAmount(100.01);
+        expense06.setCurrency(Currency.JPY);
+        expense06.setPurpose("Sushi Essen");
+        expense06.setDescription("zuhause");
+        expense06.setUser("Gabriele");
+        expense06.setId("2222");
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        Mockito.when(repo.findByIdAndUser("2222", "Gabriele")).thenReturn(Optional.of(expense06));
+
+        // when
+        SmartCountService expenseService = new SmartCountService(repo);
+
+        // then
+        Assertions.assertThatExceptionOfType(InvalidUserException.class)
+                .isThrownBy(() -> expenseService.getSingleExpense("2222", "Franz"))
+                .withMessage("You don't have access to this item");
+    }
+
 
     @Test
     void changeExpense() {
