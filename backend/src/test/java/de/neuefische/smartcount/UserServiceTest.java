@@ -1,7 +1,11 @@
-package de.neuefische.smartcount.Users;
+package de.neuefische.smartcount;
 
 import de.neuefische.smartcount.Exceptions.PasswordsDoNotMatchException;
 import de.neuefische.smartcount.Exceptions.UserAlreadyExistsException;
+import de.neuefische.smartcount.Users.User;
+import de.neuefische.smartcount.Users.UserCreationData;
+import de.neuefische.smartcount.Users.UserRepository;
+import de.neuefische.smartcount.Users.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
