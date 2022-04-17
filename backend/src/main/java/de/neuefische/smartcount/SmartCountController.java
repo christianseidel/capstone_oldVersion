@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.swing.text.html.Option;
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -20,44 +20,42 @@ public class SmartCountController {
     private final SmartCountService smartCountService;
 
     @PostMapping
-    public Expense createExpense(@RequestBody Expense expense) {
+    public Expense createExpense(@RequestBody Expense expense, Principal principal) {
+        expense.setUser(principal.getName());
        return smartCountService.createExpense(expense);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteExpense(@PathVariable String id) {
+    public void deleteExpense(@PathVariable String id, Principal principal) {
         try {
-            smartCountService.deleteExpense(id, getPrincipal());
+            smartCountService.deleteExpense(id, principal.getName());
         } catch (RuntimeException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Expense> editExpense(@PathVariable String id, @RequestBody Expense expense) {
-         return ResponseEntity.of(smartCountService.editExpense(id, expense));
+    public ResponseEntity<Expense> editExpense(@PathVariable String id, @RequestBody Expense expense, Principal principal) {
+        expense.setUser(principal.getName());
+         return ResponseEntity.of(smartCountService.editExpense(id, expense, principal.getName()));
     }
 
     @GetMapping
-    public ExpensesDTO getExpensesDTO() {
-        return new ExpensesDTO(smartCountService.getAllExpenses(getPrincipal()), smartCountService.getSum());
+    public ExpensesDTO getExpensesDTO(Principal principal) {
+        return new ExpensesDTO(smartCountService.getAllExpenses(principal.getName()), smartCountService.getSum());
     }
 
     @GetMapping("/user")
-    public ExpensesDTO getExpensesDTOByUser() {
-        return new ExpensesDTO(smartCountService.getExpensesByUser(getPrincipal()), smartCountService.getSumByUser(getPrincipal()));
+    public ExpensesDTO getExpensesDTOByUser(Principal principal) {
+        return new ExpensesDTO(smartCountService.getExpensesByUser(principal.getName()), smartCountService.getSumByUser(principal.getName()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Expense>> getSingleExpense(@PathVariable String id) {
+    public ResponseEntity<Optional<Expense>> getSingleExpense(@PathVariable String id, Principal principal) {
         try {
-            return ResponseEntity.ok(smartCountService.getSingleExpense(id, getPrincipal()));
+            return ResponseEntity.ok(smartCountService.getSingleExpense(id, principal.getName()));
         } catch (InvalidUserException e) {
             return ResponseEntity.status(403).build();
         }
-    }
-
-    private String getPrincipal() {
-        return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
     }
 }

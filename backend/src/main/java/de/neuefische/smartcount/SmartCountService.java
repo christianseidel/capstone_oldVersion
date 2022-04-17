@@ -49,8 +49,8 @@ public class SmartCountService {
         }
     }
 
-    public Optional<Expense> editExpense(String id, Expense expense) {
-        return expensesRepository.findById(id)
+    public Optional<Expense> editExpense(String id, Expense expense, String user) {
+        return expensesRepository.findByIdAndUser(id, user)
                 .map(e -> expensesRepository.save(expense));
     }
 

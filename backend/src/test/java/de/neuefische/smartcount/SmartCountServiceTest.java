@@ -270,12 +270,12 @@ class SmartCountServiceTest {
         expense07saved.setUser("Sven");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        Mockito.when(repo.findById("2333")).thenReturn(Optional.of(new Expense()));
+        Mockito.when(repo.findByIdAndUser("2333", "Sven")).thenReturn(Optional.of(new Expense()));
         Mockito.when(repo.save(expense07changed)).thenReturn(expense07saved);
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Optional<Expense> actual = expenseService.editExpense("2333", expense07changed);
+        Optional<Expense> actual = expenseService.editExpense("2333", expense07changed, "Sven");
 
         // then
         Assertions.assertThat(actual).contains(expense07saved);
@@ -285,11 +285,11 @@ class SmartCountServiceTest {
     void changeExpenseWithWrongId() {
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        Mockito.when(repo.findById("2333")).thenReturn(Optional.empty());
+        Mockito.when(repo.findByIdAndUser("2333", "Mark")).thenReturn(Optional.empty());
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Optional<Expense> actual = expenseService.editExpense("2333", null);
+        Optional<Expense> actual = expenseService.editExpense("2333", null, "Mark");
 
         // then
         Assertions.assertThat(actual).isEmpty();
