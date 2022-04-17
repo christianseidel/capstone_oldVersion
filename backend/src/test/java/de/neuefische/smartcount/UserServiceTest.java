@@ -18,8 +18,6 @@ import static org.mockito.Mockito.*;
 
 class UserServiceTest {
 
-//     I don't succeed making this first test run. Don't know why...
-
     @Test
     void createUser() {
         // given
