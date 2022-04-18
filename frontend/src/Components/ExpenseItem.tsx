@@ -41,7 +41,10 @@ function ExpenseItem(props: ExpenseItemProps) {
                     })} </span>
                 </div>
                 <div className={"item_secondLine"}>
-                    <span> {props.expense.description} </span>
+                    <div className={"item_secondLine_text"}>
+                        <span> {props.expense.description} </span>
+                        {props.expense.user && <div> <span id={"user_color"}>&#9679;</span> {props.expense.user}</div>}
+                    </div>
                     <div className={"item_secondLine_buttons"}>
                         <span>
                             <button id={'edit-button_FrontPage'} type="submit"

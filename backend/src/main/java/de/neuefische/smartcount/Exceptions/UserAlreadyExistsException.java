@@ -1,4 +1,4 @@
-package de.neuefische.smartcount.Users.Exceptions;
+package de.neuefische.smartcount.Exceptions;
 
 public class UserAlreadyExistsException extends IllegalStateException {
 

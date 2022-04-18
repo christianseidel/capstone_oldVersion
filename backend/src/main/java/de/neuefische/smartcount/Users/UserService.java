@@ -1,7 +1,7 @@
 package de.neuefische.smartcount.Users;
 
-import de.neuefische.smartcount.Users.Exceptions.PasswordsDoNotMatchException;
-import de.neuefische.smartcount.Users.Exceptions.UserAlreadyExistsException;
+import de.neuefische.smartcount.Exceptions.PasswordsDoNotMatchException;
+import de.neuefische.smartcount.Exceptions.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,7 @@ public class UserService {
     public User createUser(UserCreationData userCreationData) {
         if (userCreationDataIsValid(userCreationData)) {
             User user = new User(null, userCreationData.getUsername(), passwordEncoder.encode(userCreationData.getPassword()));
-            User saved = userRepository.save(user);
-            return saved;
+            return userRepository.save(user);
         }
         throw new PasswordsDoNotMatchException();
     }

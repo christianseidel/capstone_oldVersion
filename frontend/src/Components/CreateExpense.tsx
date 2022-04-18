@@ -44,7 +44,7 @@ function CreateExpense() {
                 purpose: purpose,
                 description: description,
                 amount: amount,
-                currency: currency
+                currency: currency,
             })
         })
             .then(() => clearForm())
