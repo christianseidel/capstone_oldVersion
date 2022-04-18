@@ -35,7 +35,9 @@
   "button_change": "change",
   "button_cancel": "cancel",
   "button_goToAddExpense": "add expense",
-  "button_showMyItemsOnly": "show my expenses only",
+  "button_showMyItemsOnly": "show mine only",
+  "button_showAllItems": "show all",
+
 
   "currency-form_EUR": "Euro",
   "currency-form_USD": "US Dollar",
