@@ -7,11 +7,17 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import static de.neuefische.smartcount.Currency.EUR;
 
+/*
+/////  THIS TEST ISN'T WORKING YET -- IT'S STILL IN IT'S BUILD-UP PHASE
+/////  PLEASE IGNORE FOR THE MOMENT !
+ */
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SmartCountControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
 
     @Test
     void addExpenses() {
