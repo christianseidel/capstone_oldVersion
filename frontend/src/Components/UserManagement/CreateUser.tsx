@@ -46,8 +46,7 @@ function CreateUser() {
             })
            .then(clearForm)
            .then(() => login(username, password))
-           .then(() => localStorage.setItem('firstTime', 'yes'))
-           .then(() => nav('/edit'));  // I still need to check and adapt this ////////////////////////////////
+           .then(() => nav('/expenses'));
     }
 
     const clearForm = () => {
