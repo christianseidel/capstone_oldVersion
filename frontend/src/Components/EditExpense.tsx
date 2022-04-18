@@ -23,9 +23,9 @@ function EditExpense() {
     const id = useParams();
 
     const clearForm = () => {
-        localStorage.setItem('purpose', '');
-        localStorage.setItem('description', '');
-        localStorage.setItem('amount', '');
+        localStorage.removeItem('purpose');
+        localStorage.removeItem('description');
+        localStorage.removeItem('amount');
     }
 
     useEffect(() => {

@@ -47,16 +47,16 @@ function ExpenseItem(props: ExpenseItemProps) {
                     </div>
                     <div className={"item_secondLine_buttons"}>
                         <span>
-                            <button id={'edit-button_FrontPage'} type="submit"
+                            <button id={'editItem-button_FrontPage'} type="submit"
                                     onClick={() => nav(`/edit/${props.expense.id}`)}
                                     onMouseOver={()=>setMouseOverButton('item-MouseOverEdit')}
                                     onMouseOut={()=>setMouseOverButton('item')}
                                     >
-                                <img id={'edit-button_FrontPage-image'} src={icon_edit} alt={'edit item'} />
+                                <img id={'editItem-button_FrontPage-image'} src={icon_edit} alt={'edit item'} />
                             </button>
                         </span>
                         <span>
-                            <button id={'delete-button_FrontPage'} type="submit"
+                            <button id={'deleteItem-button_FrontPage'} type="submit"
                                     onClick={deleteItem}
                                     onMouseOver={()=>setMouseOverButton('item-MouseOverDelete')}
                                     onMouseOut={()=>setMouseOverButton('item')}

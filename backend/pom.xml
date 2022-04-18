@@ -39,7 +39,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <!--  Flapdoodle, damit die Integrationstests dank einer Fake-Datenbank weiterhin laufen  -->
 
         <dependency>

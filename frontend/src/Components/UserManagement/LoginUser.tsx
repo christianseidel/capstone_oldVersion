@@ -25,16 +25,11 @@ function LoginUser() {
         }
     }, [nav])
 
-    const clearForm = () => {
-        localStorage.setItem('username', '');
-    }
-
     const doLogin = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         login(loginUsername, loginPassword)
-            .catch(e => setErrorMessage(e.message))
-            .then(clearForm)
-            .then(() => nav('/expenses'));
+            .then(() => nav('/expenses'))
+            .catch(e => setErrorMessage(e.message));
     };
 
     function setLanguage() {

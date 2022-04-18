@@ -115,20 +115,24 @@ h3 {
 /*---  Buttons  FrontPage ---*/
 
 #edit-button_FrontPage {
-
 }
 
-#edit-button_FrontPage-image {
+#logout-button_FrontPage {
+    margin-left: 180pt;
+}
+
+
+#editItem-button_FrontPage-image {
     transform: rotate(0deg) translateY(1px);
     height: 12px;
     width: 12px;
 }
 
-#delete-button_FrontPage {
+#deleteItem-button_FrontPage {
     margin-left: 6px;
 }
 
-#create-button_FrontPage {
+#createItem-button_FrontPage {
     margin-top: 16pt;
     margin-left: 6pt;
 }
@@ -147,15 +151,21 @@ h3 {
     margin-top: 16pt;
 }
 
-#edit-button {
+#editItem-button {
     margin-left: 20pt;
 }
-
+#showHint {
+    margin-bottom: 16pt;
+}
 
 /*-- Buttons Login/RegisterPage ---*/
 
 #register-button {
     margin-left: 16pt;
+}
+
+#login-button {
+
 }
 
 #showPassword-button {

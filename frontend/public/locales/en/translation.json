@@ -3,6 +3,9 @@
   "login-page_subtitle": "Not yet registered",
   "login-page_pleaseRegister": "Please register in order to use SmartCount",
 
+  "logout-page_title": "You successfully logged out!",
+  "logout-page_backToLogin": "Log in again",
+
   "register-page_title":  "Register User",
 
   "landing-page_title": "Your Multi-User Cashbook",
@@ -10,6 +13,9 @@
   "landing-page_zeroExpense": "No Expense has yet been entered",
 
   "create-item-page_title": "Add New Expense",
+  "create-item-page_firstTime_title": "Please enter you first expense item",
+  "create-item-page_firstTime_comment": "This preliminary step allows for a higher security of your data.",
+
   "edit-item-page_title": "Edit Expense",
 
   "input-form_name": "Name",
@@ -21,6 +27,7 @@
 
   "button_logIn": "log in",
   "button_logOut": "log out",
+  "button_goToLogin": "log in",
   "button_showPassword": "show password",
   "button_hidePassword": "hide password",
   "button_goToRegister": "register",

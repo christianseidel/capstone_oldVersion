@@ -29,7 +29,7 @@ class UserServiceTest {
         when(repo.save(user)).thenReturn(savedUser);
 
         PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
-        when(passwordEncoder.encode(newUserCreationData.getPassword())).thenReturn("myAbsolutelySecureHash");
+        when(passwordEncoder.encode("franz234")).thenReturn("myAbsolutelySecureHash");
 
         // when
         UserService userService = new UserService(repo, passwordEncoder);

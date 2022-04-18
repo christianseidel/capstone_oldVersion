@@ -11,8 +11,9 @@ function CreateUser() {
 
     const nav = useNavigate();
     const {t} = useTranslation();
+    const {login} = useAuth();
 
-    const [username, setUsername] = useState(localStorage.getItem('username') ?? '');
+    const [username, setUsername] = useState(localStorage.getItem('registerUsername') ?? '');
     const [passwordAgain, setPasswordAgain] = useState('');
     const [password, setPassword] = useState('');
     const [showPasswordToggle, setShowPasswordToggle] = useState('password');
@@ -25,7 +26,7 @@ function CreateUser() {
     }, [nav])
 
     useEffect(() => {
-        localStorage.setItem('username', username);
+        localStorage.setItem('registerUsername', username);
     }, [username]);
 
     useEffect(() => {
@@ -35,7 +36,7 @@ function CreateUser() {
 
     function doRegister(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-       register(username, password, passwordAgain)
+        register(username, password, passwordAgain)
             .then(response => {
                 if (response.status === 400) {
                     setErrorMessage('Die Passwörter stimmen nicht überein.');
@@ -43,12 +44,14 @@ function CreateUser() {
                     setErrorMessage('Der gewählte Benutzername ist bereits vergeben.');
                 }
             })
-            .then(clearForm)
-            .then(() => nav('/expenses'));  // I still need to check and adapt this ////////////////////////////////
+           .then(clearForm)
+           .then(() => login(username, password))
+           .then(() => localStorage.setItem('firstTime', 'yes'))
+           .then(() => nav('/edit'));  // I still need to check and adapt this ////////////////////////////////
     }
 
     const clearForm = () => {
-        localStorage.setItem('username', '');
+        localStorage.removeItem('registerUsername');
     }
 
     function cancelCreation() {

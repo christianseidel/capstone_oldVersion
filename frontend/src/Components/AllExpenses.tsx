@@ -89,7 +89,7 @@ function AllExpenses() {
                 : ((expensesDTO.sum === 0) ? <span>{t('landing-page_zeroExpense')}.</span> : <span>{loading}</span>)}</span></div>
 
             <div>
-                <button id={"create-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; {t('button_goToAddExpense')}</button>
+                <button id={"createItem-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; {t('button_goToAddExpense')}</button>
             </div>
             <p></p>
             <div>
@@ -97,7 +97,7 @@ function AllExpenses() {
             </div>
             <p></p>
             <div>
-                <button id={"createUser-button_FrontPage"} onClick={() => logout()}>{t('button_logOut')}</button>
+                <button id={"logout-button_FrontPage"} onClick={logout}>{t('button_logOut')}</button>
             </div>
 
         </div>

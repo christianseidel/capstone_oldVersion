@@ -6,6 +6,7 @@ import {useAuth} from "./UserManagement/AuthProvider";
 import {useTranslation} from "react-i18next";
 import deFlag from "../Media/Images/de.png";
 import enFlag from "../Media/Images/en.png";
+import loginUser from "./UserManagement/LoginUser";
 
 function CreateExpense() {
 
@@ -27,9 +28,9 @@ function CreateExpense() {
 
 
     function clearForm() {
-        localStorage.setItem('purpose', '');
-        localStorage.setItem('description', '');
-        localStorage.setItem('amount', '');
+        localStorage.removeItem('purpose');
+        localStorage.removeItem('description');
+        localStorage.removeItem('amount');
     }
 
     const postExpense = (event: FormEvent<HTMLFormElement>) => {
@@ -48,6 +49,7 @@ function CreateExpense() {
             })
         })
             .then(() => clearForm())
+            .then(() => localStorage.removeItem('firstTime'))
             .then(() => nav('/expenses'));
     }
 
@@ -67,12 +69,13 @@ function CreateExpense() {
     return (
         <div>
             <div className={'heading'}>
-                <h2>{t('create-item-page_title')}</h2>
+                <h2>{localStorage.getItem('firstTime')==='yes' ? <span>{t('create-item-page_firstTime_title')}</span> : <span> {t('create-item-page_title')} </span>}</h2>
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
                 </span>
             </div>
+            {localStorage.getItem('firstTime')==='yes' && <div id={'showHint'}>{t('create-item-page_firstTime_comment')}</div>}
             <form onSubmit={ev => postExpense(ev)}>
                 <input type="text" placeholder={t('input-form_designation')} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
