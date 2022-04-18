@@ -49,7 +49,6 @@ function CreateExpense() {
             })
         })
             .then(() => clearForm())
-            .then(() => localStorage.removeItem('firstTime'))
             .then(() => nav('/expenses'));
     }
 
@@ -69,13 +68,13 @@ function CreateExpense() {
     return (
         <div>
             <div className={'heading'}>
-                <h2>{localStorage.getItem('firstTime')==='yes' ? <span>{t('create-item-page_firstTime_title')}</span> : <span> {t('create-item-page_title')} </span>}</h2>
+                <h2>{t('create-item-page_title')}</h2>
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
                 </span>
             </div>
-            {localStorage.getItem('firstTime')==='yes' && <div id={'showHint'}>{t('create-item-page_firstTime_comment')}</div>}
+
             <form onSubmit={ev => postExpense(ev)}>
                 <input type="text" placeholder={t('input-form_designation')} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
@@ -85,8 +84,7 @@ function CreateExpense() {
                        onChange={ev => setAmount(ev.target.value)}/>
 
                 <select value={currency}
-                        onChange={ev => setCurrency(ev.target.value)}>
-                    <option value={"EUR"}>{t('currency-form_EUR')}</option>
+                        onChange={ev => setCurrency(ev.target.value)}><option value={"EUR"}>{t('currency-form_EUR')}</option>
                     <option value={"USD"}>{t('currency-form_USD')}</option>
                     <option value={"GBP"}>{t('currency-form_GBP')}</option>
                     <option value={"CHF"}>{t('currency-form_CHF')}</option>

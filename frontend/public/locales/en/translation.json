@@ -13,8 +13,6 @@
   "landing-page_zeroExpense": "No Expense has yet been entered",
 
   "create-item-page_title": "Add New Expense",
-  "create-item-page_firstTime_title": "Please enter you first expense item",
-  "create-item-page_firstTime_comment": "This preliminary step allows for a higher security of your data.",
 
   "edit-item-page_title": "Edit Expense",
 
