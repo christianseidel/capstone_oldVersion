@@ -50,7 +50,7 @@ function LoginUser() {
                 </span>
             </div>
 
-            {errorMessage && <h4>{errorMessage}</h4>}
+            {errorMessage && <div className="error">{errorMessage}</div>}
 
             <form onSubmit={ev => doLogin(ev)}>
                 <input type="text" placeholder={t('input-form_name')} value={loginUsername} autoFocus required

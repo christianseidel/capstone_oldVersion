@@ -40,7 +40,7 @@ public class SmartCountService {
     public void deleteExpense(String id, String user) {
         var item = expensesRepository.findByIdAndUser(id, user);
         if (item.isEmpty()) {
-            throw new RuntimeException("Die Ausgabe mit der Id " + id + " ist nicht bekannt!");  // possibly rethink runtime exception !!??
+            throw new RuntimeException("Die Ausgabe mit der Id " + id + " ist nicht bekannt!");  // maybe rethink runtime exception !!??
         } else {
             expensesRepository.deleteById(id);
         }

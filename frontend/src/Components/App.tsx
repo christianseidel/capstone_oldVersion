@@ -17,7 +17,7 @@ function App() {
                     <AuthProvider>
                         <Routes>
 
-                            <Route path={'/'} element={<AllExpenses/>}/>
+                            <Route path={'/*'} element={<AllExpenses />}/>
                             <Route path={'/expenses'} element={<AllExpenses/>}/>
                             <Route path={'/edit'} element={<CreateExpense/>}/>
                             <Route path={'/edit/:expenseId'} element={<EditExpense/>}/>

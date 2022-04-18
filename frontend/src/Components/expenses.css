@@ -20,6 +20,11 @@ h3 {
 }
 
 .error {
+    max-width: 573px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    padding: 6px;
+    font-size: 18px;
     color: red;
     border-color: red;
     border-width: 2px;
@@ -107,6 +112,30 @@ h3 {
     justify-content: space-between;
 }
 
+.buttons_top-line {
+    max-width: 368px;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons_first-line {
+    max-width: 368px;
+    display: flex;
+    justify-content: flex-end;
+}
+.buttons_second-line {
+    max-width: 368px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons_third-line {
+    max-width: 368px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
 #user_color {
     color: blueviolet;
 }
@@ -137,12 +166,16 @@ h3 {
     margin-left: 6pt;
 }
 
-#createUser-button_FrontPage {
-    margin-left: 180pt;
+#showItemRange-button_FrontPage {
+    margin-top: 16pt;
+    margin-left: 6pt;
+    display: flex;
+    align-items: center;
 }
 
-#showMyItemsOnly-button_FrontPage {
-    margin-left: 6pt;
+#iconItemRange {
+    font-weight: bolder;
+    font-size: x-large;
 }
 
 /*---  Buttons  Create/EditPage ---*/
@@ -162,6 +195,10 @@ h3 {
 
 #register-button {
     margin-left: 16pt;
+}
+
+#createUser-button {
+    margin-left: 180pt;
 }
 
 #login-button {
