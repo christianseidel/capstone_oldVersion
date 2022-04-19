@@ -49,11 +49,10 @@ class SmartCountServiceTest {
         List<Expense> expenseList = List.of(expense03, expense04);
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         Mockito.when(repo.findAll()).thenReturn(expenseList);
-        Mockito.when(repo.existsAllByUser("Kim")).thenReturn(true);
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Collection<Expense> actual = expenseService.getAllExpenses("Kim");
+        Collection<Expense> actual = expenseService.getAllExpenses();
 
         // then
         assertThat(actual).isEqualTo(expenseList);
@@ -110,7 +109,7 @@ class SmartCountServiceTest {
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Double actual = Math.round(expenseService.getSum()*100)/100.0;
+        Double actual = expenseService.getSum();
 
         // then
         assertThat(actual).isEqualTo(71.71);
@@ -141,7 +140,7 @@ class SmartCountServiceTest {
 
         // when
         SmartCountService expenseService = new SmartCountService(repo);
-        Double actual = Math.round(expenseService.getSumByUser("hans")*100)/100.0;
+        Double actual = expenseService.getSumByUser("hans");
 
         // then
         assertThat(actual).isEqualTo(45.05);

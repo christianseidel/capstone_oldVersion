@@ -27,9 +27,9 @@ function CreateExpense() {
 
 
     function clearForm() {
-        localStorage.setItem('purpose', '');
-        localStorage.setItem('description', '');
-        localStorage.setItem('amount', '');
+        localStorage.removeItem('purpose');
+        localStorage.removeItem('description');
+        localStorage.removeItem('amount');
     }
 
     const postExpense = (event: FormEvent<HTMLFormElement>) => {
@@ -73,6 +73,7 @@ function CreateExpense() {
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
                 </span>
             </div>
+
             <form onSubmit={ev => postExpense(ev)}>
                 <input type="text" placeholder={t('input-form_designation')} value={purpose} required
                        onChange={ev => setPurpose(ev.target.value)}/>
@@ -82,8 +83,7 @@ function CreateExpense() {
                        onChange={ev => setAmount(ev.target.value)}/>
 
                 <select value={currency}
-                        onChange={ev => setCurrency(ev.target.value)}>
-                    <option value={"EUR"}>{t('currency-form_EUR')}</option>
+                        onChange={ev => setCurrency(ev.target.value)}><option value={"EUR"}>{t('currency-form_EUR')}</option>
                     <option value={"USD"}>{t('currency-form_USD')}</option>
                     <option value={"GBP"}>{t('currency-form_GBP')}</option>
                     <option value={"CHF"}>{t('currency-form_CHF')}</option>

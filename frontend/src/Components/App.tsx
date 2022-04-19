@@ -6,6 +6,7 @@ import CreateExpense from "./CreateExpense";
 import CreateUser from "./UserManagement/CreateUser";
 import AuthProvider from "./UserManagement/AuthProvider";
 import LoginUser from "./UserManagement/LoginUser";
+import LogoutUser from "./UserManagement/LogoutUser";
 
 function App() {
 
@@ -14,17 +15,17 @@ function App() {
             <Suspense fallback={"Loading..."}>
                 <BrowserRouter>
                     <AuthProvider>
-
                         <Routes>
-                            <Route path={'/'} element={<AllExpenses/>}/>
+
+                            <Route path={'/*'} element={<AllExpenses />}/>
                             <Route path={'/expenses'} element={<AllExpenses/>}/>
                             <Route path={'/edit'} element={<CreateExpense/>}/>
                             <Route path={'/edit/:expenseId'} element={<EditExpense/>}/>
                             <Route path={'/users/register'} element={<CreateUser/>}/>
-                            <Route path={'/users/login'} element={<LoginUser/>}/>
+                            <Route path={'/users/login'} element={<LoginUser />}/>
+                            <Route path={'/users/logout'} element={<LogoutUser />}/>
 
                         </Routes>
-
                     </AuthProvider>
                 </BrowserRouter>
             </Suspense>

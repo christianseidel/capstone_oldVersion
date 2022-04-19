@@ -58,5 +58,6 @@ node
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
 /backend/src/main/java/de/neuefische/smartcount/Main.java
+
+

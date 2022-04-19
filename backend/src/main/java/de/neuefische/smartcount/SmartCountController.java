@@ -40,8 +40,8 @@ public class SmartCountController {
     }
 
     @GetMapping
-    public ExpensesDTO getExpensesDTO(Principal principal) {
-        return new ExpensesDTO(smartCountService.getAllExpenses(principal.getName()), smartCountService.getSum());
+    public ExpensesDTO getExpensesDTO() {
+        return new ExpensesDTO(smartCountService.getAllExpenses(), smartCountService.getSum());
     }
 
     @GetMapping("/user")

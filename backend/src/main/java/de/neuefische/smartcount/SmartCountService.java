@@ -17,17 +17,14 @@ public class SmartCountService {
         return expensesRepository.save(expense);
     }
 
-    public Collection<Expense> getAllExpenses(String user) {
-        if (expensesRepository.existsAllByUser(user)) {
-            return expensesRepository.findAll();
-        }
-        throw new InvalidUserException();
+    public Collection<Expense> getAllExpenses() {
+        return expensesRepository.findAll();
     }
 
     public double getSum() {
-        return expensesRepository.findAll()
+        return Math.round(expensesRepository.findAll()
                 .stream()
-                .mapToDouble(a -> a.getAmount()).sum();
+                .mapToDouble(a -> a.getAmount()).sum()*100)/100.0;
     }
 
     public Collection<Expense> getExpensesByUser(String user) {
@@ -35,15 +32,15 @@ public class SmartCountService {
     }
 
     public double getSumByUser(String user) {
-        return expensesRepository.findAllByUser(user)
+        return Math.round(expensesRepository.findAllByUser(user)
                 .stream()
-                .mapToDouble(a -> a.getAmount()).sum();
+                .mapToDouble(a -> a.getAmount()).sum()*100)/100.0;
     }
 
     public void deleteExpense(String id, String user) {
         var item = expensesRepository.findByIdAndUser(id, user);
         if (item.isEmpty()) {
-            throw new RuntimeException("Die Ausgabe mit der Id " + id + " ist nicht bekannt!");
+            throw new RuntimeException("Die Ausgabe mit der Id " + id + " ist nicht bekannt!");  // maybe rethink runtime exception !!??
         } else {
             expensesRepository.deleteById(id);
         }

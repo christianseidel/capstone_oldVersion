@@ -3,6 +3,9 @@
   "login-page_subtitle": "Noch nicht registriert",
   "login-page_pleaseRegister": "Bitte registriere dich zunächst für die Nutzung von SmartCount",
 
+  "logout-page_title": "Du hast dich erfolgreich abgemeldet!",
+  "logout-page_backToLogin": "Erneut anmelden",
+
   "register-page_title":  "Nutzer registrieren",
 
   "landing-page_title": "dein Kassenbuch für die Gruppe",
@@ -10,6 +13,7 @@
   "landing-page_zeroExpense": "Es wurden noch keine Ausgaben erfasst",
 
   "create-item-page_title": "Ausgabe hinzufügen",
+
   "edit-item-page_title": "Ausgabe bearbeiten",
 
   "input-form_name": "Name",
@@ -21,6 +25,7 @@
 
   "button_logIn": "einloggen",
   "button_logOut": "ausloggen",
+  "button_goToLogin": "einloggen",
   "button_showPassword": "Passwort anzeigen",
   "button_hidePassword": "Passwort verbergen",
   "button_goToRegister": "registrieren",
@@ -28,7 +33,9 @@
   "button_change": "ändern",
   "button_cancel": "abbrechen",
   "button_goToAddExpense": "Ausgabe hinzufügen",
-  "button_showMyItemsOnly": "nur meine Ausgaben",
+  "button_showMyItemsOnly": "nur meine anzeigen",
+  "button_showAllItems": "alle anzeigen",
+
 
   "currency-form_EUR": "Euro",
   "currency-form_USD": "US-Dollar",
