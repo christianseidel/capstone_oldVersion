@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
@@ -21,11 +21,22 @@ function AllExpenses() {
     let loading : String = `${t('message_loading')}`;
 
 
+
     useEffect(() => {
         if (!localStorage.getItem('jwt')) {
             nav('/users/login')
         }
     }, [nav])
+
+    const fetchMyExpensesOnly = useCallback(() => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/user`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody));
+    }, [token]);
 
     useEffect(() => {
         (localStorage.getItem('show') === 'mine') ? fetchMyExpensesOnly() :
@@ -36,7 +47,7 @@ function AllExpenses() {
         })
             .then(response => response.json())
             .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody))
-            }, [token]);
+            }, [fetchMyExpensesOnly, token]);
 
     const fetchAllExpenses= () => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
@@ -56,15 +67,6 @@ function AllExpenses() {
         }
     }
 
-    const fetchMyExpensesOnly = () => {
-        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/user`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then(response => response.json())
-            .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody));
-        };
 
     const setItemsRange = () => {
         if (localStorage.getItem('show') === 'all') {

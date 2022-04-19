@@ -6,7 +6,6 @@ import {useAuth} from "./UserManagement/AuthProvider";
 import {useTranslation} from "react-i18next";
 import deFlag from "../Media/Images/de.png";
 import enFlag from "../Media/Images/en.png";
-import loginUser from "./UserManagement/LoginUser";
 
 function CreateExpense() {
 
