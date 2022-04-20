@@ -68,7 +68,7 @@ public class SmartCountService {
                 .map(user -> user.getUsername()).toList();
     }
 
-    public void amountPerPerson() {
+    public List<TransactionsDTO> amountPerPerson() {
 
         List<User> userList = userRepo.findAll();
         int numberOfPersons = userList.size();
@@ -108,12 +108,14 @@ public class SmartCountService {
 
         ArrayList<TransactionsDTO> listOfTransactions = new ArrayList<>();
 
-        int e = usersWithExcess.size();
-        int d = usersWithDeficit.size();
+        int e = usersWithExcess.size()-1;
+        int d = usersWithDeficit.size()-1;
 
-        while (e > 0) {
-            double exc = usersWithExcess.get(e).userDelta();
-            double defi = usersWithDeficit.get(d).userDelta();
+        while (e >= 0) {
+            UserDOO userWithExcess = usersWithExcess.get(e);
+            UserDOO userWithDeficit = usersWithDeficit.get(d);
+            double exc = userWithExcess.userDelta();
+            double defi = userWithDeficit.userDelta();
             if (exc == defi) {
                 listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc));
                 e--;
@@ -122,14 +124,15 @@ public class SmartCountService {
             else if (exc > defi) {
                 listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), defi));
                 d--;
-                usersWithExcess.set(e, UserDOO.changeDelta(exc-defi));
+                usersWithExcess.set(e, userWithExcess.changeDelta(exc-defi));
             }
             else {
                 listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc));
                 e--;
-                usersWithDeficit.set(d, UserDOO.changeDelta(exc));
+                usersWithDeficit.set(d, userWithDeficit.changeDelta(defi-exc));
             }
         }
         System.out.println(listOfTransactions);
+        return listOfTransactions;
     }
 }

@@ -1,6 +1,7 @@
 package de.neuefische.smartcount;
 
 import de.neuefische.smartcount.Exceptions.InvalidUserException;
+import de.neuefische.smartcount.Users.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,11 +59,9 @@ public class SmartCountController {
             return ResponseEntity.status(403).build();
         }
     }
-/*
+
     @GetMapping("/userlist")
-    public Optional<List<String>> getUserList() {
+    public List<String> getUserList() {
         return smartCountService.getUserList();
     }
-
- */
 }

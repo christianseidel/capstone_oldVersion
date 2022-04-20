@@ -3,18 +3,12 @@ package de.neuefische.smartcount;
 import de.neuefische.smartcount.Users.User;
 import de.neuefische.smartcount.Users.UserRepository;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.mockito.Mockito;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static de.neuefische.smartcount.Currency.EUR;
-import static org.assertj.core.api.InstanceOfAssertFactories.list;
+import static org.assertj.core.api.Assertions.*;
 
 class SmartCountSplitExpensesTest {
 
@@ -43,8 +37,74 @@ class SmartCountSplitExpensesTest {
     }
 
     @Test
-    void iDontKnowYet() {
+    void twoUsersOnePayingTheOther() {
+        // given
+        Expense expenseA1 = new Expense();
+        expenseA1.setPurpose("Tanken");
+        expenseA1.setDescription("Aral");
+        expenseA1.setAmount(48.5);
+        expenseA1.setCurrency(EUR);
+        expenseA1.setUser("Achim");
 
+        Expense expenseB1 = new Expense();
+        expenseB1.setPurpose("Tanken");
+        expenseB1.setPurpose("Jet");
+        expenseB1.setAmount(90.0);
+        expenseB1.setCurrency(EUR);
+        expenseB1.setUser("Bernadette");
+
+        User user1 = new User("778899", "Achim", "pwd12345677");
+        User user2 = new User("778900", "Bernadette", "pwd1234556");
+
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+
+        List<User> userList = List.of(user1, user2);
+        Mockito.when(userRepository.findAll()).thenReturn(userList);
+
+        ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        Collection<Expense> allByAchim = List.of(expenseA1);
+        Mockito.when(repo.findAllByUser("Achim")).thenReturn(allByAchim);
+        Collection<Expense> allByBernadette = List.of(expenseB1);
+        Mockito.when(repo.findAllByUser("Bernadette")).thenReturn(allByBernadette);
+
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
+        // when
+        expenseService.createExpense(expenseA1);
+        expenseService.createExpense(expenseB1);
+        List<Expense> expenseList = List.of(expenseA1, expenseB1);
+        Mockito.when(repo.findAll()).thenReturn(expenseList);
+
+        List<TransactionsDTO> actual = expenseService.amountPerPerson();
+        TransactionsDTO transactionDTO = new TransactionsDTO("Achim", "Bernadette", 20.75);
+        List<TransactionsDTO> transactionsList = List.of(transactionDTO);
+
+        // then
+        assertThat(actual).isEqualTo(transactionsList);
+    }
+
+    @Test
+    void groupOfThreeWithOnePaying() {
+
+    }
+
+    @Test
+    void groupOfThreeWithTwoPaying() {
+
+    }
+
+    @Test
+    void groupOfFourWhereOneHasNoExpenses() {
+
+    }
+
+    @Test
+    void groupOfFiveWhereTwoHaveNoExpenses() {
+
+    }
+
+    @Test
+    void groupOfFiveWhereAllHaveExpenses() {
         // given
         Expense expenseA1 = new Expense();
         expenseA1.setPurpose("Tanken");
@@ -56,7 +116,7 @@ class SmartCountSplitExpensesTest {
         Expense expenseB1 = new Expense();
         expenseB1.setPurpose("Tanken");
         expenseB1.setPurpose("Jet");
-        expenseB1.setAmount(70);
+        expenseB1.setAmount(70.0);
         expenseB1.setCurrency(EUR);
         expenseB1.setUser("Bernadette");
 

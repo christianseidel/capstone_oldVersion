@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import deFlag from "../Media/Images/de.png";
 import enFlag from "../Media/Images/en.png";
 import i18n from "i18next";
-import {ExpenseDTO, UserListDTO} from "./model";
+import {UserListDTO} from "./model";
 
 
 function UserList() {
@@ -17,7 +17,7 @@ function UserList() {
     const {t} = useTranslation();
 
     const [userList, setUserList] = useState({} as UserListDTO)
-    let loading : String = `${t('message_loading')}`;
+/*    let loading : String = `${t('message_loading')}`; */
 
     useEffect(() => {
         if (!localStorage.getItem('jwt')) {
@@ -26,7 +26,7 @@ function UserList() {
     }, [nav])
 
     useEffect(() => {
-            fetch(`${process.env.REACT_APP_BASE_URL}/api/userlist`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/userlist`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -53,6 +53,10 @@ function UserList() {
                 src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                 alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
             </span>
+        </div>
+
+        <div>
+
         </div>
 
         <div className={'buttons_first-line'}>

@@ -12,6 +12,4 @@ public interface ExpensesRepository extends MongoRepository<Expense, String> {
 
     Collection<Expense> findAllByUser(String user);
     Optional<Expense> findByIdAndUser(String id, String user);
-    boolean existsAllByUser (String user);
-    // List<String> getUsers();
 }
