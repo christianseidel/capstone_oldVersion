@@ -13,6 +13,10 @@ export interface ExpenseDTO {
     sum: number;
 }
 
+export interface UserListDTO {
+    users: Array<String>;
+}
+
 export enum Currency {
     EUR,
     USD,

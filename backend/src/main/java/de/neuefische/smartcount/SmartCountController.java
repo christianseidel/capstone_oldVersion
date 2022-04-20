@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -57,4 +58,11 @@ public class SmartCountController {
             return ResponseEntity.status(403).build();
         }
     }
+/*
+    @GetMapping("/userlist")
+    public Optional<List<String>> getUserList() {
+        return smartCountService.getUserList();
+    }
+
+ */
 }

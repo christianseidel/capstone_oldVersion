@@ -67,7 +67,7 @@ function CreateExpense() {
     return (
         <div>
             <div className={'heading'}>
-                <h2>{t('create-item-page_title')}</h2>
+                <h2>{t('list-of-users-page_title')}</h2>
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
@@ -75,7 +75,7 @@ function CreateExpense() {
             </div>
 
             <form onSubmit={ev => postExpense(ev)}>
-                <input type="text" placeholder={t('input-form_designation')} value={purpose} required
+                <input type="text" placeholder={t('input-form_designation')} value={purpose} autoFocus required
                        onChange={ev => setPurpose(ev.target.value)}/>
                 <input type="text" placeholder={t('input-form_description')} value={description}
                        onChange={ev => setDescription(ev.target.value)}/>

@@ -1,6 +1,7 @@
 package de.neuefische.smartcount;
 
 import de.neuefische.smartcount.Exceptions.InvalidUserException;
+import de.neuefische.smartcount.Users.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.verify;
 
 class SmartCountServiceTest {
 
+
     @Test
     void addNewExpense() {
         //given
@@ -23,7 +25,8 @@ class SmartCountServiceTest {
         expense01.setPurpose("Einkaufen");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        SmartCountService expenseService = new SmartCountService(repo);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
 
         // when
         expenseService.createExpense(expense01);
@@ -46,12 +49,14 @@ class SmartCountServiceTest {
         expense04.setPurpose("Tanken");
         expense04.setUser("Sabine");
 
-        List<Expense> expenseList = List.of(expense03, expense04);
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+        
+        List<Expense> expenseList = List.of(expense03, expense04);
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Collection<Expense> actual = expenseService.getAllExpenses();
 
         // then
@@ -77,12 +82,14 @@ class SmartCountServiceTest {
         expense05.setPurpose("Reifenwechsel");
         expense05.setUser("Kim");
 
-        List<Expense> expenseList = List.of(expense03, expense05);
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
+        List<Expense> expenseList = List.of(expense03, expense05);
         Mockito.when(repo.findAllByUser("Kim")).thenReturn(expenseList);
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Collection<Expense> actual = expenseService.getExpensesByUser("Kim");
 
         // then
@@ -103,12 +110,14 @@ class SmartCountServiceTest {
         expense04.setPurpose("Tanken");
         expense04.setUser("Sabine");
 
-        List<Expense> expenseList = List.of(expense03, expense04);
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
+        List<Expense> expenseList = List.of(expense03, expense04);
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Double actual = expenseService.getSum();
 
         // then
@@ -134,12 +143,14 @@ class SmartCountServiceTest {
         expenseC.setPurpose("Pizza");
         expenseC.setUser("hans");
 
-        List<Expense> expenseList = List.of(expenseA, expenseC);
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
+        List<Expense> expenseList = List.of(expenseA, expenseC);
         Mockito.when(repo.findAllByUser("hans")).thenReturn(expenseList);
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Double actual = expenseService.getSumByUser("hans");
 
         // then
@@ -157,7 +168,9 @@ class SmartCountServiceTest {
         expense04.setId(("0004"));
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        SmartCountService expenseService = new SmartCountService(repo);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("0004", "Sabine")).thenReturn(Optional.of(expense04));
 
         // when
@@ -171,7 +184,9 @@ class SmartCountServiceTest {
     void deleteWhenExpenseDoesntExist() {
         //given
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        SmartCountService expenseService = new SmartCountService(repo);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("0004", "Steffi")).thenReturn(Optional.empty());
 
         // then
@@ -191,10 +206,12 @@ class SmartCountServiceTest {
         myExpense.setId("2444");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("2444", "Marion")).thenReturn(Optional.of(myExpense));
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
 
         // then
         Assertions.assertThatExceptionOfType(InvalidUserException.class)
@@ -215,10 +232,12 @@ class SmartCountServiceTest {
         expense06.setId("2222");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("2222", "Franz")).thenReturn(Optional.of(expense06));
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Optional<Expense> actual = expenseService.getSingleExpense("2222", "Franz");
 
         // then
@@ -237,10 +256,12 @@ class SmartCountServiceTest {
         expense06.setId("2222");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("2222", "Gabriele")).thenReturn(Optional.of(expense06));
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
 
         // then
         Assertions.assertThatExceptionOfType(InvalidUserException.class)
@@ -269,11 +290,13 @@ class SmartCountServiceTest {
         expense07saved.setUser("Sven");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("2333", "Sven")).thenReturn(Optional.of(new Expense()));
         Mockito.when(repo.save(expense07changed)).thenReturn(expense07saved);
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Optional<Expense> actual = expenseService.editExpense("2333", expense07changed, "Sven");
 
         // then
@@ -284,10 +307,12 @@ class SmartCountServiceTest {
     void changeExpenseWithWrongId() {
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
+
         Mockito.when(repo.findByIdAndUser("2333", "Mark")).thenReturn(Optional.empty());
 
         // when
-        SmartCountService expenseService = new SmartCountService(repo);
         Optional<Expense> actual = expenseService.editExpense("2333", null, "Mark");
 
         // then

@@ -120,7 +120,7 @@ h3 {
 .buttons_first-line {
     max-width: 368px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 .buttons_second-line {
     max-width: 368px;
@@ -132,7 +132,7 @@ h3 {
     max-width: 368px;
     margin-top: 24px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
 }
 
@@ -147,7 +147,6 @@ h3 {
 }
 
 #logout-button_FrontPage {
-    margin-left: 180pt;
 }
 
 
@@ -174,15 +173,17 @@ h3 {
 }
 
 #iconItemRange {
-    font-weight: bolder;
-    font-size: x-large;
+    font-weight: bold;
+}
+
+#showUsers-button_FrontPage {
+    margin-left: 6pt;
 }
 
 /*---  Buttons  Create/EditPage ---*/
 
 #cancel-button {
     margin-top: 16pt;
-    background-color: dee;
 }
 
 #editItem-button {

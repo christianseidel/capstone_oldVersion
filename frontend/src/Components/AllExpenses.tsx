@@ -28,7 +28,7 @@ function AllExpenses() {
         }
     }, [nav])
 
-    const fetchMyExpensesOnly = useCallback(() => {
+      const fetchMyExpensesOnly = useCallback(() => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/user`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -40,7 +40,8 @@ function AllExpenses() {
 
     useEffect(() => {
         (localStorage.getItem('show') === 'mine') ? fetchMyExpensesOnly() :
-        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
+            setShowItemRange(`${t('button_showAllItems')}`);
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -67,18 +68,17 @@ function AllExpenses() {
         }
     }
 
-
     const setItemsRange = () => {
-        if (localStorage.getItem('show') === 'all') {
-            localStorage.setItem('show', 'mine');
-            setShowItemRange( `${t('button_showAllItems')}`);
-            setIconItemRange('>');
-            fetchMyExpensesOnly();
-        } else {
+        if (localStorage.getItem('show') === 'mine') {
             localStorage.setItem('show', 'all');
             setShowItemRange(`${t('button_showMyItemsOnly')}`);
             setIconItemRange('<');
             fetchAllExpenses();
+        } else {
+            localStorage.setItem('show', 'mine');
+            setShowItemRange( `${t('button_showAllItems')}`);
+            setIconItemRange('>');
+            fetchMyExpensesOnly();
         }
     }
 
@@ -100,7 +100,7 @@ function AllExpenses() {
 
             <div className={'buttons_top-line'}>
                 <button id={"showItemRange-button_FrontPage"} onClick={setItemsRange}><span id={'iconItemRange'}>{iconItemRange}</span>&nbsp;{showItemRange}</button>
-                <button id={"createItem-button_FrontPage"} onClick={() => nav('/edit')}>&#65291; {t('button_goToAddExpense')}</button>
+                <button id={"createItem-button_FrontPage"} onClick={() => nav('/edit')}><strong>&#65291;</strong> {t('button_goToAddExpense')}</button>
             </div>
 
             <div>
@@ -122,6 +122,7 @@ function AllExpenses() {
             </div>
 
             <div className={'buttons_third-line'}>
+                <button id={"showUsers-button_FrontPage"} onClick={() => nav('/expenses/userList')}>{t('button_showUserList')}</button>
                 <button id={"logout-button_FrontPage"} onClick={doLogout}>{t('button_logOut')}</button>
             </div>
 
