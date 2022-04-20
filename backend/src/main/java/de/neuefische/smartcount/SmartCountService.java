@@ -61,27 +61,27 @@ public class SmartCountService {
         return expense;
     }
 
-    public Optional<List<String>> getUserList() {
-        return userRepo.findAllUsers();
+    //  --------- Doing The Math ---------   //
+
+    public List<String> getUserList() {
+        return userRepo.findAll().stream()
+                .map(user -> user.getUsername()).toList();
     }
 
-    //  --------- Doing The Math ---------   //
-/*
-    public List<String> listOfUsers() {
-        return expensesRepository.getUsers();
-    }
+
+
 
     public int numberOfUsers() {
-        List<String> set = expensesRepository.getUsers();
+        List<User> set = userRepo.findAll();
         return set.size();
     }
 
     public void amountPerPerson() {
 
-        List<String> userList = listOfUsers();
+        List<User> userList = userRepo.findAll();
         int numberOfPersons = userList.size();
 
-        System.out.println("number of people: " + numberOfPersons);                              //printout
+        System.out.println("number of people = " + numberOfPersons);                              //printout
 
         double arithMean = getSum()/numberOfPersons;
 

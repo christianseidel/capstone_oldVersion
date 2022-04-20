@@ -1,5 +1,6 @@
 package de.neuefische.smartcount;
 
+import de.neuefische.smartcount.Users.User;
 import de.neuefische.smartcount.Users.UserRepository;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static de.neuefische.smartcount.Currency.EUR;
+import static org.assertj.core.api.InstanceOfAssertFactories.list;
 
 class SmartCountSplitExpensesTest {
 
@@ -20,18 +22,24 @@ class SmartCountSplitExpensesTest {
     void getListOfUsers() {
 
         // given
+        User user1 = new User("778899", "Achim", "pwd12345677");
+        User user2 = new User("778900", "Barbara", "pwd1234556");
+        User user3 = new User("778901", "Clemens", "pwd125556");
+        User user4 = new User("778902", "Elfi", "pwd12444");
+
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         UserRepository userRepository = Mockito.mock(UserRepository.class);
         SmartCountService expenseService = new SmartCountService(repo, userRepository);
 
-        List<String> userList = List.of("Achim", "Bernadette", "Claus");
-        Mockito.when(userRepository.findAllUsers()).thenReturn(Optional.of(userList));
+        List<User> userList = List.of(user1, user2, user3, user4);
+        Mockito.when(userRepository.findAll()).thenReturn(userList);
 
         // when
-        Optional<List<String>> actual = expenseService.getUserList();
+        List<String> actual = expenseService.getUserList();
+        List<String> listOfUsers = List.of("Achim", "Barbara", "Clemens", "Elfi");
 
         // then
-        assertThat(actual).contains(userList);
+        assertThat(actual).isEqualTo(listOfUsers);
     }
 
     @Test
@@ -109,11 +117,19 @@ class SmartCountSplitExpensesTest {
         expenseE3.setUser("Eva");
 
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
-        UserRepository userRepository = Mockito.mock(UserRepository.class);
-        SmartCountService expenseService = new SmartCountService(repo, userRepository);
 
-        List<String> userList = List.of("Achim", "Bernadette", "Claus", "Detlev", "Eva");
-        Mockito.when(userRepository.findAllUsers()).thenReturn(Optional.of(userList));
+
+        User user1 = new User("778899", "Achim", "pwd12345677");
+        User user2 = new User("778900", "Bernadette", "pwd1234556");
+        User user3 = new User("778901", "Claus", "pwd125556");
+        User user4 = new User("778902", "Detlev", "pwd12444");
+        User user5 = new User("778903", "Eva", "pwd127777");
+
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        List<User> userList = List.of(user1, user2, user3, user4, user5);
+        Mockito.when(userRepository.findAll()).thenReturn(userList);
+
+        SmartCountService expenseService = new SmartCountService(repo, userRepository);
 
         Collection<Expense> allByAchim = List.of(expenseA1);
         Mockito.when(repo.findAllByUser("Achim")).thenReturn(allByAchim);
