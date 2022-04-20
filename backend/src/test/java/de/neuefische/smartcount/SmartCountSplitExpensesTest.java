@@ -146,8 +146,7 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         // when
-
-        // service.amountPerPerson();
+        expenseService.amountPerPerson();
 
     }
 

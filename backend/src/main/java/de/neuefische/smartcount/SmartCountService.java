@@ -61,19 +61,11 @@ public class SmartCountService {
         return expense;
     }
 
-    //  --------- Doing The Math ---------   //
+//  ---------   Doing The Math   ---------   //
 
     public List<String> getUserList() {
         return userRepo.findAll().stream()
                 .map(user -> user.getUsername()).toList();
-    }
-
-
-
-
-    public int numberOfUsers() {
-        List<User> set = userRepo.findAll();
-        return set.size();
     }
 
     public void amountPerPerson() {
@@ -87,57 +79,57 @@ public class SmartCountService {
 
         System.out.println("mean = " + arithMean);                              //printout
 
-        Map<String, Double> mapOfUsersWithExcess = new HashMap<>();
-        Map<String, Double> mapOfUsersWithDeficit = new HashMap<>();
+        List<UserDOO> usersWithExcess = new ArrayList<>();
+        List<UserDOO> usersWithDeficit = new ArrayList<>();
+
 
         for (int i = 0; i < numberOfPersons; i++) {
-            String user = userList.get(i);
+            String user = userList.get(i).getUsername();
             double sum = getSumByUser(user);
             if ((sum - arithMean) >= 0.0) {
-                mapOfUsersWithExcess.put(user, sum);
+                double delta = Math.round((sum - arithMean)*100)/100.0;
+                var userRecord = new UserDOO (user, delta);
+                usersWithExcess.add(userRecord);
             } else {
-                mapOfUsersWithDeficit.put(user, sum);
+                double delta = Math.round((arithMean - sum)*100)/100.0;
+                var userRecord = new UserDOO(user, delta);
+                usersWithDeficit.add(userRecord);
             }
         }
 
-        System.out.println("\nPeople with Excess are: " + mapOfUsersWithExcess);                              //printout
-        System.out.println("People with Deficit are: " + mapOfUsersWithDeficit + "\n");                            //printout
+        System.out.println("\nPeople with Excess are: " + usersWithExcess);                              //printout
+        System.out.println("People with Deficit are: " + usersWithDeficit);                            //printout
 
-        HashMap<String, Double> mapOfUsersWithExcessSorted = new HashMap<>();
-        HashMap<String, Double> mapOfUsersWithDeficitSorted = new HashMap<>();
+        usersWithExcess.sort(Comparator.comparing(UserDOO::userDelta).reversed());
+        usersWithDeficit.sort(Comparator.comparing(UserDOO::userDelta).reversed());
 
-        System.out.println("Nutzer mit Überschuss: ");
-        System.out.println(mapOfUsersWithExcess);
-        mapOfUsersWithExcess
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue())
-                .forEachOrdered(item -> mapOfUsersWithExcessSorted.put(item.getKey(), item.getValue()));
-        System.out.println(mapOfUsersWithExcessSorted);
+        System.out.println("\nPeople with Excess in sorted order are: " + usersWithExcess);                              //printout
+        System.out.println("People with Deficit in sorted order are: " + usersWithDeficit);                            //printout
 
+        ArrayList<TransactionsDTO> listOfTransactions = new ArrayList<>();
 
-        System.out.println("Nutzer mit Defizit: ");
-        System.out.println(mapOfUsersWithDeficit);
-        mapOfUsersWithDeficit.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Double::compareTo))
-                .forEach(item -> mapOfUsersWithDeficitSorted.put(item.getKey(), item.getValue()));
-        System.out.println(mapOfUsersWithDeficitSorted);
+        int e = usersWithExcess.size();
+        int d = usersWithDeficit.size();
 
-        // same with printout:
-        mapOfUsersWithExcess
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Double::compareTo))
-                .forEach(System.out::println);
-        mapOfUsersWithDeficit.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Double::compareTo))
-                .forEachOrdered(System.out::println);
-
-
-
+        while (e > 0) {
+            double exc = usersWithExcess.get(e).userDelta();
+            double defi = usersWithDeficit.get(d).userDelta();
+            if (exc == defi) {
+                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc));
+                e--;
+                d--;
+            }
+            else if (exc > defi) {
+                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), defi));
+                d--;
+                usersWithExcess.set(e, UserDOO.changeDelta(exc-defi));
+            }
+            else {
+                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc));
+                e--;
+                usersWithDeficit.set(d, UserDOO.changeDelta(exc));
+            }
+        }
+        System.out.println(listOfTransactions);
     }
-
- */
 }
