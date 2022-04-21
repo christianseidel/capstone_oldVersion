@@ -33,6 +33,12 @@ h3 {
 
 /*---  Main Page  ---*/
 
+.list_OfAllItems {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .item {
     max-width: 350px;
     margin-left: 8px;

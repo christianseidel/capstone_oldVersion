@@ -1,13 +1,15 @@
 
 
 import {useNavigate} from "react-router-dom";
-import {useAuth} from "./UserManagement/AuthProvider";
+import {useAuth} from "../UserManagement/AuthProvider";
 import {useTranslation} from "react-i18next";
 import React, {useEffect, useState} from "react";
-import deFlag from "../Media/Images/de.png";
-import enFlag from "../Media/Images/en.png";
+import deFlag from "../../Media/Images/de.png";
+import enFlag from "../../Media/Images/en.png";
 import i18n from "i18next";
-import {UserListDTO} from "./model";
+import {UserListDTO} from "../model";
+import UserItem from "./UserItem";
+import userItem from "./UserItem";
 
 
 function UserList() {
@@ -16,7 +18,7 @@ function UserList() {
     const {token} = useAuth();
     const {t} = useTranslation();
 
-    const [userList, setUserList] = useState({} as UserListDTO)
+    const [userList, setUserList] = useState([] as Array <string>)
 /*    let loading : String = `${t('message_loading')}`; */
 
     useEffect(() => {
@@ -32,7 +34,7 @@ function UserList() {
                 }
             })
                 .then(response => response.json())
-                .then((responseBody: UserListDTO) => setUserList(responseBody));
+                .then((responseBody: Array<string>) => setUserList(responseBody));
         }, [token]);
 
 
@@ -54,7 +56,7 @@ function UserList() {
                 alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
             </span>
         </div>
-
+        {userList.map(item => <div> {item}</div>)}
         <div>
 
         </div>

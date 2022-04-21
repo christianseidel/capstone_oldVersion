@@ -24,3 +24,7 @@ export enum Currency {
     GBP,
     JPY
 }
+
+export interface User {
+    user: string;
+}

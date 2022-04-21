@@ -484,7 +484,7 @@ class SmartCountSplitExpensesTest {
         // then
         Assertions.assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> expenseService.amountPerPerson())
-                .withMessage("There is only one user in this group. No transactions will take place.");
+                .withMessage("There is only one user in this group. No transaction will take place.");
     }
 
     @Test

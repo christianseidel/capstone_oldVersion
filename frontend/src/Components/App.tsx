@@ -7,7 +7,7 @@ import CreateUser from "./UserManagement/CreateUser";
 import AuthProvider from "./UserManagement/AuthProvider";
 import LoginUser from "./UserManagement/LoginUser";
 import LogoutUser from "./UserManagement/LogoutUser";
-import UserList from "./UserList";
+import UserList from "./UserList/UserList";
 
 function App() {
 

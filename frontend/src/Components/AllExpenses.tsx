@@ -40,7 +40,7 @@ function AllExpenses() {
 
     useEffect(() => {
         (localStorage.getItem('show') === 'mine') ? fetchMyExpensesOnly() :
-            setShowItemRange(`${t('button_showAllItems')}`);
+            setShowItemRange(`${t('button_showMyItemsOnly')}`);
             fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -48,7 +48,7 @@ function AllExpenses() {
         })
             .then(response => response.json())
             .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody))
-            }, [fetchMyExpensesOnly, token]);
+            }, [fetchMyExpensesOnly, token, t]);
 
     const fetchAllExpenses= () => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
