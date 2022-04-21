@@ -9,11 +9,6 @@ import org.springframework.http.ResponseEntity;
 
 import static de.neuefische.smartcount.Currency.EUR;
 
-//
-// The Following is Test Driven Development (TDD).
-// Incremental. Chronological.
-//
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SmartCountControllerTest {
 

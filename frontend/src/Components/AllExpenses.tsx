@@ -95,12 +95,15 @@ function AllExpenses() {
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
                 </span>
-
             </div>
 
             <div className={'buttons_top-line'}>
-                <button id={"showItemRange-button_FrontPage"} onClick={setItemsRange}><span id={'iconItemRange'}>{iconItemRange}</span>&nbsp;{showItemRange}</button>
-                <button id={"createItem-button_FrontPage"} onClick={() => nav('/edit')}><strong>&#65291;</strong> {t('button_goToAddExpense')}</button>
+                <button id={"showItemRange-button_FrontPage"} onClick={setItemsRange}>
+                    <span id={'iconItemRange'}>{iconItemRange}</span>&nbsp;{showItemRange}
+                </button>
+                <button id={"createItem-button_FrontPage"} onClick={() => nav('/edit')}>
+                    <strong>&#65291;</strong> {t('button_goToAddExpense')}
+                </button>
             </div>
 
             <div>

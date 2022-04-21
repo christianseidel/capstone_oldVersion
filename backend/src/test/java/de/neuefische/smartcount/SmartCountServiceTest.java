@@ -15,7 +15,6 @@ import static org.mockito.Mockito.verify;
 
 class SmartCountServiceTest {
 
-
     @Test
     void addNewExpense() {
         //given
@@ -219,7 +218,6 @@ class SmartCountServiceTest {
                 .withMessage("You don't have access to this item");
     }
 
-
     @Test
     void retrieveOneExpense() {
         // given
@@ -261,14 +259,11 @@ class SmartCountServiceTest {
 
         Mockito.when(repo.findByIdAndUser("2222", "Gabriele")).thenReturn(Optional.of(expense06));
 
-        // when
-
         // then
         Assertions.assertThatExceptionOfType(InvalidUserException.class)
                 .isThrownBy(() -> expenseService.getSingleExpense("2222", "Franz"))
                 .withMessage("You don't have access to this item");
     }
-
 
     @Test
     void changeExpense() {
@@ -305,7 +300,7 @@ class SmartCountServiceTest {
 
     @Test
     void changeExpenseWithWrongId() {
-
+        //given
         ExpensesRepository repo = Mockito.mock(ExpensesRepository.class);
         UserRepository userRepository = Mockito.mock(UserRepository.class);
         SmartCountService expenseService = new SmartCountService(repo, userRepository);
@@ -317,7 +312,5 @@ class SmartCountServiceTest {
 
         // then
         Assertions.assertThat(actual).isEmpty();
-
     }
-
 }

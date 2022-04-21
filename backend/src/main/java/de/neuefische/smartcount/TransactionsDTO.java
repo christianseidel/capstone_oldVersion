@@ -3,8 +3,8 @@ package de.neuefische.smartcount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-//  This Data Transfer Object collects and transfers a list of transactions,
-//  which are needed to settle all debts within the Cashbook.
+//  This Data Transfer Object collects and transfers a list of those transactions,
+//  which will be needed to settle all debts within the group of users of the Cashbook.
 
 @Data
 @AllArgsConstructor

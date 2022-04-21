@@ -82,5 +82,4 @@ class UserServiceTest {
                 .isThrownBy(() -> userService.createUser(newUser))
                 .withMessage("user already exists");
     }
-
 }
