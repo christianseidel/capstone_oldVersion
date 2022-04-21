@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import deFlag from "../../Media/Images/de.png";
 import enFlag from "../../Media/Images/en.png";
 import i18n from "i18next";
+import {TransactionsDTO} from "../model";
 
 
 function UserList() {
@@ -14,6 +15,7 @@ function UserList() {
     const {t} = useTranslation();
 
     const [userList, setUserList] = useState([] as Array<string>)
+    const [transactions, setTransactions] = useState([] as Array<TransactionsDTO>)
     /*    let loading : String = `${t('message_loading')}`; */
 
     useEffect(() => {
@@ -21,6 +23,17 @@ function UserList() {
             nav('/users/login')
         }
     }, [nav])
+
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/balance`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then((responseBody: Array<TransactionsDTO>) => setTransactions(responseBody));
+    }, [token]);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/userlist`, {
@@ -50,9 +63,14 @@ function UserList() {
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
             </span>
             </div>
-            {userList.map(item => <div> {item}</div>)}
+            {userList.map(item => <div key={item}> {item}</div>)}
+            <p></p>
             <div>
-
+                {transactions.map(item => <div key={item.userFrom}>
+                    <span>{item.userFrom}</span>&nbsp;{" > "}&nbsp;
+                    <span>{item.userTo}</span> = &nbsp;
+                    <span>{item.balance}</span>
+                </div>)}
             </div>
 
             <div className={'buttons_first-line'}>

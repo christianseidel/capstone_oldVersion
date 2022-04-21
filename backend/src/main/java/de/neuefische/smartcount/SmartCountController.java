@@ -64,4 +64,9 @@ public class SmartCountController {
     public List<String> getUserList() {
         return smartCountService.getUserList();
     }
+
+    @GetMapping("/balance")
+    public List<TransactionsDTO> getBalance() {
+        return smartCountService.amountPerPerson();
+    }
 }
