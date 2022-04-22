@@ -16,6 +16,8 @@
 
   "edit-item-page_title": "Edit Expense",
 
+  "list-of-users-page_title": "Members of Your Group",
+
   "input-form_name": "Name",
   "input-form_password": "Password",
   "input-form_passwordAgain": "Password again",
@@ -35,6 +37,8 @@
   "button_goToAddExpense": "add expense",
   "button_showMyItemsOnly": "show mine only",
   "button_showAllItems": "show all",
+  "button_showUserList": "show group members",
+  "button_showCashbook": "show Cashbook",
 
 
   "currency-form_EUR": "Euro",

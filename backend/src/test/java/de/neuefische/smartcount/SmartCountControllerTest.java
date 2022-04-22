@@ -1,49 +1,40 @@
 package de.neuefische.smartcount;
 
+import de.neuefische.smartcount.Users.UserController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 
 import static de.neuefische.smartcount.Currency.EUR;
-
-/*
-/////  THIS TEST ISN'T WORKING YET -- IT'S STILL IN IT'S BUILD-UP PHASE
-/////  PLEASE IGNORE FOR THE MOMENT !
- */
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SmartCountControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-
-
+/*
     @Test
     void addExpenses() {
+*/
+        // register a new user
+     //   ResponseEntity
+     //   UserController userController = new UserController();
+
+/*
+        // create new expense
         Expense expense01 = new Expense();
         expense01.setPurpose("Reifen wechseln");
         expense01.setDescription("Auto Wagner");
         expense01.setAmount(26.0);
         expense01.setCurrency(EUR);
         expense01.setUser("Andrea");
-
+*/
+/*
     }
 }
 
-/*
-import org.springframework.boot.test.context.SpringBootTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class SmartCountControllerTest {
-
-    // The Following is Test Driven Development (TDD).
-    // Incremental. Chronological.
 /*
     @Test
     void splittingUpExpenses() {
@@ -58,6 +49,5 @@ class SmartCountControllerTest {
         // then
         Assertions.assertEquals(0, sum);
     }
-
-}
 */
+}

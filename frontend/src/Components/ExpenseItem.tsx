@@ -30,6 +30,7 @@ function ExpenseItem(props: ExpenseItemProps) {
     const [mouseOverButton, setMouseOverButton] = useState('item');
 
     return (
+        <div className={"list_OfAllItems"}>
           <div className={mouseOverButton==='item' ? 'item-wrapper_regular' : 'item-wrapper_small'}>
               <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
@@ -68,6 +69,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                 </div>
             </div>
           </div>
+        </div>
     );
 }
 
