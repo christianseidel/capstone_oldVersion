@@ -20,8 +20,6 @@ function AllExpenses() {
     const [iconItemRange, setIconItemRange] = useState('<');
     let loading : String = `${t('message_loading')}`;
 
-
-
     useEffect(() => {
         if (!localStorage.getItem('jwt')) {
             nav('/users/login')
@@ -50,7 +48,7 @@ function AllExpenses() {
                     return response.json()})
             .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody))
                 .catch(() => nav('/users/login'))
-            }, [fetchMyExpensesOnly, token, t]);
+            }, [fetchMyExpensesOnly, token, t, nav]);
 
     const fetchAllExpenses= () => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {

@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {useAuth} from "./AuthProvider";
 import {useNavigate} from "react-router-dom";
 import icon_eyes from "../../Media/Images/eyes.png";
