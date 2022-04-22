@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {ExpenseDTO} from "./model";
+import {checkLogin, ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
@@ -46,8 +46,10 @@ function AllExpenses() {
                 'Authorization': `Bearer ${token}`
             }
         })
-            .then(response => response.json())
+            .then(response => {checkLogin(response.status);
+                    return response.json()})
             .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody))
+                .catch(() => nav('/users/login'))
             }, [fetchMyExpensesOnly, token, t]);
 
     const fetchAllExpenses= () => {

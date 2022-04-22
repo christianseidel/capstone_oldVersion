@@ -19,12 +19,6 @@ function LoginUser() {
 
     const {login} = useAuth();
 
-    useEffect(() => {
-        if (localStorage.getItem('jwt')) {
-            nav('/expenses')
-        }
-    }, [nav])
-
     const doLogin = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         login(loginUsername, loginPassword)

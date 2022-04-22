@@ -67,7 +67,7 @@ function CreateExpense() {
     return (
         <div>
             <div className={'heading'}>
-                <h2>{t('list-of-users-page_title')}</h2>
+                <h2>{t('create-item-page_title')}</h2>
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
