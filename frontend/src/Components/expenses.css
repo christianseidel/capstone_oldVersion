@@ -11,8 +11,10 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
-
 }
+.e {    border: 1px solid #1e6ebf;}
+
+
 
 h3 {
     margin-top: 46px;

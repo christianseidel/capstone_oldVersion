@@ -6,6 +6,7 @@ import deFlag from "../../Media/Images/de.png";
 import enFlag from "../../Media/Images/en.png";
 import i18n from "i18next";
 import {TransactionsDTO} from "../model";
+import UserItem from "./UserItem";
 
 
 function UserList() {
@@ -61,16 +62,15 @@ function UserList() {
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
-            </span>
+                </span>
             </div>
             {userList.map(item => <div key={item}> {item}</div>)}
             <p></p>
+            <div>The members of this group need to make the following payments in order to settle all balances:</div>
             <div>
-                {transactions.map(item => <div key={item.userFrom}>
-                    <span>{item.userFrom}</span>&nbsp;{" > "}&nbsp;
-                    <span>{item.userTo}</span> = &nbsp;
-                    <span>{item.balance}</span>
-                </div>)}
+                {transactions.map(item => <UserItem key={item.userFrom} data={item} />
+
+                )}
             </div>
 
             <div className={'buttons_first-line'}>

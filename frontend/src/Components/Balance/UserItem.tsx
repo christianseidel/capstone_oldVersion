@@ -1,28 +1,19 @@
-import {User} from "../model";
+import React from "react";
+import {TransactionsDTO} from "../model";
 
-/*
-interface UserItemProps {
-    user: string
-}
-*/
 interface BalanceProps {
-    userFrom: string;
-    userTo: string;
-    balance: number;
+    data: TransactionsDTO;
 }
 
 function UserItem(props: BalanceProps) {
 
     return (
- /*       <div> propsUser: UserItemProps,
-            {propsUser.user}
-        </div>
-   */
         <div>
-            <span>{props.userFrom}</span> <span>{props.userTo}</span>: <span>{props.balance}</span>
+            <span>&#9679;&nbsp;{props.data.userFrom}</span>&nbsp;
+            <span>to {props.data.userTo}</span>:<br/>&nbsp; &nbsp;&
+            <span>{props.data.balance}</span>
         </div>
     )
-
 }
 
 export default UserItem

@@ -34,7 +34,7 @@ function ExpenseItem(props: ExpenseItemProps) {
           <div className={mouseOverButton==='item' ? 'item-wrapper_regular' : 'item-wrapper_small'}>
               <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
-                    <span> {props.expense.purpose} </span> &nbsp; &nbsp;
+                    <span> {props.expense.purpose} </span>
                     <span> {(props.expense.amount).toLocaleString('de-De', {
                         style: 'currency',
                         currency: props.expense.currency,

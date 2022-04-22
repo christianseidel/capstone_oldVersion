@@ -66,7 +66,7 @@ public class SmartCountService {
                 .map(user -> user.getUsername()).toList();
     }
 
-    //  --------------   Computing The Math   --------------   //
+    //  ----------------   Doing The Math   ----------------   //
     //  -----   Who needs to pay how much at the end   -----   //
 
     public List<TransactionsDTO> amountPerPerson() {
