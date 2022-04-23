@@ -58,25 +58,35 @@ function BalanceList() {
     return (
         <div>
             <div className={'heading'}>
-                <h2>{t('list-of-users-page_title')}</h2>
+                <h2>{t('balances_title')}</h2>
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
                 </span>
             </div>
-            {userList.map(item => <div key={item}> {item}</div>)}
-            <p></p>
-            <div className={'explain'}>The members of this group need to make the following payments in order to settle all balances:</div>
-            <div>
-                {transactions.map(item => <BalanceItem key={item.userFrom} data={item} />
 
-                )}
+            <div className={'balancePage'}>
+                <div className={'balancePage_paneLeft'}>
+                    <div className={'balancePage_explained'}>{t('balances_explained')}</div>
+                </div>
+                <div className={'balancePage_paneRight_alignmentBottom'}>
+                    <div className={'userList_explained'}>{t('userList')}</div>
+                </div>
             </div>
 
-            <div className={'buttons_first-line'}>
-                <button className={'button_bellow-list'} onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
+            <div className={'balancePage'}>
+                <div className={'balancePage_paneLeft'}>
+                    <div>
+                    {transactions.map(item => <BalanceItem key={item.userFrom} data={item} />)}
+                    </div>
+                    <div className={'buttons_first-line'}>
+                        <button className={'button_bellow-list'} onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
+                    </div>
+                </div>
+                <div className={'balancePage_paneRight'}>
+                    <div className={'userList'}>{userList.map(item => <div key={item}>&#9679;&nbsp; {item}</div>)}</div>
+                </div>
             </div>
-
         </div>
     )
 }

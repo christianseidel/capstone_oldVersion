@@ -16,7 +16,10 @@
 
   "edit-item-page_title": "Ausgabe bearbeiten",
 
-  "list-of-users-page_title": "Ausgleichszahlungen",
+  "balances_title": "Ausgleichszahlungen",
+  "balances_explained": "Folgende Zahlungen sind erforderlich, um die Differenzen der Ausgaben in der Gruppe wieder auszugleichen:",
+  "to": "an",
+  "userList": "Mitglieder in der Gruppe:",
 
   "input-form_name": "Name",
   "input-form_password": "Passwort",

@@ -16,7 +16,11 @@
 
   "edit-item-page_title": "Edit Expense",
 
-  "list-of-users-page_title": "Equalization payments",
+  "balances_title": "Equalization payments",
+  "balances_explained": "The members of this group need to make the following payments in order to settle all balances:",
+  "to": "to",
+  "userList": "Members of this group:",
+
 
   "input-form_name": "Name",
   "input-form_password": "Password",
