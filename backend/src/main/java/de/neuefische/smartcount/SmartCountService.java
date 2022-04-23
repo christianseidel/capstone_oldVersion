@@ -130,17 +130,17 @@ public class SmartCountService {
             double exc = userWithExcess.userDelta();
             double defi = userWithDeficit.userDelta();
             if (exc == defi) {
-                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc));
+                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc, Currency.EUR));  // The handling of different currencies is here being prepared for, but will only be implemented at a later point in time.
                 e--;
                 d--;
             }
             else if (exc > defi) {
-                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), defi));
+                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), defi, Currency.EUR));
                 d--;
                 usersWithExcess.set(e, userWithExcess.changeDelta(Math.round((exc-defi)*100)/100.0));
             }
             else {
-                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc));
+                listOfTransactions.add(new TransactionsDTO(usersWithDeficit.get(d).userName(), usersWithExcess.get(e).userName(), exc, Currency.EUR));
                 e--;
                 usersWithDeficit.set(d, userWithDeficit.changeDelta(Math.round((defi-exc)*100)/100.0));
             }

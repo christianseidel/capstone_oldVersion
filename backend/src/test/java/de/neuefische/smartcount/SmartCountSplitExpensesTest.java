@@ -64,7 +64,7 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO = new TransactionsDTO("Achim", "Bernadette", 45.0);
+        TransactionsDTO transactionDTO = new TransactionsDTO("Achim", "Bernadette", 45.0, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO);
 
         // then
@@ -111,7 +111,7 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO = new TransactionsDTO("Achim", "Bernadette", 20.75);
+        TransactionsDTO transactionDTO = new TransactionsDTO("Achim", "Bernadette", 20.75, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO);
 
         // then
@@ -159,8 +159,8 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Claudius", "Achim", 10.0);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Claudius", "Bernadette", 40.0);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Claudius", "Achim", 10.0, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Claudius", "Bernadette", 40.0, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2);
 
         // then
@@ -217,8 +217,8 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Achim", "Bernadette", 1.98);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Claudius", "Bernadette", 50.48);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Achim", "Bernadette", 1.98, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Claudius", "Bernadette", 50.48, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2);
 
         // then
@@ -291,8 +291,8 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Claudius", "Achim", 0.03);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Bernadette", "Achim", 0.03);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Claudius", "Achim", 0.03, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Bernadette", "Achim", 0.03, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2);
 
         // then
@@ -333,12 +333,12 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Gabi", "Achim", 0.01);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Fabienne", "Achim", 0.01);
-        TransactionsDTO transactionDTO3 = new TransactionsDTO("Enrique", "Achim", 0.01);
-        TransactionsDTO transactionDTO4 = new TransactionsDTO("Damian", "Achim", 0.01);
-        TransactionsDTO transactionDTO5 = new TransactionsDTO("Claudius", "Achim", 0.01);
-        TransactionsDTO transactionDTO6 = new TransactionsDTO("Bernadette", "Achim", 0.01);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Gabi", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Fabienne", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO3 = new TransactionsDTO("Enrique", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO4 = new TransactionsDTO("Damian", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO5 = new TransactionsDTO("Claudius", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO6 = new TransactionsDTO("Bernadette", "Achim", 0.01, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2, transactionDTO3, transactionDTO4, transactionDTO5, transactionDTO6);
 
         // then
@@ -379,12 +379,12 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Gabi", "Achim", 1.0);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Fabienne", "Achim", 1.0);
-        TransactionsDTO transactionDTO3 = new TransactionsDTO("Enrique", "Achim", 1.0);
-        TransactionsDTO transactionDTO4 = new TransactionsDTO("Damian", "Achim", 1.0);
-        TransactionsDTO transactionDTO5 = new TransactionsDTO("Claudius", "Achim", 1.0);
-        TransactionsDTO transactionDTO6 = new TransactionsDTO("Bernadette", "Achim", 1.0);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Gabi", "Achim", 1.0, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Fabienne", "Achim", 1.0, EUR);
+        TransactionsDTO transactionDTO3 = new TransactionsDTO("Enrique", "Achim", 1.0, EUR);
+        TransactionsDTO transactionDTO4 = new TransactionsDTO("Damian", "Achim", 1.0, EUR);
+        TransactionsDTO transactionDTO5 = new TransactionsDTO("Claudius", "Achim", 1.0, EUR);
+        TransactionsDTO transactionDTO6 = new TransactionsDTO("Bernadette", "Achim", 1.0, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2, transactionDTO3, transactionDTO4, transactionDTO5, transactionDTO6);
 
         // then
@@ -425,12 +425,12 @@ class SmartCountSplitExpensesTest {
         Mockito.when(repo.findAll()).thenReturn(expenseList);
 
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Gabi", "Achim", 0.01);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Fabienne", "Achim", 0.01);
-        TransactionsDTO transactionDTO3 = new TransactionsDTO("Enrique", "Achim", 0.01);
-        TransactionsDTO transactionDTO4 = new TransactionsDTO("Damian", "Achim", 0.01);
-        TransactionsDTO transactionDTO5 = new TransactionsDTO("Claudius", "Achim", 0.01);
-        TransactionsDTO transactionDTO6 = new TransactionsDTO("Bernadette", "Achim", 0.01);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Gabi", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Fabienne", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO3 = new TransactionsDTO("Enrique", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO4 = new TransactionsDTO("Damian", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO5 = new TransactionsDTO("Claudius", "Achim", 0.01, EUR);
+        TransactionsDTO transactionDTO6 = new TransactionsDTO("Bernadette", "Achim", 0.01, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2, transactionDTO3, transactionDTO4, transactionDTO5, transactionDTO6);
 
         // then
@@ -593,10 +593,10 @@ class SmartCountSplitExpensesTest {
         // when
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
 
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Detlev", "Bernadette", 27.76);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Claus", "Bernadette", 3.57);
-        TransactionsDTO transactionDTO3 = new TransactionsDTO("Claus", "Eva", 48.05);
-        TransactionsDTO transactionDTO4 = new TransactionsDTO("Achim", "Eva", 51.62);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Detlev", "Bernadette", 27.76, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Claus", "Bernadette", 3.57, EUR);
+        TransactionsDTO transactionDTO3 = new TransactionsDTO("Claus", "Eva", 48.05, EUR);
+        TransactionsDTO transactionDTO4 = new TransactionsDTO("Achim", "Eva", 51.62, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2, transactionDTO3, transactionDTO4);
 
         expenseService.amountPerPerson();
@@ -708,10 +708,10 @@ class SmartCountSplitExpensesTest {
         // when
         List<TransactionsDTO> actual = expenseService.amountPerPerson();
 
-        TransactionsDTO transactionDTO1 = new TransactionsDTO("Achim", "Bernadette", 0.02);
-        TransactionsDTO transactionDTO2 = new TransactionsDTO("Detlev", "Bernadette", 17.41);
-        TransactionsDTO transactionDTO3 = new TransactionsDTO("Detlev", "Eva", 24.25);
-        TransactionsDTO transactionDTO4 = new TransactionsDTO("Claus", "Eva", 61.54);
+        TransactionsDTO transactionDTO1 = new TransactionsDTO("Achim", "Bernadette", 0.02, EUR);
+        TransactionsDTO transactionDTO2 = new TransactionsDTO("Detlev", "Bernadette", 17.41, EUR);
+        TransactionsDTO transactionDTO3 = new TransactionsDTO("Detlev", "Eva", 24.25, EUR);
+        TransactionsDTO transactionDTO4 = new TransactionsDTO("Claus", "Eva", 61.54, EUR);
         List<TransactionsDTO> transactionsList = List.of(transactionDTO1, transactionDTO2, transactionDTO3, transactionDTO4);
 
         expenseService.amountPerPerson();

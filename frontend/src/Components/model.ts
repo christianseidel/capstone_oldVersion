@@ -17,6 +17,7 @@ export interface TransactionsDTO {
     userFrom: string;
     userTo: string;
     balance: number;
+    currency: string;
 }
 
 export enum Currency {

@@ -6,10 +6,10 @@ import deFlag from "../../Media/Images/de.png";
 import enFlag from "../../Media/Images/en.png";
 import i18n from "i18next";
 import {TransactionsDTO} from "../model";
-import UserItem from "./UserItem";
+import BalanceItem from "./BalanceItem";
 
 
-function UserList() {
+function BalanceList() {
 
     const nav = useNavigate();
     const {token} = useAuth();
@@ -66,19 +66,19 @@ function UserList() {
             </div>
             {userList.map(item => <div key={item}> {item}</div>)}
             <p></p>
-            <div>The members of this group need to make the following payments in order to settle all balances:</div>
+            <div className={'explain'}>The members of this group need to make the following payments in order to settle all balances:</div>
             <div>
-                {transactions.map(item => <UserItem key={item.userFrom} data={item} />
+                {transactions.map(item => <BalanceItem key={item.userFrom} data={item} />
 
                 )}
             </div>
 
             <div className={'buttons_first-line'}>
-                <button onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
+                <button className={'button_bellow-list'} onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
             </div>
 
         </div>
     )
 }
 
-export default UserList;
+export default BalanceList;

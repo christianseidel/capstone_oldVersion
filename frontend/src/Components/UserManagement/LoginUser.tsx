@@ -60,9 +60,8 @@ function LoginUser() {
                         onClick={() => ((showPasswordToggle==='text')
                             ? setShowPasswordToggle('password')
                             : setShowPasswordToggle("text"))}>
-                    <img id={'showPassword-button-icon'} src={icon_eyes} alt={'edit item'} /> &nbsp;
-                    {showPasswordToggle==='text' && <> {t('button_hidePassword')}</>}
-                    {showPasswordToggle==='password' && <> {t('button_showPassword')}</>}
+                    {showPasswordToggle==='text' && <> <span id={'hidePassword'}> &#10005;&#10005;&nbsp;</span> {t('button_hidePassword')}</>}
+                    {showPasswordToggle==='password' && <><img id={'showPassword-button-icon'} src={icon_eyes} alt={'edit item'} /> {t('button_showPassword')}</>}
                 </button>
             </div>
 
