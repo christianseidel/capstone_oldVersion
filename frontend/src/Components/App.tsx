@@ -20,7 +20,7 @@ function App() {
 
                             <Route path={'/*'} element={<AllExpenses />}/>
                             <Route path={'/expenses'} element={<AllExpenses/>}/>
-                            <Route path={'/expenses/userList'} element={<BalanceList/>}/>
+                            <Route path={'/expenses/balance'} element={<BalanceList/>}/>
                             <Route path={'/edit'} element={<CreateExpense/>}/>
                             <Route path={'/edit/:expenseId'} element={<EditExpense/>}/>
                             <Route path={'/users/register'} element={<CreateUser/>}/>

@@ -46,6 +46,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                         <span> {props.expense.description} </span>
                         {props.expense.user && <div> <span id={"user_color"}>&#9679;</span> {props.expense.user}</div>}
                     </div>
+                    {(localStorage.getItem(('username')) === props.expense.user) &&
                     <div className={"item_secondLine_buttons"}>
                         <span>
                             <button id={'editItem-button_FrontPage'} type="submit"
@@ -65,8 +66,9 @@ function ExpenseItem(props: ExpenseItemProps) {
                                 &#10006;
                             </button>
                         </span>
-                    </div>
+                    </div> }
                 </div>
+
             </div>
           </div>
         </div>

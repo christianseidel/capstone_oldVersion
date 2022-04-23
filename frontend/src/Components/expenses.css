@@ -12,9 +12,6 @@ body {
     justify-content: space-between;
     align-items: baseline;
 }
-.e {    border: 1px solid #1e6ebf;}
-
-
 
 h3 {
     margin-top: 46px;
@@ -37,7 +34,7 @@ h3 {
 
 .item_wrapper {
     max-width: 380px;
-    height: 72px;
+    height: 66px;
     margin-left: 8px;
     display: flex;
     align-items: center;
@@ -46,7 +43,7 @@ h3 {
 .item {
     max-width: 350px;
     width: 350px;
-    padding: 4px;
+    padding: 4px 6px 4px 6px;
     border: 1px solid #1e6ebf;
     border-radius: 9px;
 }
@@ -63,25 +60,29 @@ h3 {
 .item-MouseOverEdit {
     font-size: larger;
     max-width: 386px;
-    padding: 4px;
+    padding: 6px;
     border: 5px solid #808d7b;
     border-radius: 9px;
     background-color: #d3e7dc;
+    position: relative;
+    top: 3px;
 }
 
 .item-MouseOverDelete {
     font-size: larger;
     max-width: 386px;
-    padding: 4px;
+    padding: 6px;
     border: 5px solid #ab8799;
     border-radius: 9px;
     background-color: #eedbe4;
+    position: relative;
+    top: 3px;
 }
 
 .sum {
     width: 350px;
     font-weight: bold;
-    padding: 4px;
+    padding: 6px;
     border: 1px solid #1e6ebf;
     border-radius: 6px;
     display: flex;

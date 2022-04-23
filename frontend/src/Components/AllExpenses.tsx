@@ -130,7 +130,7 @@ function AllExpenses() {
 
             <div className={'buttons_third-line'}>
                 <button id={"showUsers-button_FrontPage"}
-                        onClick={() => nav('/expenses/userList')}>{t('button_showUserList')}</button>
+                        onClick={() => nav('/expenses/balance')}>{t('button_showUserList')}</button>
                 <button id={"logout-button_FrontPage"} onClick={doLogout}>{t('button_logOut')}</button>
             </div>
 

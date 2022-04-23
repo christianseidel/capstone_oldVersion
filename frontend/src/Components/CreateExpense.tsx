@@ -80,7 +80,7 @@ function CreateExpense() {
                 <input type="text" placeholder={t('input-form_description')} value={description}
                        onChange={ev => setDescription(ev.target.value)}/>
                 <input type="text" placeholder={t('input-form_amount')} value={amount} required
-                       onChange={ev => setAmount(ev.target.value)}/>
+                       onChange={ev => setAmount(ev.target.value.replace(",","."))}/>
 
                 <select value={currency}
                         onChange={ev => setCurrency(ev.target.value)}><option value={"EUR"}>{t('currency-form_EUR')}</option>
