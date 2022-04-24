@@ -17,7 +17,6 @@ function App() {
                 <BrowserRouter>
                     <AuthProvider>
                         <Routes>
-
                             <Route path={'/*'} element={<AllExpenses />}/>
                             <Route path={'/expenses'} element={<AllExpenses/>}/>
                             <Route path={'/expenses/balance'} element={<BalanceList/>}/>
@@ -26,7 +25,6 @@ function App() {
                             <Route path={'/users/register'} element={<CreateUser/>}/>
                             <Route path={'/users/login'} element={<LoginUser />}/>
                             <Route path={'/users/logout'} element={<LogoutUser />}/>
-
                         </Routes>
                     </AuthProvider>
                 </BrowserRouter>

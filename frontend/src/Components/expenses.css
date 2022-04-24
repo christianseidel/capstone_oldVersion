@@ -30,11 +30,27 @@ h3 {
     border-style: solid;
 }
 
-/*---  Main Page  ---*/
+/*--    MAIN PAGE    --*/
+
+#showItemRange-button_FrontPage {
+    margin-top: 16pt;
+    margin-left: 6pt;
+    margin-bottom: 10pt;
+    display: flex;
+    align-items: center;
+}
+#iconItemRange {
+    font-weight: bold;
+}
+#createItem-button_FrontPage {
+    margin-top: 16pt;
+    margin-left: 6pt;
+    margin-bottom: 10pt;
+}
 
 .item_wrapper {
-    max-width: 380px;
-    height: 66px;
+    max-width: 386px;
+    height: 76px;
     margin-left: 8px;
     display: flex;
     align-items: center;
@@ -47,52 +63,27 @@ h3 {
     border: 1px solid #1e6ebf;
     border-radius: 9px;
 }
-.item-wrapper_regular {
-    width: 380px;
-    padding-top: 10px;
-    padding-bottom: 6px;
-}
-.item-wrapper_small {
-    width: 380px;
-    padding-bottom: 2px;
-}
 
-.item-MouseOverEdit {
+.item_MouseOverEdit {
     font-size: larger;
-    max-width: 386px;
-    padding: 6px;
+    width: 386px;
+    padding: 6px 13px 4px 6px;
+    background-color: #d3e7dc;
     border: 5px solid #808d7b;
     border-radius: 9px;
-    background-color: #d3e7dc;
     position: relative;
-    top: 3px;
+    bottom: 2px;
 }
 
-.item-MouseOverDelete {
+.item_MouseOverDelete {
     font-size: larger;
-    max-width: 386px;
-    padding: 6px;
+    width: 386px;
+    padding: 6px 13px 4px 6px;
     border: 5px solid #ab8799;
     border-radius: 9px;
     background-color: #eedbe4;
     position: relative;
-    top: 3px;
-}
-
-.sum {
-    width: 350px;
-    font-weight: bold;
-    padding: 6px;
-    border: 1px solid #1e6ebf;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.sum:hover {
-    width: 380px;
-    font-size: larger;
-    border: 4px solid #1e6ebf;
+    bottom: 2px;
 }
 
 .item_firstLine {
@@ -111,10 +102,38 @@ h3 {
     flex-direction: column;
     justify-content: center;
 }
+
 .item_secondLine_buttons {
-    margin-top: 4pt;
+    margin-top:3px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+#editItem-button_FrontPage-image {
+    transform: rotate(0deg) translateY(1px);
+    height: 12px;
+    width: 12px;
+}
+
+#deleteItem-button_FrontPage {
+    margin-left: 6px;
+}
+
+.sum {
+    width: 350px;
+    font-weight: bold;
+    padding: 6px;
+    border: 1px solid #1e6ebf;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sum:hover {
+    width: 380px;
+    font-size: larger;
+    border: 4px solid #1e6ebf;
 }
 
 .buttons_top-line {
@@ -154,33 +173,6 @@ h3 {
 }
 
 
-#editItem-button_FrontPage-image {
-    transform: rotate(0deg) translateY(1px);
-    height: 12px;
-    width: 12px;
-}
-
-#deleteItem-button_FrontPage {
-    margin-left: 6px;
-}
-
-#createItem-button_FrontPage {
-    margin-top: 16pt;
-    margin-left: 6pt;
-    margin-bottom: 10pt;
-}
-
-#showItemRange-button_FrontPage {
-    margin-top: 16pt;
-    margin-left: 6pt;
-    margin-bottom: 10pt;
-    display: flex;
-    align-items: center;
-}
-
-#iconItemRange {
-    font-weight: bold;
-}
 
 #showUsers-button_FrontPage {
     margin-left: 6pt;
@@ -251,24 +243,24 @@ h3 {
 }
 .balancePage_explained {
     max-width: 368px;
-    margin-left: 6px;
+    margin-left: 8px;
     margin-bottom: 8px;
 }
 
 .userList_explained {
-    margin-left: 6px;
+    margin-left: 8px;
     margin-bottom: 8px;
 }
 .balanceItem_wrapper {
     max-width: 386px;
     height: 50px;
+    margin-left: 8px;
     display: flex;
     align-items: center;
 }
 
 .balanceItem {
     font-weight: bold;
-    margin-left: 6px;
     display: flex;
     justify-content: space-between;
     width: 350px;
@@ -289,10 +281,10 @@ h3 {
 }
 
 .userList {
-    margin-left: 12px;
+    margin-left: 14px;
 }
 
-.button_bellow-list {
+#button_showCashbook {
     margin-top: 16pt;
-    margin-left: 6px;
+    margin-left: 8px;
 }

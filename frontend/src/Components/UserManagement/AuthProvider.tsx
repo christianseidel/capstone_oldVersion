@@ -14,7 +14,7 @@ export default function AuthProvider({children}: Param) {
 
     const [token, setToken] = useState(localStorage.getItem('jwt') ?? '');
 
-    const navigate = useNavigate();
+    const nav = useNavigate();
 
     useEffect(() =>{
         localStorage.setItem('jwt', token);
@@ -60,7 +60,7 @@ export default function AuthProvider({children}: Param) {
         setToken('');
         localStorage.removeItem('jwt');
         localStorage.removeItem('username');
-        navigate("/users/logout");
+        nav("/users/logout");
     };
 
     return (
