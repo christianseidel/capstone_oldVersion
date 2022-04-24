@@ -13,5 +13,6 @@ public class TransactionsDTO {
     private String userFrom;
     private String userTo;
     private double balance;
+    private Currency currency;
 
 }

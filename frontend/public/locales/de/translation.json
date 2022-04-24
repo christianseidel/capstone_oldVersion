@@ -16,7 +16,10 @@
 
   "edit-item-page_title": "Ausgabe bearbeiten",
 
-  "list-of-users-page_title": "Mitglieder deiner Gruppe",
+  "balances_title": "Ausgleichszahlungen",
+  "balances_explained": "Folgende Zahlungen sind erforderlich, um die Differenzen der Ausgaben in der Gruppe wieder auszugleichen:",
+  "to": "an",
+  "userList": "Mitglieder in der Gruppe:",
 
   "input-form_name": "Name",
   "input-form_password": "Passwort",
@@ -37,7 +40,7 @@
   "button_goToAddExpense": "Ausgabe hinzufügen",
   "button_showMyItemsOnly": "nur meine anzeigen",
   "button_showAllItems": "alle anzeigen",
-  "button_showUserList": "Liste der Teilnehmer",
+  "button_showBalance": "Kassensturz",
   "button_showCashbook": "zum Kassenbuch",
 
 

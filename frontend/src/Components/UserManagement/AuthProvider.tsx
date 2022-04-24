@@ -52,9 +52,7 @@ export default function AuthProvider({children}: Param) {
                 return response.json();
             })
             .then((token: Token) => setToken(token.token))
-            .then(() => console.log(`${token}`))
-            .then(() => console.log('wieso ist das Token leer?'))
-            .then(() => localStorage.setItem('jwt2AuthProvider', token))
+            .then(() => localStorage.setItem('jwt', token))
             .then(() => localStorage.setItem('username', username))
     };
 

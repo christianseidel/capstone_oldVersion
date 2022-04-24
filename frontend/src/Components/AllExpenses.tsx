@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {ExpenseDTO} from "./model";
+import {checkLogin, ExpenseDTO} from "./model";
 import ExpenseItem from "./ExpenseItem"
 import {useNavigate} from "react-router-dom";
 import './expenses.css'
@@ -18,9 +18,7 @@ function AllExpenses() {
     const [expensesDTO, setExpensesDTO] = useState({} as ExpenseDTO);
     const [showItemRange, setShowItemRange] = useState(`${t('button_showMyItemsOnly')}`);
     const [iconItemRange, setIconItemRange] = useState('<');
-    let loading : String = `${t('message_loading')}`;
-
-
+    let loading: String = `${t('message_loading')}`;
 
     useEffect(() => {
         if (!localStorage.getItem('jwt')) {
@@ -28,7 +26,7 @@ function AllExpenses() {
         }
     }, [nav])
 
-      const fetchMyExpensesOnly = useCallback(() => {
+    const fetchMyExpensesOnly = useCallback(() => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses/user`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -41,16 +39,20 @@ function AllExpenses() {
     useEffect(() => {
         (localStorage.getItem('show') === 'mine') ? fetchMyExpensesOnly() :
             setShowItemRange(`${t('button_showMyItemsOnly')}`);
-            fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
-            .then(response => response.json())
+            .then(response => {
+                checkLogin(response.status);
+                return response.json()
+            })
             .then((responseBody: ExpenseDTO) => setExpensesDTO(responseBody))
-            }, [fetchMyExpensesOnly, token, t]);
+            .catch(() => nav('/users/login'))
+    }, [fetchMyExpensesOnly, token, t, nav]);
 
-    const fetchAllExpenses= () => {
+    const fetchAllExpenses = () => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/expenses`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -76,7 +78,7 @@ function AllExpenses() {
             fetchAllExpenses();
         } else {
             localStorage.setItem('show', 'mine');
-            setShowItemRange( `${t('button_showAllItems')}`);
+            setShowItemRange(`${t('button_showAllItems')}`);
             setIconItemRange('>');
             fetchMyExpensesOnly();
         }
@@ -108,24 +110,27 @@ function AllExpenses() {
 
             <div>
                 {expensesDTO.expenses ? expensesDTO.expenses.map(item => <ExpenseItem key={item.id} expense={item}
-                                                                                onItemDeletion={fetchAllExpenses}
-                                                                                onExpenseChange={setExpensesDTO}/>)
+                                                                                      onItemDeletion={fetchAllExpenses}
+                                                                                      onExpenseChange={setExpensesDTO}/>)
                     : <span>{t('message_loading')}</span>}
             </div>
 
-            <div className={"sum"}>
+            <div className={"item_wrapper"}>
+                <div className={"sum"}>
                 {(expensesDTO.sum !== 0) && <span>{t('landing-page_sum')}:</span>}
                 <span>{expensesDTO.sum ? (expensesDTO.sum).toLocaleString('de-De', {
-                style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
-            })
-                : ((expensesDTO.sum === 0) ? <span>{t('landing-page_zeroExpense')}.</span> : <span>{loading}</span>)}</span></div>
-
+                        style: 'currency', currency: 'EUR', minimumFractionDigits: 2  // hard-coded "EUR" will be solved and implemented at a later point in time
+                    })
+                    : ((expensesDTO.sum === 0) ? <span>{t('landing-page_zeroExpense')}.</span> :
+                        <span>{loading}</span>)}</span></div>
+            </div>
             <div className={'buttons_first-line'}>
 
             </div>
 
             <div className={'buttons_third-line'}>
-                <button id={"showUsers-button_FrontPage"} onClick={() => nav('/expenses/userList')}>{t('button_showUserList')}</button>
+                <button id={"showUsers-button_FrontPage"}
+                        onClick={() => nav('/expenses/balance')}>{t('button_showBalance')}</button>
                 <button id={"logout-button_FrontPage"} onClick={doLogout}>{t('button_logOut')}</button>
             </div>
 

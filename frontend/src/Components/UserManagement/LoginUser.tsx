@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {useAuth} from "./AuthProvider";
 import {useNavigate} from "react-router-dom";
 import icon_eyes from "../../Media/Images/eyes.png";
@@ -18,12 +18,6 @@ function LoginUser() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const {login} = useAuth();
-
-    useEffect(() => {
-        if (localStorage.getItem('jwt')) {
-            nav('/expenses')
-        }
-    }, [nav])
 
     const doLogin = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -66,9 +60,8 @@ function LoginUser() {
                         onClick={() => ((showPasswordToggle==='text')
                             ? setShowPasswordToggle('password')
                             : setShowPasswordToggle("text"))}>
-                    <img id={'showPassword-button-icon'} src={icon_eyes} alt={'edit item'} /> &nbsp;
-                    {showPasswordToggle==='text' && <> {t('button_hidePassword')}</>}
-                    {showPasswordToggle==='password' && <> {t('button_showPassword')}</>}
+                    {showPasswordToggle==='text' && <> <span id={'hidePassword'}> &#10005;&#10005;&nbsp;</span> {t('button_hidePassword')}</>}
+                    {showPasswordToggle==='password' && <><img id={'showPassword-button-icon'} src={icon_eyes} alt={'edit item'} /> {t('button_showPassword')}</>}
                 </button>
             </div>
 

@@ -17,6 +17,7 @@ export interface TransactionsDTO {
     userFrom: string;
     userTo: string;
     balance: number;
+    currency: string;
 }
 
 export enum Currency {
@@ -29,4 +30,9 @@ export enum Currency {
 
 export interface User {
     user: string;
+}
+
+export const checkLogin = (status: number) => {
+    if((status === 401)||(status === 403)) {
+        throw new Error("forbidden")}
 }

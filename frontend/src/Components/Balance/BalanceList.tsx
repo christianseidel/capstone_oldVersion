@@ -6,9 +6,10 @@ import deFlag from "../../Media/Images/de.png";
 import enFlag from "../../Media/Images/en.png";
 import i18n from "i18next";
 import {TransactionsDTO} from "../model";
+import BalanceItem from "./BalanceItem";
 
 
-function UserList() {
+function BalanceList() {
 
     const nav = useNavigate();
     const {token} = useAuth();
@@ -57,28 +58,37 @@ function UserList() {
     return (
         <div>
             <div className={'heading'}>
-                <h2>{t('list-of-users-page_title')}</h2>
+                <h2>{t('balances_title')}</h2>
                 <span><img
                     src={(localStorage.getItem('i18nextLng') === 'en') ? deFlag : enFlag} width={'28px'} height={'28px'}
                     alt={'set to English / Deutsch auswählen'} onClick={() => setLanguage()}/>
-            </span>
-            </div>
-            {userList.map(item => <div key={item}> {item}</div>)}
-            <p></p>
-            <div>
-                {transactions.map(item => <div key={item.userFrom}>
-                    <span>{item.userFrom}</span>&nbsp;{" > "}&nbsp;
-                    <span>{item.userTo}</span> = &nbsp;
-                    <span>{item.balance}</span>
-                </div>)}
+                </span>
             </div>
 
-            <div className={'buttons_first-line'}>
-                <button onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
+            <div className={'balancePage'}>
+                <div className={'balancePage_paneLeft'}>
+                    <div className={'balancePage_explained'}>{t('balances_explained')}</div>
+                </div>
+                <div className={'balancePage_paneRight_alignmentBottom'}>
+                    <div className={'userList_explained'}>{t('userList')}</div>
+                </div>
             </div>
 
+            <div className={'balancePage'}>
+                <div className={'balancePage_paneLeft'}>
+                    <div>
+                    {transactions.map(item => <BalanceItem key={item.userFrom} data={item} />)}
+                    </div>
+                    <div className={'buttons_first-line'}>
+                        <button className={'button_bellow-list'} onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
+                    </div>
+                </div>
+                <div className={'balancePage_paneRight'}>
+                    <div className={'userList'}>{userList.map(item => <div key={item}>&#9679;&nbsp; {item}</div>)}</div>
+                </div>
+            </div>
         </div>
     )
 }
 
-export default UserList;
+export default BalanceList;

@@ -30,11 +30,11 @@ function ExpenseItem(props: ExpenseItemProps) {
     const [mouseOverButton, setMouseOverButton] = useState('item');
 
     return (
-        <div className={"list_OfAllItems"}>
+        <div className={"item_wrapper"}>
           <div className={mouseOverButton==='item' ? 'item-wrapper_regular' : 'item-wrapper_small'}>
               <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
-                    <span> {props.expense.purpose} </span> &nbsp; &nbsp;
+                    <span> {props.expense.purpose} </span>
                     <span> {(props.expense.amount).toLocaleString('de-De', {
                         style: 'currency',
                         currency: props.expense.currency,
@@ -46,6 +46,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                         <span> {props.expense.description} </span>
                         {props.expense.user && <div> <span id={"user_color"}>&#9679;</span> {props.expense.user}</div>}
                     </div>
+                    {(localStorage.getItem(('username')) === props.expense.user) &&
                     <div className={"item_secondLine_buttons"}>
                         <span>
                             <button id={'editItem-button_FrontPage'} type="submit"
@@ -65,8 +66,9 @@ function ExpenseItem(props: ExpenseItemProps) {
                                 &#10006;
                             </button>
                         </span>
-                    </div>
+                    </div> }
                 </div>
+
             </div>
           </div>
         </div>
