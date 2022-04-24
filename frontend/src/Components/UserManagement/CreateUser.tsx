@@ -40,8 +40,12 @@ function CreateUser() {
             .then(response => {
                 if (response.status === 400) {
                     setErrorMessage('Die Passwörter stimmen nicht überein.');
+//                    clearForm();
+//                    nav('/users/login');
                 } else if (response.status === 409) {
                     setErrorMessage('Der gewählte Benutzername ist bereits vergeben.');
+//                    clearForm();
+//                    nav('/users/login');
                 }
             })
            .then(clearForm)
@@ -65,7 +69,6 @@ function CreateUser() {
         }
     }
 
-    // I still need to implement error message -- none is shown as of now /////
     return (
         <div>
             <div className={'heading'}>

@@ -80,7 +80,7 @@ function BalanceList() {
                     {transactions.map(item => <BalanceItem key={item.userFrom} data={item} />)}
                     </div>
                     <div className={'buttons_first-line'}>
-                        <button className={'button_bellow-list'} onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
+                        <button id={'button_showCashbook'} onClick={() => nav('/expenses')}>{t('button_showCashbook')}</button>
                     </div>
                 </div>
                 <div className={'balancePage_paneRight'}>

@@ -31,7 +31,6 @@ function ExpenseItem(props: ExpenseItemProps) {
 
     return (
         <div className={"item_wrapper"}>
-          <div className={mouseOverButton==='item' ? 'item-wrapper_regular' : 'item-wrapper_small'}>
               <div className={mouseOverButton}>
                 <div className={"item_firstLine"}>
                     <span> {props.expense.purpose} </span>
@@ -51,7 +50,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                         <span>
                             <button id={'editItem-button_FrontPage'} type="submit"
                                     onClick={() => nav(`/edit/${props.expense.id}`)}
-                                    onMouseOver={()=>setMouseOverButton('item-MouseOverEdit')}
+                                    onMouseOver={()=>setMouseOverButton('item_MouseOverEdit')}
                                     onMouseOut={()=>setMouseOverButton('item')}
                                     >
                                 <img id={'editItem-button_FrontPage-image'} src={icon_edit} alt={'edit item'} />
@@ -60,7 +59,7 @@ function ExpenseItem(props: ExpenseItemProps) {
                         <span>
                             <button id={'deleteItem-button_FrontPage'} type="submit"
                                     onClick={deleteItem}
-                                    onMouseOver={()=>setMouseOverButton('item-MouseOverDelete')}
+                                    onMouseOver={()=>setMouseOverButton('item_MouseOverDelete')}
                                     onMouseOut={()=>setMouseOverButton('item')}
                                     >
                                 &#10006;
@@ -68,10 +67,8 @@ function ExpenseItem(props: ExpenseItemProps) {
                         </span>
                     </div> }
                 </div>
-
             </div>
           </div>
-        </div>
     );
 }
 
