@@ -4,22 +4,16 @@ import de.neuefische.smartcount.Users.Authentification.Token;
 import de.neuefische.smartcount.Users.UserController;
 import de.neuefische.smartcount.Users.UserCreationData;
 import de.neuefische.smartcount.Users.UserLoginData;
-import org.apache.tomcat.util.http.parser.HttpParser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.client.RestTemplate;
 
-import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 import static de.neuefische.smartcount.Currency.EUR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -167,7 +161,7 @@ class SmartCountControllerTest {
         expense06.setAmount(3.75);
         expense06.setCurrency(EUR);
         Expense expense07 = new Expense();
-        expense07.setPurpose("2 Kästen Bier");
+        expense07.setPurpose("zwei Kästen Bier");
         expense07.setDescription("Rewe");
         expense07.setAmount(28.60);
         expense07.setCurrency(EUR);
@@ -175,7 +169,14 @@ class SmartCountControllerTest {
         restTemplate.exchange("/api/expenses",HttpMethod.POST,new HttpEntity<>(expense04, bearerHeaderUser2),Expense.class);
         restTemplate.exchange("/api/expenses",HttpMethod.POST,new HttpEntity<>(expense05, bearerHeaderUser2),Expense.class);
         restTemplate.exchange("/api/expenses",HttpMethod.POST,new HttpEntity<>(expense06, bearerHeaderUser2),Expense.class);
-        restTemplate.exchange("/api/expenses",HttpMethod.POST,new HttpEntity<>(expense07, bearerHeaderUser2),Expense.class);
+        ResponseEntity<Expense> createExpense07 = restTemplate.exchange(
+                "/api/expenses",
+                HttpMethod.POST,
+                new HttpEntity<>(expense07, bearerHeaderUser2),
+                Expense.class
+        );
+        String expense07Id = Objects.requireNonNull(createExpense07.getBody()).getId();  // get id for later use
+
 
         // check sum adds up to 52.35 EUR
         ResponseEntity<ExpensesDTO> expensesByEva = restTemplate.exchange(
@@ -201,33 +202,77 @@ class SmartCountControllerTest {
                 Expense.class
         );
 
-
         // should change amount
         String expense08Id = createExpense08.getBody().getId();
         expense08.setId(expense08Id);
         expense08.setUser("Eva");
         expense08.setAmount(12.60);
-        System.out.println(expense08);
-      /*
+
         ResponseEntity<Expense> changeAmountExpense08 = restTemplate.exchange(
                 "/api/expenses/" + expense08Id,
                 HttpMethod.PUT,
-                new HttpEntity<>(expense08Id, expense08, bearerHeaderUser2),
+                new HttpEntity<>(expense08, bearerHeaderUser2),
                 Expense.class
         );
-        System.out.println(changeAmountExpense08);
 
-       */
-  //      Assertions.assertThat(changeAmountExpense08.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        Assertions.assertThat(changeAmountExpense08.getBody().getAmount()).isEqualTo(12.6);
+        Assertions.assertThat(changeAmountExpense08.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(changeAmountExpense08.getBody().getAmount()).isEqualTo(12.6);
 
+        // should delete expense item
+        ResponseEntity<String> deleteExpense08 = restTemplate.exchange(
+                "/api/expenses/" + expense08Id,
+                HttpMethod.DELETE,
+                new HttpEntity<>(bearerHeaderUser2),
+                String.class
+        );
 
-/*
-        @PutMapping("/{id}")
-        public ResponseEntity<Expense> editExpense(@PathVariable String id, @RequestBody Expense expense, Principal principal) {
-            expense.setUser(principal.getName());
-            return ResponseEntity.of(smartCountService.editExpense(id, expense, principal.getName()));
-        }
-*/
+        Assertions.assertThat(deleteExpense08.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        // get single expense
+        ResponseEntity<String> getExpense07 = restTemplate.exchange(
+                "/api/expenses/" + expense07Id,
+                HttpMethod.GET,
+                new HttpEntity<>(bearerHeaderUser2),
+                String.class
+        );
+
+        Assertions.assertThat(getExpense07.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(getExpense07.getBody().contains("zwei Kästen Bier"));
+
+        // should get all expenses
+        ResponseEntity<ExpensesDTO> getAllExpenses = restTemplate.exchange(
+                "/api/expenses",
+                HttpMethod.GET,
+                new HttpEntity<>(bearerHeaderUser2),
+                ExpensesDTO.class
+        );
+
+        Assertions.assertThat(getAllExpenses.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        Assertions.assertThat(getAllExpenses.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(getAllExpenses.getBody().getSum()).isEqualTo(71.5);
+
+        // should get list of users
+        ResponseEntity<String> getUserList = restTemplate.exchange(
+                "/api/expenses/userlist",
+                HttpMethod.GET,
+                new HttpEntity<>(bearerHeaderUser2),
+                String.class
+        );
+
+        Assertions.assertThat(getUserList.getBody()).isEqualTo("[\"Jakob\",\"Eva\"]");
+
+        // should retrieve list of transactions
+        ResponseEntity<TransactionsDTO[]> getTransactions = restTemplate.exchange(
+                "/api/expenses/balance",
+                HttpMethod.GET,
+                new HttpEntity<>(bearerHeaderUser2),
+                TransactionsDTO[].class
+        );
+
+        Assertions.assertThat(getTransactions.getBody().length).isEqualTo(1);
+        Assertions.assertThat(getTransactions.getBody()[0].getUserFrom()).isEqualTo("Jakob");
+        Assertions.assertThat(getTransactions.getBody()[0].getUserTo()).isEqualTo("Eva");
+        Assertions.assertThat(getTransactions.getBody()[0].getBalance()).isEqualTo(16.6);
     }
 }
