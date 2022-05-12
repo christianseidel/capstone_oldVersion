@@ -1,6 +1,6 @@
 ## My Capstone Project
 
-From January to April 2022 I am attending a Full Stack Java Development Bootcamp with "neue fische" in Hamburg. This is my Capstone Project.
+From January to April 2022 I attended a Full Stack Java Development Bootcamp with "neue fische" in Hamburg. This is my Capstone Project.
 
 ## SmartCount App
 SmartCount is a group app. It offers an easy way to keep track of everybody's expenses and allows to quickly see each person's share of costs and due at any point in time. SmartCount is meant for people who go on vacation together, live in a shared apartment, or simply plan for the next big event to take place. As a member of the group you will only have access to your own expense items.
@@ -10,6 +10,8 @@ The Project is based on Java 17 and TypeScript, and includes elements of HTML an
 
 ## Have A Lock
 Please go and have look at this app on the web: 
-[SmartCount live](https://capstone-smartcount.herokuapp.com/). However,
-**please beware:** As I write these lines, I am still in process of coding the app. It will only be finalized at the end of April 2022.
-
+[SmartCount live](https://capstone-smartcount.herokuapp.com/). 
+However, please be aware, that during the Capstone phase of the Java Bootcamp only limited time was dedicated to the development of this application. Therefore, some basic elements have yet to be implemented:
+- Users will be organized into groups where each group has its own cashbook.
+- Currency conversion has in part been prepared for but is not offered as of now.
+- Different users will be characterized by an individually coloured dot. 
