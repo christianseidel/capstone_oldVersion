@@ -10,7 +10,7 @@
     <artifactId>capstone-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>capstone-backend</name>
-    <description>Demo to deploy frontend and backend</description>
+    <description>Capstone Project</description>
 
 
     <!--     DEPENDENCIES    -->

@@ -15,3 +15,4 @@ However, please be aware, that during the Capstone phase of the Java Bootcamp on
 - Users will be organized into groups where each group has its own cashbook.
 - Currency conversion has partly been prepared for but is not offered as of now.
 - Different users will be characterized by an individually coloured dot. 
+- 
